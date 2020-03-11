@@ -2,7 +2,7 @@
 
 Tool, Models, and Supplementary Materials for Attacker Synthesis Project.
 
-This repository is currently in flux.  In the near future, the repository will be updated with full documentation, and cleaner code.  At that time this README will be updated accordingly.
+**This repository is currently in flux.  In the near future, the repository will be updated with full documentation, and cleaner code.  At that time this README will be updated accordingly.**
 
 ## Repository Structure
 
