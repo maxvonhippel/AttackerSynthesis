@@ -4,6 +4,16 @@ Tool, Models, and Supplementary Materials for Attacker Synthesis Project.
 
 **This repository is currently in flux.  In the near future, the repository will be updated with full documentation, and cleaner code.  At that time this README will be updated accordingly.**
 
+**REPOSITORY STATUS:**
+
+* Documentation: *in progress* :expressionless:
+* Citation: *coming soon* :zipper_mouth_face:
+* ArXiV version: *coming soon* :zipper_mouth_face:
+* Instructions for using `Korg`: *coming soon* :zipper_mouth_face:
+* `Korg` passing tests: *in progress* :expressionless:
+* Makefile working: *coming soon* :zipper_mouth_face:
+* `Korg` CLI improved: *coming soon* :zipper_mouth_face:
+
 ## Repository Structure
 
 This repository contains the tool `Korg` as well as various Promela models from our paper.
