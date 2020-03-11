@@ -1,0 +1,3 @@
+ltl isTrue {
+	true
+}
