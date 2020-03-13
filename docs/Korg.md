@@ -25,12 +25,18 @@
 
 ````
 
+* `Korg` is named after the KORG MicroKorg synthesizer, which has a dedicated *attack* knob (Knob 3).  (Source: [KORG MicroKorg Owner's Manual, page 9](https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf))
+
 ![](images/korg.png)
 
 * Image courtesy of [KORG](https://www.korg.com/us/products/synthesizers/microkorg/).
 * ASCII art courtesy of [Patrick Gillespie's tool](http://patorjk.com/software/taag/#p=display&f=Alpha&t=KORG).
 
 # What is Korg?
+
+TODO
+
+# How can I install Korg?
 
 TODO
 
