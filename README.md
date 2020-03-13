@@ -52,4 +52,4 @@ Coming soon.
 
 ## How to use the tool.
 
-Coming soon.
+See `docs/Korg.md`.
