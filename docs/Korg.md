@@ -25,11 +25,11 @@
 
 ````
 
-<center>
+<p align="center">
 	<b>Korg</b> is named after the <b>KORG MicroKorg</b> synthesizer, which has a dedicated <i>attack</i> knob (Knob 3).  (Source: <a href="https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf">KORG MicroKorg Owner's Manual, page 9</a>)
 
-![](images/korg.png)
-</center>
+	<img src="images/korg.png">
+</p>
 
 * Image courtesy of [KORG](https://www.korg.com/us/products/synthesizers/microkorg/).
 * ASCII art courtesy of [Patrick Gillespie's tool](http://patorjk.com/software/taag/#p=display&f=Alpha&t=KORG).
