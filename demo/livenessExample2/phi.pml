@@ -1,3 +1,3 @@
 ltl alwaysEventuallyDead {
-	always ( eventually ( dead == 1 ))
+	always ( eventually ( dead == 1 ) )
 }

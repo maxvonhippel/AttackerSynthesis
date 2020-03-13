@@ -1,3 +1,3 @@
 ltl eventuallyAlwaysWEqualZero {
-	eventually always ( w == 0 )
+	eventually ( always ( w == 0 ) )
 }

@@ -1,15 +1,15 @@
 import unittest
-import Korg as g3
+import Korg
 
 class TestKorg(unittest.TestCase):
 
 	# Test on small toy problems
-	P     = 'demo/LivenessExample/P.pml'
-	Q     = 'demo/LivenessExample/Q.pml'
-	phi   = 'demo/LivenessExample/wrongPhi.pml'
-	psi   = 'demo/LivenessExample/phi.pml'
-	theta = 'demo/LivenessExample/theta.pml'
-	IO_P  = 'demo/LivenessExample/IO.txt'
+	P     = 'demo/livenessExample2/P.pml'
+	Q     = 'demo/livenessExample2/Q.pml'
+	phi   = 'demo/livenessExample2/wrongPhi.pml'
+	psi   = 'demo/livenessExample2/phi.pml'
+	theta = 'demo/livenessExample2/theta.pml'
+	IO_P  = 'demo/livenessExample2/IO.txt'
 
 	# Test on TCP model with 3 threat models
 	TCP   = 'demo/TCP/TCP.pml'
@@ -20,10 +20,10 @@ class TestKorg(unittest.TestCase):
 	exp3  = 'experiments/experiment3.pml'
 	
 	# Test Cole's experiments
-	s_P   = 'demo/Cole/smallDemo1/P.pml'
-	s_Q   = 'demo/Cole/smallDemo1/Q.pml'
-	s_IO  = 'demo/Cole/smallDemo1/IO.txt'
-	s_Phi = 'demo/Cole/smallDemo1/Phi.pml' 
+	s_P   = 'demo/livenessExample1/P.pml'
+	s_Q   = 'demo/livenessExample1/Q.pml'
+	s_IO  = 'demo/livenessExample1/IO.txt'
+	s_Phi = 'demo/livenessExample1/Phi.pml' 
 
 	maxAttacks = 1
 
@@ -34,7 +34,7 @@ class TestKorg(unittest.TestCase):
 	def test_errors_if_no_attackers_requested(self):
 		for _finite in [ True, False ]:
 			_name = "test_errors_if_no_attackers_requested_" + str(_finite)
-			self.assertEqual(g3.body( \
+			self.assertEqual(Korg.body( \
 				model   = None,       \
 				phi     = None,       \
 				Q       = None,       \
@@ -49,7 +49,7 @@ class TestKorg(unittest.TestCase):
 	def test_errors_if_trivial(self):
 		for _finite in [ True, False ]:
 			_name = "test_errors_if_trivial_" + str(_finite)
-			self.assertEqual(g3.body(          \
+			self.assertEqual(Korg.body(          \
 					model   = self.P,          \
 					phi     = self.phi,        \
 					Q       = self.Q,          \
@@ -64,7 +64,7 @@ class TestKorg(unittest.TestCase):
 	def test_errors_if_cannot_negate_phi(self):
 		for _finite in [ True, False ]:
 			_name = "test_errors_if_cannot_negate_phi_" + str(_finite)
-			self.assertEqual(g3.body(      \
+			self.assertEqual(Korg.body(      \
 				model   = None,            \
 				phi     = None,            \
 				Q       = None,            \
@@ -84,7 +84,7 @@ class TestKorg(unittest.TestCase):
 					  + "_"                       \
 					  + str(_IO).replace("demo/", "")
 				_exp  = 4 if _IO == None else 5
-				self.assertEqual(g3.body(      \
+				self.assertEqual(Korg.body(      \
 					model   = self.TCP,        \
 					phi     = self.exp1,       \
 					Q       = self.net,        \
@@ -101,7 +101,7 @@ class TestKorg(unittest.TestCase):
 	def test_errors_if_no_solution(self):
 		for _finite in [ True, False ]:
 			_name = "test_errors_if_no_solution_" + str(_finite)
-			self.assertEqual(g3.body(      \
+			self.assertEqual(Korg.body(      \
 				model   = self.P,          \
 				phi     = self.theta,      \
 				Q       = self.Q,          \
@@ -113,7 +113,7 @@ class TestKorg(unittest.TestCase):
 				characterize = True), 6)
 	
 	def test_works_on_TCP_exp1_finite(self):
-		self.assertEqual(g3.body(      \
+		self.assertEqual(Korg.body(      \
 			model   = self.TCP,        \
 			phi     = self.exp1,       \
 			Q       = self.net,        \
@@ -125,7 +125,7 @@ class TestKorg(unittest.TestCase):
 			characterize = True), 0)
 
 	def test_works_on_TCP_exp1_not_finite(self):
-		self.assertEqual(g3.body(      \
+		self.assertEqual(Korg.body(      \
 			model   = self.TCP,        \
 			phi     = self.exp1,       \
 			Q       = self.net,        \
@@ -137,7 +137,7 @@ class TestKorg(unittest.TestCase):
 			characterize = True), 0)
 	
 	def test_works_on_TCP_exp2_finite(self):
-		self.assertEqual(g3.body(      \
+		self.assertEqual(Korg.body(      \
 			model   = self.TCP,        \
 			phi     = self.exp2,       \
 			Q       = self.net,        \
@@ -149,7 +149,7 @@ class TestKorg(unittest.TestCase):
 			characterize = True), 0)
 
 	def test_works_on_TCP_exp2_not_finite(self):
-		self.assertEqual(g3.body(      \
+		self.assertEqual(Korg.body(      \
 			model   = self.TCP,        \
 			phi     = self.exp2,       \
 			Q       = self.net,        \
@@ -161,23 +161,23 @@ class TestKorg(unittest.TestCase):
 			characterize = True), 0)
 
 	def test_fails_on_finite_Liveness(self):
-		self.assertEqual(g3.body(                     \
-			model   = 'demo/LivenessExample/P.pml',   \
-			phi     = 'demo/LivenessExample/phi.pml', \
-			Q       = 'demo/LivenessExample/Q.pml',   \
-			IO      = 'demo/LivenessExample/IO.txt',  \
-			max_attacks     = self.maxAttacks,                \
+		self.assertEqual(Korg.body(                     \
+			model   = self.s_P,   \
+			phi     = self.s_Phi, \
+			Q       = self.s_Q,   \
+			IO      = self.s_IO,  \
+			max_attacks = self.maxAttacks,                \
 			finite  = True,                           \
 			TESTING = True,							  \
 			name    = "test_fails_on_finite_Liveness", \
-			characterize = True), -1)
+			characterize = True), 6)
 
 	def test_works_on_non_finite_Liveness(self):
-		self.assertEqual(g3.body(                     \
-			model   = 'demo/LivenessExample/P.pml',   \
-			phi     = 'demo/LivenessExample/phi.pml', \
-			Q       = 'demo/LivenessExample/Q.pml',   \
-			IO      = 'demo/LivenessExample/IO.txt',  \
+		self.assertEqual(Korg.body(                     \
+			model   = self.s_P,   \
+			phi     = self.s_Phi, \
+			Q       = self.s_Q,   \
+			IO      = self.s_IO,  \
 			max_attacks = self.maxAttacks,            \
 			finite  = False,                          \
 			TESTING = True,                           \
@@ -185,7 +185,7 @@ class TestKorg(unittest.TestCase):
 			characterize = True), 0)
 
 	def test_works_on_Coles_example_finite(self):
-		self.assertEqual(g3.body(      \
+		self.assertEqual(Korg.body(      \
 			model   = self.s_P,        \
 			phi     = self.s_Phi,      \
 			Q       = self.s_Q,        \
@@ -197,7 +197,7 @@ class TestKorg(unittest.TestCase):
 			characterize = True), 6)
 
 	def test_works_on_Coles_example_non_finite(self):
-		self.assertEqual(g3.body(      \
+		self.assertEqual(Korg.body(      \
 			model   = self.s_P,        \
 			phi     = self.s_Phi,      \
 			Q       = self.s_Q,        \

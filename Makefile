@@ -55,7 +55,7 @@ testChar: ; green tests/test_Characterize.py
 testCons: ; green tests/test_Construct.py
 
 # Runs all tests
-test: ; make clean testChar clean testG3 clean testCons
+test: ; make clean testChar clean testKorg clean testCons
 
 # Installs green so you can run the tests with my make targets
 setup: ; pip3 install green
