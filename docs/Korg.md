@@ -26,8 +26,8 @@
 ````
 
 <center>
-	`Korg` is named after the KORG MicroKorg synthesizer, which has a dedicated *attack* knob (Knob 3).  (Source: [KORG MicroKorg Owner's Manual, page 9](https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf))
-	
+	<b>Korg</b> is named after the <b>KORG MicroKorg</b> synthesizer, which has a dedicated <i>attack</i> knob (Knob 3).  (Source: <a href="https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf">KORG MicroKorg Owner's Manual, page 9</a>)
+
 ![](images/korg.png)
 </center>
 
