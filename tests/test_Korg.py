@@ -1,20 +1,24 @@
 import unittest
-import Gen3 as g3
+import Korg as g3
 
-class TestGen3(unittest.TestCase):
+class TestKorg(unittest.TestCase):
 
+	# Test on small toy problems
 	P     = 'demo/LivenessExample/P.pml'
 	Q     = 'demo/LivenessExample/Q.pml'
 	phi   = 'demo/LivenessExample/wrongPhi.pml'
 	psi   = 'demo/LivenessExample/phi.pml'
 	theta = 'demo/LivenessExample/theta.pml'
 	IO_P  = 'demo/LivenessExample/IO.txt'
+
+	# Test on TCP model with 3 threat models
 	TCP   = 'demo/TCP/TCP.pml'
 	net   = 'demo/TCP/network.pml'
 	IO    = 'demo/TCP/IO.txt'
 	exp1  = 'experiments/experiment1.pml'
 	exp2  = 'experiments/experiment2.pml'
 	exp3  = 'experiments/experiment3.pml'
+	
 	# Test Cole's experiments
 	s_P   = 'demo/Cole/smallDemo1/P.pml'
 	s_Q   = 'demo/Cole/smallDemo1/Q.pml'
@@ -75,7 +79,10 @@ class TestGen3(unittest.TestCase):
 	def test_errors_if_IO_None(self):
 		for _finite in [ True, False ]:
 			for _IO in [ None, 'dne.blarg', 'demo/emptyFile' ]:
-				_name = "test_errors_if_IO_None_" + str(_finite) + "_" + str(_IO).replace("demo/", "")
+				_name = "test_errors_if_IO_None_" \
+					  + str(_finite)              \
+					  + "_"                       \
+					  + str(_IO).replace("demo/", "")
 				_exp  = 4 if _IO == None else 5
 				self.assertEqual(g3.body(      \
 					model   = self.TCP,        \
@@ -105,7 +112,6 @@ class TestGen3(unittest.TestCase):
 				name    = _name, \
 				characterize = True), 6)
 	
-	# WORKS
 	def test_works_on_TCP_exp1_finite(self):
 		self.assertEqual(g3.body(      \
 			model   = self.TCP,        \
@@ -118,7 +124,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_works_on_TCP_exp1_finite", \
 			characterize = True), 0)
 
-	# WORKS
 	def test_works_on_TCP_exp1_not_finite(self):
 		self.assertEqual(g3.body(      \
 			model   = self.TCP,        \
@@ -131,7 +136,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_works_on_TCP_exp1_not_finite", \
 			characterize = True), 0)
 	
-	# WORKS
 	def test_works_on_TCP_exp2_finite(self):
 		self.assertEqual(g3.body(      \
 			model   = self.TCP,        \
@@ -144,7 +148,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_works_on_TCP_exp2_finite", \
 			characterize = True), 0)
 
-	# WORKS
 	def test_works_on_TCP_exp2_not_finite(self):
 		self.assertEqual(g3.body(      \
 			model   = self.TCP,        \
@@ -157,7 +160,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_works_on_TCP_exp2_not_finite", \
 			characterize = True), 0)
 
-	# FAILS
 	def test_fails_on_finite_Liveness(self):
 		self.assertEqual(g3.body(                     \
 			model   = 'demo/LivenessExample/P.pml',   \
@@ -170,7 +172,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_fails_on_finite_Liveness", \
 			characterize = True), -1)
 
-	# WORKS
 	def test_works_on_non_finite_Liveness(self):
 		self.assertEqual(g3.body(                     \
 			model   = 'demo/LivenessExample/P.pml',   \
@@ -183,7 +184,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_works_on_non_finite_Liveness", \
 			characterize = True), 0)
 
-	# WORKS
 	def test_works_on_Coles_example_finite(self):
 		self.assertEqual(g3.body(      \
 			model   = self.s_P,        \
@@ -196,7 +196,6 @@ class TestGen3(unittest.TestCase):
 			name    = "test_works_on_Coles_example_finite", \
 			characterize = True), 6)
 
-	# WORKS
 	def test_works_on_Coles_example_non_finite(self):
 		self.assertEqual(g3.body(      \
 			model   = self.s_P,        \
