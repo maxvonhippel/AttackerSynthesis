@@ -13,6 +13,7 @@ Tool, Models, and Supplementary Materials for Attacker Synthesis Project.
 * `Korg` passing tests: *in progress* :expressionless:
 * Makefile working: *coming soon* :zipper_mouth_face:
 * `Korg` CLI improved: *coming soon* :zipper_mouth_face:
+* `Korg` build system: *coming soon* :zipper_mouth_face:
 
 ## How to Read Docs
 
