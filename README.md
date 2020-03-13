@@ -14,6 +14,10 @@ Tool, Models, and Supplementary Materials for Attacker Synthesis Project.
 * Makefile working: *coming soon* :zipper_mouth_face:
 * `Korg` CLI improved: *coming soon* :zipper_mouth_face:
 
+## How to Read Docs
+
+The documentation for this project consists of this README as well as all the files in `docs/`.  They natively link to one another so that you can navigate without ever using the file system.  These documents are written in [Github Markdown](https://developer.github.com/v3/markdown/) and are best viewed online, in the Github repository, e.g., [here](https://github.com/maxvonhippel/AttackerSynthesis).  We use features of Github flavor Markdown such as emojis and `HTML`.
+
 ## Repository Structure
 
 This repository contains the tool `Korg` as well as various Promela models from our paper.
