@@ -1,27 +1,16 @@
-'''
-							Generator3.py
-				Authored 30 November 2019 by Max von Hippel
-USAGE:
-	
-	See the Makefile, as this often changes at the moment.
+# ==============================================================================
+# File      : Korg.py
+# Author    : Max von Hippel and Cole Vick
+# Authored  : 30 November 2019 - 13 March 2020
+# Purpose   : Primary runner for Korg tool
+# How to run: see docs/Korg.md for instructions
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Security  : This code is not even remotely cyber-secure and should only be run 
+#             locally on inputs you personally manufactured.  Otherwise you 
+#             expose yourself to a basically trivial remote code execution issue 
+#             in Bash, because of the way I am hacking on subprocess.
+# ==============================================================================
 
-WHERE:
-
-	TODO: Write this once the interface is locked down & no longer
-	actively evolving.
-
-RETURNS:
-
-	A (M, (Q), phi)-attacker, optionally with recovery to Q.
-
-NOTE:
-
-	This code is not even remotely cyber-secure and should only be
-	run locally on inputs you personally manufactured.  Otherwise you expose
-	yourself to a basically trivial remote code execution issue in Bash,
-	because of the way I am hacking on subprocess.
-
-'''
 from CLI          import *
 from Characterize import *
 from Construct    import *

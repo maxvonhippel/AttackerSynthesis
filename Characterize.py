@@ -1,12 +1,12 @@
-'''
-							Characterize.py
-				Authored 30 November 2019 by Max von Hippel
-PURPOSE:
+# ==============================================================================
+# File      : Characterize.py
+# Author    : Max von Hippel and Cole Vick
+# Authored  : 30 November 2019 - 13 March 2020
+# Purpose   : Checks when models do or do not satisfy properties.  Also inter-
+#             prets various outputs of Spin.
+# How to run: This code is used by Korg.py, which is what you want to run.
+# ==============================================================================
 
-	This file contains code used to chracterize attacks as E-attacks,
-	A-attacks, or not attacks at all.
-
-'''
 import subprocess
 import sys
 import os
@@ -23,7 +23,6 @@ OUTPUT:
 	or violations else false
 '''
 def check(modelFile, maxDepth=10000):
-	# print("calling check( " + modelFile + " )")
 	if maxDepth > 10000 * 20:
 		print("maxDepth too large for any realistic run.  Edit the code if " \
 			+ "you actually really want to do this ... in Characterize.py.")
@@ -54,7 +53,6 @@ def makeAllTrails(modelFile, numTrails=100):
 		args = "spin -run -a " + modelFile
 	else:
 		args = "spin -run -a -e -c" + str(numTrails) + " " + modelFile
-		print("\n\n\nMAKING TRAILS WITH CMD = " + args + "\n\n\n")
 	subprocess.run(args.split(" "))
 	
 '''
@@ -94,6 +92,7 @@ def models(model, phi, N, name):
 
 	return check(name)
 
+# Example snippet of what sort of text parseTrail parses:
 '''
 (env) mvh:attempt2$ spin -t -s -r 956233795109139376_tmp.pml
 ltl exp3: (! ([] (<> (((state[0]==1)) && ((state[1]==2)))))) || (<> ((state[0]==4)))
@@ -151,7 +150,6 @@ def parseTrail(trailBody):
 		elif "CYCLE" in line:
 			i = 1
 	
-	# print("ret = ", ret)
 	return ret
 
 def parseAllTrails(cmds, finite=False, debug=False):

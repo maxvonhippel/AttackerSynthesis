@@ -1,13 +1,10 @@
-'''
-							CLI.py
-				Authored 30 November 2019 by Max von Hippel
-PURPOSE:
-
-	This file contains code used to delete files / clean up,
-	get command-line inputs, create new Bash commands to
-	be executed, and output information to the user.
-
-'''
+# ==============================================================================
+# File      : CLI.py
+# Author    : Max von Hippel and Cole Vick
+# Authored  : 30 November 2019 - 13 March 2020
+# Purpose   : Handles most of the command line interface logic for Korg.
+# How to run: This code is used by Korg.py, which is what you want to run.
+# ==============================================================================
 
 import argparse
 from   glob import glob
@@ -108,46 +105,15 @@ def addTrailNumberToArgs(args, num):
 	return ret
 
 def handleTs(args, name):
-	print("\n\n\nCALLING HANDLE Ts\n\n\n")
 	args = args.split(" ")
 	num  = len(glob(name + "*.trail"))
 	if num == 0:
-		print("NUM = 0 ... @MAX")
 		return []
 	elif num == 1:
-		print("NUM = 1 this is a problem ... @MAX")
 		return [args]
 	else:
-		print("Debug addTrailNumberToArgs .... @MAX")
 		return [addTrailNumberToArgs(args, i) for i in range(0, num)]
 
-'''
-(env) mvh:attempt2$ spin -t -s -r 956233795109139376_tmp.pml
-ltl exp3: (! ([] (<> (((state[0]==1)) && ((state[1]==2)))))) || (<> ((state[0]==4)))
-starting claim 3
-Never claim moves to line 4	[(!((state[0]==4)))]
-  2:	proc  1 (daisy:1) 956233795109139376_tmp.pml:93 Send SYN_ACK	-> queue 1 (NtoB)
-  4:	proc  1 (daisy:1) 956233795109139376_tmp.pml:94 Send SYN_ACK	-> queue 2 (NtoA)
- 34:	proc  3 (TCP:1) 956233795109139376_tmp.pml:24 Send SYN	-> queue 4 (snd)
-Never claim moves to line 3	[((!((state[0]==4))&&((state[0]==1)&&(state[1]==2))))]
- 38:	proc  3 (TCP:1) 956233795109139376_tmp.pml:42 Recv SYN_ACK	<- queue 1 (rcv)
-Never claim moves to line 8	[(!((state[0]==4)))]
- 40:	proc  1 (daisy:1) 956233795109139376_tmp.pml:96 Recv SYN	<- queue 4 (BtoN)
-Never claim moves to line 3	[((!((state[0]==4))&&((state[0]==1)&&(state[1]==2))))]
- 42:	proc  3 (TCP:1) 956233795109139376_tmp.pml:42 Send ACK	-> queue 4 (snd)
-Never claim moves to line 8	[(!((state[0]==4)))]
-Never claim moves to line 4	[(!((state[0]==4)))]
- 46:	proc  1 (daisy:1) 956233795109139376_tmp.pml:92 Recv ACK	<- queue 4 (BtoN)
- 48:	proc  3 (TCP:1) 956233795109139376_tmp.pml:54 Send FIN	-> queue 4 (snd)
- 52:	proc  1 (daisy:1) 956233795109139376_tmp.pml:100 Recv FIN	<- queue 4 (BtoN)
- 54:	proc  1 (daisy:1) 956233795109139376_tmp.pml:106 Send FIN	-> queue 1 (NtoB)
- 56:	proc  3 (TCP:1) 956233795109139376_tmp.pml:62 Recv FIN	<- queue 1 (rcv)
- 58:	proc  3 (TCP:1) 956233795109139376_tmp.pml:62 Send ACK	-> queue 4 (snd)
- 62:	proc  1 (daisy:1) 956233795109139376_tmp.pml:92 Recv ACK	<- queue 4 (BtoN)
- 64:	proc  1 (daisy:1) 956233795109139376_tmp.pml:107 Send ACK	-> queue 1 (NtoB)
- 66:	proc  3 (TCP:1) 956233795109139376_tmp.pml:74 Recv ACK	<- queue 1 (rcv)
- 76:	proc  1 (daisy:1) 956233795109139376_tmp.pml:102 Send SYN	-> queue 1 (NtoB)
-'''
 def trailParseCMDs(tmpName):
 	args = "spin -t -s -r " + tmpName
 	return handleTs(args, tmpName)

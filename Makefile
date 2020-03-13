@@ -1,4 +1,11 @@
-.PHONY: demo
+# ==============================================================================
+# File      : Makefile
+# Author    : Max von Hippel
+# Authored  : 13 March 2020
+# Purpose   : provides various useful targets for running Korg
+# How to run: see https://www.gnu.org/software/make/manual/make.html if you are
+#             unfamiliar with Makefiles.
+# ==============================================================================
 
 clean:
 	- rm -rf out/*
@@ -25,7 +32,7 @@ experiment1:
 			--name=experiment1                \
 			--characterize=False
 
-# Reproduces our results fromthe Case Study
+# Reproduces our results from the Case Study
 avgExperiment:
 	for exp in 3 2 1; do                                                             \
 		for b in False True; do                                                      \
@@ -56,6 +63,3 @@ testCons: ; green tests/test_Construct.py
 
 # Runs all tests
 test: ; make clean testChar clean testKorg clean testCons
-
-# Installs green so you can run the tests with my make targets
-setup: ; pip3 install green

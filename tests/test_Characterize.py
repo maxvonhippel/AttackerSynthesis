@@ -1,3 +1,11 @@
+# ==============================================================================
+# File      : test_Characterize.py
+# Author    : Max von Hippel
+# Authored  : 30 November 2019
+# Purpose   : Tests Characterize.py
+# How to run: $ make testChar
+# ==============================================================================
+
 import unittest
 from Characterize import models
 

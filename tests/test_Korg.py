@@ -1,3 +1,11 @@
+# ==============================================================================
+# File      : test_Korg.py
+# Author    : Max von Hippel and Cole Vick
+# Authored  : 30 November 2019 - 13 March 2020
+# Purpose   : Tests Korg.py
+# How to run: $ make testKorg
+# ==============================================================================
+
 import unittest
 import Korg
 

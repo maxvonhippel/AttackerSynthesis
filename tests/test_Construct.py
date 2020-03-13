@@ -1,3 +1,11 @@
+# ==============================================================================
+# File      : test_Construct.py
+# Author    : Cole Vick
+# Authored  : Sometime in February 2020
+# Purpose   : Tests Construct.py
+# How to run: $ make testCons
+# ==============================================================================
+
 import unittest
 import Construct as c
 
