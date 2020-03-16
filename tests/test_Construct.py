@@ -19,15 +19,18 @@ class TestConstruct(unittest.TestCase):
 
     s_network, s_label = c.makeDaisy(IO,s_Q)
 
+    # Checks that bit for recovery logic was set correctly
     def test_makeDaisy1(self):
         self.assertEqual(self.s_label, "b")
 
+    # Tests that daisy in a particular example was made correctly
     def test_makeDaisyWithEvent(self):
         daisy_string = c.makeDaisyWithEvents(self.IO, False, self.s_network, self.s_label)
         self.assertEqual(\
             daisy_string, \
             'active proctype daisy () {\n\tdo\n\t:: channel!C;\n\t:: channel?A;\n\t:: channel?B;\n\tod\n}')
 
+    # Same but for recovery case
     def test_makeDaisyPhiFinite(self):
         d_phi = " ".join([b for b in                              \
                     [a.strip() for a in                           \
