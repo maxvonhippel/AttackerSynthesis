@@ -54,13 +54,13 @@ def getArgs():
 		type=int,
 		help='The maximum number of attackers to generate.')
 	parser.add_argument(
-		'--finite',
-		metavar='finite',
+		'--with_recovey',
+		metavar='with_recovey',
 		type=str2bool,
 		default=False,
 		nargs='?',
 		const=True,
-		help='True iff you want to solve the F∃ASP, False iff you want to solve the ∃ASP.')
+		help='True iff you want the recovered attackers to be attackers with recovery, else false.')
 	parser.add_argument(
 		'--name',
 		metavar='name',

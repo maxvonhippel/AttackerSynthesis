@@ -58,3 +58,7 @@ TODO
 ## I ran Korg on my threat model.  Now, how do I interpret the results?
 
 TODO
+
+## Help!  It's not working!
+
+See [troubleshooting](Troubleshooting.md).
