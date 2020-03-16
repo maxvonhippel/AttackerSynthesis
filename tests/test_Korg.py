@@ -43,15 +43,11 @@ class TestKorg(unittest.TestCase):
 		for _with_recovery in [ True, False ]:
 			_name = "test_errors_if_no_attackers_requested_" + str(_with_recovery)
 			self.assertEqual(Korg.body( \
-				model   = None,       \
-				phi     = None,       \
-				Q       = None,       \
-				IO      = None,       \
-				max_attacks = 0	, 	  \
-				with_recovery  = _with_recovery,    \
-				TESTING = True,       \
-				name    = _name, \
-				characterize = True), 1)
+				model = None, phi = None, Q = None, IO = None, \
+				max_attacks   = 0	, 	  \
+				with_recovery = _with_recovery,    \
+				name          = _name, \
+				characterize  = True), 1)
 	
 	# Test that if model || Q |/= phi then errors
 	def test_errors_if_trivial(self):
@@ -64,7 +60,6 @@ class TestKorg(unittest.TestCase):
 					IO      = None,            \
 					max_attacks = self.maxAttacks, \
 					with_recovery  = _with_recovery,         \
-					TESTING = True,            \
 					name = _name, \
 					characterize = True), 3)
 	
@@ -79,7 +74,6 @@ class TestKorg(unittest.TestCase):
 				IO      = None,            \
 				max_attacks = self.maxAttacks, \
 				with_recovery  = _with_recovery,         \
-				TESTING = True,            \
 				name    = _name, \
 				characterize = True), 2)
 
@@ -99,7 +93,6 @@ class TestKorg(unittest.TestCase):
 					IO      = _IO,             \
 					max_attacks     = self.maxAttacks, \
 					with_recovery  = _with_recovery,         \
-					TESTING = True,            \
 					name    = _name, \
 					characterize = True), _exp)
 
@@ -116,7 +109,6 @@ class TestKorg(unittest.TestCase):
 				IO      = self.IO_P,       \
 				max_attacks     = self.maxAttacks, \
 				with_recovery  = _with_recovery,         \
-				TESTING = True,            \
 				name    = _name, \
 				characterize = True), 6)
 	
@@ -128,7 +120,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.IO,         \
 			max_attacks     = self.maxAttacks, \
 			with_recovery  = True,    	       \
-			TESTING = True,            \
 			name    = "test_works_on_TCP_exp1_with_recovery", \
 			characterize = True), 0)
 
@@ -140,7 +131,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.IO,         \
 			max_attacks     = self.maxAttacks, \
 			with_recovery  = False,           \
-			TESTING = True,            \
 			name    = "test_works_on_TCP_exp1_not_with_recovery", \
 			characterize = True), 0)
 	
@@ -152,7 +142,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.IO,         \
 			max_attacks     = self.maxAttacks, \
 			with_recovery  = True,    	       \
-			TESTING = True,            \
 			name    = "test_works_on_TCP_exp2_with_recovery", \
 			characterize = True), 0)
 
@@ -164,7 +153,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.IO,         \
 			max_attacks     = self.maxAttacks, \
 			with_recovery  = False,           \
-			TESTING = True,            \
 			name    = "test_works_on_TCP_exp2_not_with_recovery", \
 			characterize = True), 0)
 
@@ -176,7 +164,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.s_IO,  \
 			max_attacks = self.maxAttacks,                \
 			with_recovery  = True,                           \
-			TESTING = True,							  \
 			name    = "test_fails_on_with_recovery_Liveness", \
 			characterize = True), 6)
 
@@ -188,7 +175,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.s_IO,  \
 			max_attacks = self.maxAttacks,            \
 			with_recovery  = False,                          \
-			TESTING = True,                           \
 			name    = "test_works_on_non_with_recovery_Liveness", \
 			characterize = True), 0)
 
@@ -200,7 +186,6 @@ class TestKorg(unittest.TestCase):
 			IO      = self.s_IO,       \
 			max_attacks     = self.maxAttacks, \
 			with_recovery  = True,            \
-			TESTING = True,            \
 			name    = "test_works_on_Coles_example_with_recovery", \
 			characterize = True), 6)
 
@@ -212,6 +197,5 @@ class TestKorg(unittest.TestCase):
 			IO      = self.s_IO,       \
 			max_attacks     = self.maxAttacks, \
 			with_recovery  = False,           \
-			TESTING = True,            \
 			name    = "test_works_on_Coles_example_non_with_recovery", \
 			characterize = True), 0)

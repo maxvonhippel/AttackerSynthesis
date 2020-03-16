@@ -27,37 +27,35 @@ def main():
 		args.with_recovery,                 \
 		args.name,                   \
 		args.characterize
-	return body(model, phi, Q, IO, max_attacks, with_recovery, False, name, characterize)
+	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize)
 
-def checkArgs(max_attacks, TESTING, phi, model, Q, basic_check_name, IO):
+def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	if max_attacks == None or max_attacks < 1:
-		printInvalidNum(max_attacks, TESTING)
+		printInvalidNum(max_attacks)
 		return 1
 
 	# Can we negate phi?  This is important.
 	if not negateClaim(phi):
-		printCouldNotNegateClaim(phi, TESTING)
+		printCouldNotNegateClaim(phi)
 		return 2
 	
 	# Check validity: Does model || Q |= phi?
 	if not models(model, phi, Q, basic_check_name):
-		printInvalidInputs(model, phi, Q, TESTING)
+		printInvalidInputs(model, phi, Q)
 		return 3
 	
 	# Get the IO.  Is it empty?
 	if IO == None:
-		if not TESTING:
-			print("No IO.")
 		return 4
 	
 	_IO = getIO(IO)
 	if _IO == None or len(list(_IO)) == 0:
-		printZeroIO(IO, TESTING)
+		printZeroIO(IO)
 		return 5
 	
 	return _IO
 
-def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, TESTING=False, name=None, characterize=False):
+def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, name=None, characterize=False):
 	'''
 	Body attempts to find attackers against a given model. The attacker 
 	is successful if the given phi is violated. The phi is initially 
@@ -68,7 +66,6 @@ def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, TESTING=False, na
 	@param IO           : Input Output interface of Q's communication channels
 	@param max_attacks  : how many attackers to generate
 	@param with_recovery: should the attackers be with_recovery?
-	@param TESTING      : are you testing? 
 	@param name         : name of the files
 	@param characterize : do you want us to characterize attackers after producing them?
 	'''
@@ -85,7 +82,7 @@ def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, TESTING=False, na
 	# The name of the file we use to check that model || daisy(Q) |/= phi
 	daisy_models_name = name + "_daisy_check.pml" 
 
-	IO = checkArgs(max_attacks, TESTING, phi, model, Q, basic_check_name, IO)
+	IO = checkArgs(max_attacks, phi, model, Q, basic_check_name, IO)
 	if IO in { 1, 2, 3, 4, 5 }:
 		return IO
 	IO = sorted(list(IO)) # sorted list of events
@@ -107,7 +104,7 @@ def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, TESTING=False, na
 	_models = models(model, daisyPhi, daisy_name, daisy_models_name)
 		
 	if net == None or _models:
-		printNoSolution(model, phi, Q, with_recovery, TESTING)
+		printNoSolution(model, phi, Q, with_recovery)
 		return 6
 	
 	makeAllTrails(daisy_models_name, max_attacks) 

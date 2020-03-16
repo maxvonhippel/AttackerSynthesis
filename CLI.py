@@ -119,37 +119,27 @@ def trailParseCMDs(tmpName):
 	return handleTs(args, tmpName)
 
 # Error message for if we were handed apparently invalid inputs.
-def printInvalidInputs(model, phi, N, TESTING=False):
-	if TESTING:
-		return
+def printInvalidInputs(model, phi, N):
 	print("In order for the problem (model, phi, N) to be non-trivial, we \
 		   require that (model || N) |= phi.  However, this does not appear \
 		   to be the case.")
 
 # Error message for if we cannot find any solution.
-def printNoSolution(model, phi, N, finite, TESTING=False):
-	if TESTING:
-		return
-	possiblyFinite = "finite" if finite else ""
+def printNoSolution(model, phi, N, with_recovery):
+	possiblyFinite = "with_recovery" if with_recovery else ""
 	print("We could not find any " + possiblyFinite + "(model, (N), phi)-attacker A.")
 
 # Error message when we could not negate the claim phi.
-def printCouldNotNegateClaim(phi, TESTING=False):
-	if TESTING:
-		return
+def printCouldNotNegateClaim(phi):
 	if phi == None:
 		print("No property phi provided; giving up.")
 	else:
 		print("We could not negate the claim in " + phi + "; giving up.")
 
 # Error message when we could not get any inputs or outputs.
-def printZeroIO(IO, TESTING=False):
-	if TESTING:
-		return
+def printZeroIO(IO):
 	print("We could not find any inputs or outputs in " + IO + "; giving up.")
 
 # Error message when num is too small
-def printInvalidNum(num, TESTING=False):
-	if TESTING:
-		return
+def printInvalidNum(num):
 	print("--num option must be > 0, was: " + str(num) + "; giving up.")

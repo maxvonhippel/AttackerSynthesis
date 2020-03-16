@@ -28,7 +28,7 @@ experiment1:
 			--Q=demo/TCP/network.pml          \
 			--IO=demo/TCP/IO.txt              \
 			--max_attacks=1                   \
-			--finite=False                    \
+			--with_recovery=False                    \
 			--name=experiment1                \
 			--characterize=False
 
@@ -46,7 +46,7 @@ avgExperiment:
 					--Q=demo/TCP/network.pml                                         \
 					--IO=demo/TCP/IO.txt                                             \
 					--max_attacks=10                                                 \
-					--finite=$$b                                                     \
+					--with_recovery=$$b                                                     \
 					--name=$$name;                                                   \
 			done;                                                                    \
 		done;                                                                        \
@@ -62,4 +62,7 @@ testChar: ; green tests/test_Characterize.py
 testCons: ; green tests/test_Construct.py
 
 # Runs all tests
-test: ; make clean testChar clean testKorg clean testCons
+test: 
+	rm -rf tests/__pycache__
+	rm -rf __pycache__
+	make clean testChar clean testKorg clean testCons
