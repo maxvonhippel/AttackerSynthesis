@@ -42,59 +42,54 @@ class TestKorg(unittest.TestCase):
 	def test_errors_if_no_attackers_requested(self):
 		for _with_recovery in [ True, False ]:
 			_name = "test_errors_if_no_attackers_requested_" + str(_with_recovery)
-			self.assertEqual(Korg.body( \
+			self.assertEqual(Korg.body(                        \
 				model = None, phi = None, Q = None, IO = None, \
-				max_attacks   = 0	, 	  \
-				with_recovery = _with_recovery,    \
-				name          = _name, \
+				max_attacks   = 0, 	                           \
+				with_recovery = _with_recovery,                \
+				name          = _name,                         \
 				characterize  = True), 1)
 	
 	# Test that if model || Q |/= phi then errors
 	def test_errors_if_trivial(self):
 		for _with_recovery in [ True, False ]:
 			_name = "test_errors_if_trivial_" + str(_with_recovery)
-			self.assertEqual(Korg.body(          \
-					model   = self.P,          \
-					phi     = self.phi,        \
-					Q       = self.Q,          \
-					IO      = None,            \
-					max_attacks = self.maxAttacks, \
-					with_recovery  = _with_recovery,         \
-					name = _name, \
-					characterize = True), 3)
+			self.assertEqual(Korg.body(              \
+					model         = self.P,          \
+					phi           = self.phi,        \
+					Q             = self.Q,          \
+					IO            = None,            \
+					max_attacks   = self.maxAttacks, \
+					with_recovery = _with_recovery,  \
+					name          = _name,           \
+					characterize  = True), 3)
 	
 	# Test that if we cannot negate phi then we get back 2
 	def test_errors_if_cannot_negate_phi(self):
 		for _with_recovery in [ True, False ]:
 			_name = "test_errors_if_cannot_negate_phi_" + str(_with_recovery)
-			self.assertEqual(Korg.body(      \
-				model   = None,            \
-				phi     = None,            \
-				Q       = None,            \
-				IO      = None,            \
-				max_attacks = self.maxAttacks, \
-				with_recovery  = _with_recovery,         \
-				name    = _name, \
-				characterize = True), 2)
+			self.assertEqual(Korg.body(                        \
+				model = None, phi = None, Q = None, IO = None, \
+				max_attacks   = self.maxAttacks,               \
+				with_recovery = _with_recovery,                \
+				name          = _name,                         \
+				characterize  = True), 2)
 
 	# Test that if IO is empty then we error, get back 4 or 5
 	def test_errors_if_IO_None(self):
 		for _with_recovery in [ True, False ]:
 			for _IO in [ None, 'dne.blarg', 'demo/emptyFile' ]:
-				_name = "test_errors_if_IO_None_" \
-					  + str(_with_recovery)              \
-					  + "_"                       \
-					  + str(_IO).replace("demo/", "")
+				_name = "test_errors_if_IO_None_" + str(_with_recovery) \
+					  + "_" + str(_IO).replace("demo/", "")
 				_exp  = 4 if _IO == None else 5
-				self.assertEqual(Korg.body(      \
-					model   = self.TCP,        \
-					phi     = self.exp1,       \
-					Q       = self.net,        \
-					IO      = _IO,             \
-					max_attacks     = self.maxAttacks, \
-					with_recovery  = _with_recovery,         \
-					name    = _name, \
-					characterize = True), _exp)
+				self.assertEqual(Korg.body(          \
+					model         = self.TCP,        \
+					phi           = self.exp1,       \
+					Q             = self.net,        \
+					IO            = _IO,             \
+					max_attacks   = self.maxAttacks, \
+					with_recovery = _with_recovery,  \
+					name          = _name,           \
+					characterize  = True), _exp)
 
 	# Test that if cannot make daisy then we error, get back 6
 	# Also test that if no solution exists, ie, daisy doesn't violate,
@@ -102,100 +97,70 @@ class TestKorg(unittest.TestCase):
 	def test_errors_if_no_solution(self):
 		for _with_recovery in [ True, False ]:
 			_name = "test_errors_if_no_solution_" + str(_with_recovery)
-			self.assertEqual(Korg.body(      \
-				model   = self.P,          \
-				phi     = self.theta,      \
-				Q       = self.Q,          \
-				IO      = self.IO_P,       \
-				max_attacks     = self.maxAttacks, \
-				with_recovery  = _with_recovery,         \
-				name    = _name, \
+			self.assertEqual(Korg.body(           \
+				model          = self.P,          \
+				phi            = self.theta,      \
+				Q              = self.Q,          \
+				IO             = self.IO_P,       \
+				max_attacks    = self.maxAttacks, \
+				with_recovery  = _with_recovery,  \
+				name           = _name,           \
 				characterize = True), 6)
 	
-	def test_works_on_TCP_exp1_with_recovery(self):
-		self.assertEqual(Korg.body(      \
-			model   = self.TCP,        \
-			phi     = self.exp1,       \
-			Q       = self.net,        \
-			IO      = self.IO,         \
-			max_attacks     = self.maxAttacks, \
-			with_recovery  = True,    	       \
-			name    = "test_works_on_TCP_exp1_with_recovery", \
-			characterize = True), 0)
-
-	def test_works_on_TCP_exp1_not_with_recovery(self):
-		self.assertEqual(Korg.body(      \
-			model   = self.TCP,        \
-			phi     = self.exp1,       \
-			Q       = self.net,        \
-			IO      = self.IO,         \
-			max_attacks     = self.maxAttacks, \
-			with_recovery  = False,           \
-			name    = "test_works_on_TCP_exp1_not_with_recovery", \
-			characterize = True), 0)
+	# Test that we can find attackers for experiment_1 with and without recovery
+	def test_works_on_TCP_exp1(self):
+		for _recovery in [ True, False ]:
+			self.assertEqual(Korg.body(           \
+				model          = self.TCP,        \
+				phi            = self.exp1,       \
+				Q              = self.net,        \
+				IO             = self.IO,         \
+				max_attacks    = self.maxAttacks, \
+				with_recovery  = _recovery,    	  \
+				name = "test_works_on_TCP_exp1_" + str(_recovery), \
+				characterize   = True), 0)
 	
-	def test_works_on_TCP_exp2_with_recovery(self):
-		self.assertEqual(Korg.body(      \
-			model   = self.TCP,        \
-			phi     = self.exp2,       \
-			Q       = self.net,        \
-			IO      = self.IO,         \
-			max_attacks     = self.maxAttacks, \
-			with_recovery  = True,    	       \
-			name    = "test_works_on_TCP_exp2_with_recovery", \
-			characterize = True), 0)
+	# Test that we can find attackers for experiment_2 with and without recovery
+	def test_works_on_TCP_exp2(self):
+		for _recovery in [ True, False ]:
+			self.assertEqual(Korg.body(           \
+				model          = self.TCP,        \
+				phi            = self.exp2,       \
+				Q              = self.net,        \
+				IO             = self.IO,         \
+				max_attacks    = self.maxAttacks, \
+				with_recovery  = _recovery,    	  \
+				name           = "test_works_on_TCP_exp2_" + str(_recovery), \
+				characterize   = True), 0)
 
-	def test_works_on_TCP_exp2_not_with_recovery(self):
-		self.assertEqual(Korg.body(      \
-			model   = self.TCP,        \
-			phi     = self.exp2,       \
-			Q       = self.net,        \
-			IO      = self.IO,         \
-			max_attacks     = self.maxAttacks, \
-			with_recovery  = False,           \
-			name    = "test_works_on_TCP_exp2_not_with_recovery", \
-			characterize = True), 0)
+	# We don't test exp3 because it takes too long, but we encourage you to
+	# try it out if you're curious!  See the documentation and Makefile for more.
 
-	def test_fails_on_with_recovery_Liveness(self):
-		self.assertEqual(Korg.body(                     \
-			model   = self.s_P,   \
-			phi     = self.s_Phi, \
-			Q       = self.s_Q,   \
-			IO      = self.s_IO,  \
-			max_attacks = self.maxAttacks,                \
-			with_recovery  = True,                           \
-			name    = "test_fails_on_with_recovery_Liveness", \
-			characterize = True), 6)
+	# Now let's try a toy problem where we can solve it without recovery but not with.
+	def test_on_Liveness(self):
+		for _recovery in [ True, False ]:
+			self.assertEqual(Korg.body(          \
+				model         = self.s_P,        \
+				phi           = self.s_Phi,      \
+				Q             = self.s_Q,        \
+				IO            = self.s_IO,       \
+				max_attacks   = self.maxAttacks, \
+				with_recovery = _recovery,       \
+				name          = "test_"          \
+							  + ("fails" if _recovery else "works") \
+							  + "_on_Liveness_" + str(_recovery),   \
+				characterize  = True), 6 if _recovery else 0)
 
-	def test_works_on_non_with_recovery_Liveness(self):
-		self.assertEqual(Korg.body(                     \
-			model   = self.s_P,   \
-			phi     = self.s_Phi, \
-			Q       = self.s_Q,   \
-			IO      = self.s_IO,  \
-			max_attacks = self.maxAttacks,            \
-			with_recovery  = False,                          \
-			name    = "test_works_on_non_with_recovery_Liveness", \
-			characterize = True), 0)
-
-	def test_works_on_Coles_example_with_recovery(self):
-		self.assertEqual(Korg.body(      \
-			model   = self.s_P,        \
-			phi     = self.s_Phi,      \
-			Q       = self.s_Q,        \
-			IO      = self.s_IO,       \
-			max_attacks     = self.maxAttacks, \
-			with_recovery  = True,            \
-			name    = "test_works_on_Coles_example_with_recovery", \
-			characterize = True), 6)
-
-	def test_works_on_Coles_example_non_with_recovery(self):
-		self.assertEqual(Korg.body(      \
-			model   = self.s_P,        \
-			phi     = self.s_Phi,      \
-			Q       = self.s_Q,        \
-			IO      = self.s_IO,       \
-			max_attacks     = self.maxAttacks, \
-			with_recovery  = False,           \
-			name    = "test_works_on_Coles_example_non_with_recovery", \
-			characterize = True), 0)
+	# Opposite logic to prior test.
+	def test_works_on_Coles_example(self):
+		for _recovery in [ True, False ]:
+			self.assertEqual(Korg.body(          \
+				model         = self.s_P,        \
+				phi           = self.s_Phi,      \
+				Q             = self.s_Q,        \
+				IO            = self.s_IO,       \
+				max_attacks   = self.maxAttacks, \
+				with_recovery = _recovery,       \
+				name          = "test_works_on_Coles_example_" \
+							  + str(_recovery),  \
+				characterize  = True), 6 if _recovery else 0)
