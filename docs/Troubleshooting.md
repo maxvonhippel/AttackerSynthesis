@@ -3,7 +3,7 @@
 # Troubleshooting
 
 <p align="center">
-	Pictured: Korg is also a super-hero made of rocks, and one of the main characters in *Thor: Ragnarok*.  Image courtesy of <a href="https://marvel-contestofchampions.fandom.com/wiki/Korg">Marvel</a>.
+	Pictured: Korg is also a super-hero made of rocks, and one of the main characters in <a href="https://www.imdb.com/title/tt3501632/">Thor: Ragnarok</a>.  Image courtesy of <a href="https://marvel-contestofchampions.fandom.com/wiki/Korg">Marvel</a>.
 	<br><br>
 	<img src="images/Korg_portrait.png">
 </p>
