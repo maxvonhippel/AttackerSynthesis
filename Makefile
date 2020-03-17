@@ -21,6 +21,8 @@ clean:
 	- rm *.pyc
 	- rm test_exp*
 	- rm ._n_i_p_s_
+	- rm **.tmp
+	- rm *.txt
 	echo "All clean!"
 
 # Tests on TCP w/ experiment1 (phi_1)
