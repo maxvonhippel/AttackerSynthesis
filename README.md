@@ -27,18 +27,19 @@
 
 <p align="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.</p>
 
+This repository is currently in flux.  In the near future, the repository will become stable.  At that time this README will be updated accordingly.  The status of my TODO tasks in order to complete the stabalization of the repository is detailed in the table below.
 
-| **REPOSITORY STATUS**                                               | **NOTE**                       |
-|---------------------------------------------------------------------|:-------------------------------|
-| Documentation                 | *in progress* | :expressionless:    | This repository is currently   |
-|:------------------------------|---------------|---------------------| in flux.  In the near future,  |
-| Citation                      | *coming soon* | :zipper_mouth_face: | the repository will become     |
-| ArXiV version                 | *coming soon* | :zipper_mouth_face: | stable.  At that time this     |
-| Instructions for using `Korg` | *coming soon* | :zipper_mouth_face: | README will be updated         |
-| `Korg` passing tests          |*done*         | :sparkling_heart:   | accordingly.                   |
-| Makefile working              | *coming soon* | :zipper_mouth_face: |                                |
-| `Korg` CLI improved           |*coming soon*  | :sparkling_heart:	  |                                |
-| `Korg` build system           | *coming soon* | :zipper_mouth_face: |                                |
+| **REPOSITORY STATUS**                                               |
+|---------------------------------------------------------------------|
+| Documentation                 | *in progress* | :expressionless:    |
+|:------------------------------|---------------|---------------------|
+| Citation                      | *coming soon* | :zipper_mouth_face: |
+| ArXiV version                 | *coming soon* | :zipper_mouth_face: |
+| Instructions for using `Korg` | *coming soon* | :zipper_mouth_face: |
+| `Korg` passing tests          |*done*         | :sparkling_heart:   |
+| Makefile working              | *coming soon* | :zipper_mouth_face: |
+| `Korg` CLI improved           |*coming soon*  | :sparkling_heart:	  |
+| `Korg` build system           | *coming soon* | :zipper_mouth_face: |
 
 ## How to Read Docs
 
