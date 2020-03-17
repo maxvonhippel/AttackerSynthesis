@@ -48,7 +48,7 @@ The documentation for this project consists of this README as well as all the fi
 * :zipper_mouth_face: [`README.md` = this file](README.md)
 
 	* :sparkling_heart: [`Korg.md` = Korg project overview](docs/Korg.md)
-	* :zipper_mouth_face: [`Install.md` = Korg install instuctions](docs/Install.md)
+	* :sparkling_heart: [`Install.md` = Korg install instuctions](docs/Install.md)
 	* :zipper_mouth_face: [`InterpretingOutputs.md` = details on Korg outputs](docs/InterpretingOutputs.md)
 	* :zipper_mouth_face: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
 	* :zipper_mouth_face: [`Usage.md` = usage instructions for Korg](docs/Usage.md)
