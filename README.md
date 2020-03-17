@@ -36,7 +36,7 @@ This repository is currently in flux.  In the near future, the repository will b
 | Instructions for using `Korg` | *coming soon* | :zipper_mouth_face: |
 | `Korg` passing tests          |*done*         | :sparkling_heart:   |
 | Makefile working              | *coming soon* | :zipper_mouth_face: |
-| `Korg` CLI improved           |*coming soon*  | :sparkling_heart:	  |
+| `Korg` CLI improved           |*done       *  | :sparkling_heart:	  |
 | `Korg` build system           | *coming soon* | :zipper_mouth_face: |
 
 ## How to Read Docs
