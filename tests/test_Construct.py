@@ -41,4 +41,4 @@ class TestConstruct(unittest.TestCase):
 
         self.assertEqual(\
             d_phi, \
-            "ltl newPhi { always ( ( b == 1 ) implies ( eventually ( always ( w == 0 ) ) ) )}")
+            "ltl newPhi { (eventually ( b == 1 ) ) implies ( eventually ( always ( w == 0 ) ) )}")

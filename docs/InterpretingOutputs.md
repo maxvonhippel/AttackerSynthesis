@@ -240,7 +240,7 @@ ltl exp2 {
 
 ````
 ltl newPhi {
-	always ( ( b == 1 ) implies (
+	(eventually ( b == 1 ) ) implies
 		
 	( (always ( eventually ( state[0] == 1 && state[1] == 2 ) ) ) 
 		implies ( eventually ( state[0] == 4 ) ) )
