@@ -43,6 +43,16 @@ This repository is currently in flux.  In the near future, the repository will b
 
 The documentation for this project consists of this README as well as all the files in `docs/`.  They natively link to one another so that you can navigate without ever using the file system.  These documents are written in [Github Markdown](https://developer.github.com/v3/markdown/) and are best viewed online, in the Github repository, e.g., [here](https://github.com/maxvonhippel/AttackerSynthesis).  We use features of Github flavor Markdown such as emojis and `HTML`.
 
+### Table of Contents
+
+* :zipper_mouth_face: [`README.md` = this file](README.md)
+
+	* :zipper_mouth_face: [`Korg.md` = Korg project overview](docs/Korg.md)
+	* :zipper_mouth_face: [`Install.md` = Korg install instuctions](docs/Install.md)
+	* :zipper_mouth_face: [`InterpretingOutputs.md` = details on Korg outputs](docs/InterpretingOutputs.md)
+	* :zipper_mouth_face: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
+	* :zipper_mouth_face: [`Usage.md` = usage instructions for Korg](docs/Usage.md)
+
 ## Repository Structure
 
 This repository contains the tool `Korg` as well as various Promela models from our paper.

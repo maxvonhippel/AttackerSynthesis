@@ -71,7 +71,7 @@ Use `Cygwin`, or, remove your operating system, and replace it with a [better on
 
 ## I ran Korg on my threat model.  Now, how do I interpret the results?
 
-TODO
+See [interpreting outputs](InterpretingOutputs.md)
 
 ## Help!  It's not working!
 
