@@ -16,7 +16,7 @@ The documentation for this project consists of this README as well as all the fi
 
 ## Repository Structure
 
-This repository contains the tool `Korg` as well as various Promela models from our paper.
+This repository contains the tool `Korg` as well as various Promela models from our paper.  The most important parts from the paper are marked with a :pushpin:.
 
 * `demo/` - contains models used for unit-testing the software, as well as our TCP model.
 	- `emptyFile` is an empty file used in unit-testing.
@@ -25,15 +25,15 @@ This repository contains the tool `Korg` as well as various Promela models from 
 		-- `phi.pml` a liveness property;
 		-- `theta.pml` the trivial property; and
 		-- `wrongPhi.pml` a safety property also used in unit-testing.
-	- `TCP/` contains the entire TCP model used in our Case Study.
-* `experiments/` - contains the three properties `phi_1.pml`, `phi_2.pml`, `phi_3.pml` used in the Case Study for `TM_1`, `TM_2`, `TM_3`.
+	- :pushpin: `TCP/` contains the entire TCP model used in our Case Study.
+* :pushpin: `experiments/` - contains the three properties `phi_1.pml`, `phi_2.pml`, `phi_3.pml` used in the Case Study for `TM_1`, `TM_2`, `TM_3`.
 * `out/` - this is where the outputs of the program are written to.
 * `results/` - this contains the results of the Case Study from the paper.  You can reproduce these results using the tool.
 * `tests/` - this contains unit-test code for `Korg`.
 * `__init__.py` - a file needed by Python to handle imports.
-* `avgExperiment.sh` - a Bash script with which to reproduce our results in `results/`.
+* :pushpin: `avgExperiment.sh` - a Bash script with which to reproduce our results in `results/`.
 
-The rest of the contents of the repository are exactly the code for the tool `Korg`.
+:pushpin: The rest of the contents of the repository are exactly the code for the tool `Korg`.
 
 * `Characterize.py` - used to characterize models with respect to properties using `Spin`.
 * `CLI.py` - handles basic I/O and CLI aspects of code.
