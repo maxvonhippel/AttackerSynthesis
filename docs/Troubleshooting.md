@@ -1,12 +1,14 @@
 [`↞` Back to **README.md**](../README.md), [`↞` Back to **Korg.md**](Korg.md)
 
-# Troubleshooting
-
 <p align="center">
-	Pictured: Korg is also a super-hero made of rocks, and one of the main characters in <a href="https://www.imdb.com/title/tt3501632/">Thor: Ragnarok</a>.  Image courtesy of <a href="https://marvel-contestofchampions.fandom.com/wiki/Korg">Marvel</a>.
-	<br><br>
-	<img style="border-radius: 50%;" src="images/Korg_portrait.png">
+<img
+    title="Pictured: Korg is also a super-hero made of rocks, and one of the main characters in Thor: Ragnarok.  Image courtesy of Marvel: https://marvel-contestofchampions.fandom.com/wiki/Korg"
+    style="border-radius: 50%; border: 2px solid black;" 
+    src="images/Korg_portrait.png"
+    width="200">
 </p>
+
+# Troubleshooting
 
 ## Caveats
 
