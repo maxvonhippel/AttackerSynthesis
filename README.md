@@ -51,7 +51,7 @@ The documentation for this project consists of this README as well as all the fi
 	* :sparkling_heart: [`Korg.md` = Korg project overview](docs/Korg.md)
 	* :sparkling_heart: [`Install.md` = Korg install instuctions](docs/Install.md)
 	* :zipper_mouth_face: [`InterpretingOutputs.md` = details on Korg outputs](docs/InterpretingOutputs.md)
-	* :zipper_mouth_face: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
+	* :sparkling_heart: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
 	* :sparkling_heart: [`Usage.md` = usage instructions for Korg](docs/Usage.md)
 
 ## Repository Structure
