@@ -25,7 +25,7 @@
             \$$$$$$                                                                
 ````
 
-<p style="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.</p>
+<p align="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.</p>
 
 **This repository is currently in flux.  In the near future, the repository will become stable.  At that time this README will be updated accordingly.**
 
