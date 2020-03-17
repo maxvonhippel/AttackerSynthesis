@@ -54,8 +54,8 @@ def getArgs():
 		type=int,
 		help='The maximum number of attackers to generate.')
 	parser.add_argument(
-		'--with_recovey',
-		metavar='with_recovey',
+		'--with_recovery',
+		metavar='with_recovery',
 		type=str2bool,
 		default=False,
 		nargs='?',

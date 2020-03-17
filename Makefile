@@ -9,6 +9,8 @@
 
 # Deletes all the left-over files produced by running the other targets in this file.
 clean:
+	- rm -rf __pycache__
+	- rm -rf tests/__pycache__
 	- rm -rf out/*
 	- rm *.trail
 	- rm *.pml
@@ -23,7 +25,7 @@ clean:
 
 # Tests on TCP w/ experiment1 (phi_1)
 experiment1:
-	time python3 Gen3.py                      \
+	time python3 Korg.py                      \
 			--model=demo/TCP/TCP.pml          \
 			--phi=experiments/experiment1.pml \
 			--Q=demo/TCP/network.pml          \
@@ -41,7 +43,7 @@ avgExperiment:
 				rm *.pml;                                                            \
 				name="experiment"$$exp"_"$$n"_"$$b;                                  \
 				echo "\n\n~~~~~~~~~~~~~ EXPERIMENT :: "$$name" ~~~~~~~~~~~~~~~\n\n"; \
-				/usr/bin/time -o "logs/"$$name"_log.txt" python3 Gen3.py             \
+				/usr/bin/time -o "logs/"$$name"_log.txt" python3 Korg.py             \
 					--model=demo/TCP/TCP.pml                                         \
 					--phi="experiments/experiment"$$exp".pml"                        \
 					--Q=demo/TCP/network.pml                                         \
