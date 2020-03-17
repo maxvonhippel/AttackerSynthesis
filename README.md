@@ -6,13 +6,16 @@ The documentation for this project consists of this README as well as all the fi
 
 ### Table of Contents
 
-* :clipboard: [`README.md` = this file](README.md)
+* TOC
+{:toc}
+
+<!-- * :clipboard: [`README.md` = this file](README.md)
 	
 	* :pushpin: [`Korg.md` = Korg tool overview](docs/Korg.md)
 	* :pushpin: [`Install.md` = Korg install instuctions](docs/Install.md)
 	* :pushpin: [`InterpretingOutputs.md` = details on Korg outputs](docs/InterpretingOutputs.md)
 	* :pushpin: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
-	* :pushpin: [`Usage.md` = usage instructions for Korg](docs/Usage.md)
+	* :pushpin: [`Usage.md` = usage instructions for Korg](docs/Usage.md) -->
 
 ## Repository Structure
 
