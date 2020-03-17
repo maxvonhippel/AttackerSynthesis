@@ -28,9 +28,7 @@
 <p align="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.</p>
 
 This repository is currently in flux.  In the near future, the repository will become stable.  At that time this README will be updated accordingly.  The status of my TODO tasks in order to complete the stabalization of the repository is detailed in the table below.
-
-| **REPOSITORY STATUS**                                               |
-|---------------------------------------------------------------------|
+         
 | Documentation                 | *in progress* | :expressionless:    |
 |:------------------------------|---------------|---------------------|
 | Citation                      | *coming soon* | :zipper_mouth_face: |
