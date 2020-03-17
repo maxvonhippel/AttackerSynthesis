@@ -8,7 +8,7 @@ The documentation for this project consists of this README as well as all the fi
 
 * :clipboard: [`README.md` = this file](README.md)
 	
-	* :pushpin: [`Korg.md` = Korg project overview](docs/Korg.md)
+	* :pushpin: [`Korg.md` = Korg tool overview](docs/Korg.md)
 	* :pushpin: [`Install.md` = Korg install instuctions](docs/Install.md)
 	* :pushpin: [`InterpretingOutputs.md` = details on Korg outputs](docs/InterpretingOutputs.md)
 	* :pushpin: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
