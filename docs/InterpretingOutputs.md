@@ -191,7 +191,7 @@ out/experiment2_True/
 
 ### `Ψ`
 
-There is one more thing for us to notice here: `Ψ`.  In the paper, we take a property `Φ`, and we construct a new property `Ψ = (G (recover ⇒ Φ))`.  We use a bit `b` to detect recovery in our models, like so:
+There is one more thing for us to notice here: `Ψ`.  In the paper, we take a property `Φ`, and we construct a new property `Ψ = (F recover) ⇒ Φ`.  We use a bit `b` to detect recovery in our models, like so:
 
 ````
 bit b= 0;
