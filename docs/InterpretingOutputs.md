@@ -85,11 +85,11 @@ active proctype attacker() {
 ````
 The first line gives the command that was used to produce the trail file which was interpreted in order to synthesize this attacker.  The rest of the lines give us the `attacker()` process, which, in order:
 
-1. Sends `ACK` over `NtoA` (called `Nto1` in the paper);
-2. Sends `SYN` over `NtoB` (called `Nto2` in the paper);
-3. Receives `SYN_ACK` over `BtoN` (called `2toN` in the paper);
-4. Sends `ACK` over `NtoB` (called `Nto2` in the paper);
-5. Does nothing forever.
+1. Sends `ACK` over `NtoA` (called `Nto1` in the paper) (:exclamation:)
+2. Sends `SYN` over `NtoB` (called `Nto2` in the paper) (:exclamation:)
+3. Receives `SYN_ACK` over `BtoN` (called `2toN` in the paper) (:question:)
+4. Sends `ACK` over `NtoB` (called `Nto2` in the paper) (:exclamation:)
+5. Does nothing forever. (:interrobang:)
 
 So, as a process, the attacker looks something like this.
 
@@ -164,21 +164,22 @@ out/experiment2_True/
 
 :scream: Wow!  :open_file_folder: :open_file_folder: :open_file_folder: That's a lot of files!  Let's go over what each of them is, exactly.
 
-* `attacker_0_WITH_RECOVERY.pml` is the first synthesized attacker, out of 3.  Obviously `attacker_1_WITH_RECOVERY.pml` is the second, and `attacker_2_WITH_RECOVERY.pml` is the third.
+* :calendar: `attacker_0_WITH_RECOVERY.pml` is the first synthesized attacker, out of 3.  Obviously `attacker_1_WITH_RECOVERY.pml` is the second, and `attacker_2_WITH_RECOVERY.pml` is the third.
 
-	* Actually, these three models are all exactly the same.  Sometimes I find that I need to run with a fairly large `--max_attacks` in order to get more than one *distinct* attacker.  The problem arises from non-determinism in `P`, or, in this case, `TCP.pml`.
+	* :wastebasket: Actually, these three models are all exactly the same.  Sometimes I find that I need to run with a fairly large `--max_attacks` in order to get more than one *distinct* attacker.  The problem arises from non-determinism in `P`, or, in this case, `TCP.pml`.
 
-* `log.txt`.  This is a comma-separated-value (CSV) text file following the format `model,A/E,with_recovery?`.  So, column 1 gives the name of the attacker model (e.g., `attacker_0_WITH_RECOVERY.pml`); column 2 says `A-attack` if it is a ∀-attacker, `E-attack` if it is an ∃-attacker, or `NOT AN ATTACK` if somehow the code made a mistake (which should not happen ... so if this does happen, please file an issue in the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues)); and column 3 says `True` iff it is an attacker with recovery, or `False` otherwise.
+* :spiral_notepad: `log.txt`.  This is a comma-separated-value (CSV) text file following the format `model,A/E,with_recovery?`.  So, column 1 gives the name of the attacker model (e.g., `attacker_0_WITH_RECOVERY.pml`); column 2 says `A-attack` if it is a ∀-attacker, `E-attack` if it is an ∃-attacker, or `NOT AN ATTACK` if somehow the code made a mistake (which should not happen ... so if this does happen, please file an issue in the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues)); and column 3 says `True` iff it is an attacker with recovery, or `False` otherwise.
 
-* `artifacts/attacker_0_WITH_RECOVERY_A.pml` reports no violations or acceptance cycles when run with `spin -run -a`, if and only if `attacker_0_WITH_RECOVERY.pml` is a ∀-attacker.  Otherwise, it reports one or more violations or acceptance cycles.
+* :chart_with_upwards_trend: `artifacts/attacker_0_WITH_RECOVERY_A.pml` reports no violations or acceptance cycles when run with `spin -run -a`, if and only if `attacker_0_WITH_RECOVERY.pml` is a ∀-attacker.  Otherwise, it reports one or more violations or acceptance cycles.
 
-	* Inspecting this file is a good way for you to understand *how* we check this.  The basic idea is to see if `P` composed with `attacker` *satisfies* the *negation* of `phi`.
+	* :bar_chart: Inspecting this file is a good way for you to understand *how* we check this.  The basic idea is to see if `P` composed with `attacker` *satisfies* the *negation* of `phi`.
 
-	* Likewise, `artifacts/attacker_1_WITH_RECOVERY_A.pml` serves the same purpose for `attacker_1_WITH_RECOVERY.pml`, and, `artifacts/attacker_2_WITH_RECOVERY_A.pml` serves the same puspose for `attacker_2_WITH_RECOVERY.pml`.
+	* :file_cabinet: Likewise, `artifacts/attacker_1_WITH_RECOVERY_A.pml` serves the same purpose for `attacker_1_WITH_RECOVERY.pml`, and, `artifacts/attacker_2_WITH_RECOVERY_A.pml` serves the same puspose for `attacker_2_WITH_RECOVERY.pml`.
 
-* `artifacts/attacker_0_WITH_RECOVERY_E.pml` reports at least one violation or acceptance cycle iff `attacker_0_WITH_RECOVERY.pml` is an attacker.  So: 
+* :clipboard: `artifacts/attacker_0_WITH_RECOVERY_E.pml` reports at least one violation or acceptance cycle iff `attacker_0_WITH_RECOVERY.pml` is an attacker.  So: 
 
-	* if `spin -run -a artifacts/attacker_0_WITH_RECOVERY_E.pml` reports at least one violation or acceptance cycle, and `spin -run -a artifacts/attacker_0_WITH_RECOVERY_A.pml` does not, then `attacker_0_WITH_RECOVERY.pml` is a ∀-attacker;
-	* if both commands report each at least one violation or acceptance cycle, then `attacker_0_WITH_RECOVERY.pml` is an ∃-attacker;
-	* if neither command reports at least one violation or acceptance cycle, then there is something *very very wrong* with the code, and you should submit the inputs and outputs for us to inspect on the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues);
-	* likewise, if `spin -run -a artifacts/attacker_0_WITH_RECOVERY_E.pml` reports no violation or acceptance cycle, but `spin -run -a artifacts/attacker_0_WITH_RECOVERY_A.pml` reports at least one violation or acceptance cycle, then there is something *very very wrong* with the code, and you should submit the inputs and outputs for us to inspect on the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues).
+	* :pushpin: if `spin -run -a artifacts/attacker_0_WITH_RECOVERY_E.pml` reports at least one violation or acceptance cycle, and `spin -run -a artifacts/attacker_0_WITH_RECOVERY_A.pml` does not, then `attacker_0_WITH_RECOVERY.pml` is a ∀-attacker;
+	* :pushpin: if both commands report each at least one violation or acceptance cycle, then `attacker_0_WITH_RECOVERY.pml` is an ∃-attacker;
+	* :scissors: if neither command reports at least one violation or acceptance cycle, then there is something *very very wrong* with the code, and you should submit the inputs and outputs for us to inspect on the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues);
+	* :scissors: likewise, if `spin -run -a artifacts/attacker_0_WITH_RECOVERY_E.pml` reports no violation or acceptance cycle, but `spin -run -a artifacts/attacker_0_WITH_RECOVERY_A.pml` reports at least one violation or acceptance cycle, then there is something *very very wrong* with the code, and you should submit the inputs and outputs for us to inspect on the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues).
+	* :file_cabinet: Obviously `artifacts/attacker_$n_WITH_RECOVERY_E.pml` and `artifacts_attacker_$n_WITH_RECOVERY_A.pml` serve the same respective purposes for the attacker `attacker_$n_WITH_RECOVERY.pml`, for `$n ∈ { 0, 1, 2 }`.
