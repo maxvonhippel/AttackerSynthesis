@@ -55,8 +55,30 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 #### IO File Grammar / Syntax
 
-TODO
+The syntax of the IO file is:
+
+````
+chan1:
+	I:a1,a2,...
+	O:b1',b2',...
+chan2:
+	I:c1,c2,...
+	O:d1,d2,...
+...
+````
+
+In other words, for each channel :ear: that the process can communicate over, you have a new line :ear:, followed by a tab, then `I:` and a comma-seperated list of the inputs the process can hear over :ear:, followed by a newline and then a tab and then `O:` and a comma-seperated list of the outputs the process can send over :ear:.
+
+We assume that when you provide Korg with an interface, it is the interface of the `Q` argument, however, we do not computationally enforce this assumption.  (Your results might not make sense if this assumption is not met.)
 
 ## As a Library
 
-TODO
+Korg can be used as a Python library.
+
+````
+from Korg import *
+````
+
+The best way to see how to do this is to look at the unit tests, e.g., [`test_Korg.py`](../tests/test_Korg.py), which do exactly this.
+
+* If you use Korg in your project, please let us know!  We would love to see how you use it.
