@@ -4,7 +4,7 @@
 
 As a tool, Korg should be used through the command line (Bash).
 
-* Yes, it almost certainly works fine in variants such as ZSH.  But if you have any difficulties along these lines, feel free to tell us about it in the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues), and we will try to help.
+* Yes, it almost certainly works fine in variants such as [ZSH](https://ohmyz.sh/).  But if you have any difficulties along these lines, feel free to tell us about it in the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues), and we will try to help.
 
 The Korg usage is as follows.
 
