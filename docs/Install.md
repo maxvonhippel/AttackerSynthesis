@@ -2,6 +2,12 @@
 
 # Korg Installation Instructions
 
+<p align="center">
+  Pictured: Korg Pa4X User Manual.  Image courtesy of <a href="https://www.scribd.com/document/368305380/Korg-Pa4X-User-Manual-v2-0-E13">Anonymous HGOomkn69</a>.
+  <br><br>
+  <img src="images/Korg_manual.png">
+</p>
+
 ## Instructions
 
 We have tried to make this easy by providing the installation script [`setup.sh`](../setup.sh).  
