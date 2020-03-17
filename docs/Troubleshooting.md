@@ -25,6 +25,8 @@ Here are some important caveats to be aware of.
 
 3. Korg expects you to be honest when you craft your interface (`IO.txt`) file.  Do not lie about the interface of `Q`!
 
+4. Note that while in the paper we call the TCP channels `1toN`, `2toN`, `Nto1`, and `Nto2`, actually Spin does not accept these channel names, so in our models we use `AtoN`, `BtoN`, `NtoA`, and `NtoB`, instead.
+
 ## Return Values
 
 You can infer a lot from the value returned by Korg (the [exit status](https://en.wikipedia.org/wiki/Exit_status) or [error code](https://en.wikipedia.org/wiki/Error_code)).

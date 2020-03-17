@@ -1,23 +1,23 @@
 /* spin -t7 -s -r experiment1_3_False_daisy_check.pml */
 active proctype attacker() {
 	
-	Nto1 ! ACK;
-	Nto2 ! SYN;
-	2toN ? SYN_ACK;
-	Nto2 ! ACK;
-	2toN ? FIN;
-	Nto2 ! ACK;
-	Nto2 ! FIN;
-	2toN ? ACK;
-	Nto2 ! SYN;
-	Nto2 ! ACK;
-	Nto2 ! ACK;
-	2toN ? SYN_ACK;
-	Nto2 ! FIN;
-	Nto2 ! SYN;
-	2toN ? FIN;
-	2toN ? ACK;
-	2toN ? SYN;
-	Nto2 ! ACK;
+	NtoA ! ACK;
+	NtoB ! SYN;
+	BtoN ? SYN_ACK;
+	NtoB ! ACK;
+	BtoN ? FIN;
+	NtoB ! ACK;
+	NtoB ! FIN;
+	BtoN ? ACK;
+	NtoB ! SYN;
+	NtoB ! ACK;
+	NtoB ! ACK;
+	BtoN ? SYN_ACK;
+	NtoB ! FIN;
+	NtoB ! SYN;
+	BtoN ? FIN;
+	BtoN ? ACK;
+	BtoN ? SYN;
+	NtoB ! ACK;
 	// Acceptance Cycle part of attack
 }

@@ -1,9 +1,9 @@
 mtype = { SYN, FIN, ACK, SYN_ACK }
 
-chan 1toN = [1] of { mtype };
-chan Nto1 = [1] of { mtype };
-chan 2toN = [1] of { mtype };
-chan Nto2 = [1] of { mtype };
+chan AtoN = [1] of { mtype };
+chan NtoA = [1] of { mtype };
+chan BtoN = [1] of { mtype };
+chan NtoB = [1] of { mtype };
 
 int state[2];
 int pids[2];
@@ -98,6 +98,6 @@ end:
 init {
 	state[0] = ClosedState;
 	state[1] = ClosedState;
-	run TCP(1toN, Nto1, 0);
-	run TCP(2toN, Nto2, 1);
+	run TCP(AtoN, NtoA, 0);
+	run TCP(BtoN, NtoB, 1);
 }

@@ -81,29 +81,29 @@ Let's look at `attacker_0.pml`.
 /* spin -t -s -r experiment1_daisy_check.pml */
 active proctype attacker() {
 	
-	Nto1 ! ACK;
-	Nto2 ! SYN;
-	2toN ? SYN_ACK;
-	Nto2 ! ACK;
+	NtoA ! ACK;
+	NtoB ! SYN;
+	BtoN ? SYN_ACK;
+	NtoB ! ACK;
 	// Acceptance Cycle part of attack
 }
 ````
 The first line gives the command that was used to produce the trail file which was interpreted in order to synthesize this attacker.  The rest of the lines give us the `attacker()` process, which, in order:
 
-1. Sends `ACK` over `Nto1`
-2. Sends `SYN` over `Nto2`
-3. Receives `SYN_ACK` over `2toN`
-4. Sends `ACK` over `Nto2`
+1. Sends `ACK` over `NtoA`
+2. Sends `SYN` over `NtoB`
+3. Receives `SYN_ACK` over `BtoN`
+4. Sends `ACK` over `NtoB`
 5. Does nothing forever.
 
 So, as a process, the attacker looks something like this.
 
 ````
-              Nto1 ! ACK             Nto2 ! SYN
+              NtoA ! ACK             NtoB ! SYN
 ---> ( s_0 ) ------------> ( s_ 1) -------------> ( s_3 )
                                                     |
-                                                    | 2toN ? SYN_ACK
-                                     Nto2 ! ACK     V
+                                                    | BtoN ? SYN_ACK
+                                     NtoB ! ACK     V
                            ( s_5 ) <------------- ( s_4 )
 ````
 
@@ -117,12 +117,12 @@ Inspecting `experiment2_False/attacker_2.pml`, I see:
 /* spin -t2 -s -r experiment2_daisy_check.pml */
 active proctype attacker() {
 	
-	Nto1 ! ACK;
-	Nto2 ! ACK;
+	NtoA ! ACK;
+	NtoB ! ACK;
 	// Acceptance Cycle part of attack
 	do
 	::
-	   2toN ? SYN;
+	   BtoN ? SYN;
 	od
 }
 ````
@@ -130,10 +130,10 @@ active proctype attacker() {
 Clearly this attacker has a non-trivial acceptance cycle (again, using the paper's notation for the channels for my figure below):
 
 ````
-               Nto1 ! ACK           Nto2 ! ACK
+               NtoA ! ACK           NtoB ! ACK
 ----> ( s_0 ) ------------> ( s_1 ) -----------> ( s_3 ) -----
                                                     ^        |
-                                                    |        | 2toN ? SYN
+                                                    |        | BtoN ? SYN
                                                     ----------
 
                                                \_______ _________________/
@@ -197,9 +197,9 @@ There is one more thing for us to notice here: `Ψ`.  In the paper, we take a pr
 bit b= 0;
 active proctype daisy () {
 	do
-	:: 1toN?ACK;
-	:: 1toN?FIN;
-	:: 1toN?SYN;
+	:: AtoN?ACK;
+	:: AtoN?FIN;
+	:: AtoN?SYN;
 	
 	// etc etc etc
 
@@ -209,13 +209,13 @@ active proctype daisy () {
 	// N begins here ... 
 
 	do
-	:: 1toN ? SYN -> 
+	:: AtoN ? SYN -> 
 		if
-		:: Nto2 ! SYN;
+		:: NtoB ! SYN;
 		fi unless timeout;
-	:: 2toN ? SYN -> 
+	:: BtoN ? SYN -> 
 		if
-		:: Nto1 ! SYN;
+		:: NtoA ! SYN;
 		fi unless timeout;
 	
 	// etc etc etc

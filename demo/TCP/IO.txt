@@ -1,12 +1,12 @@
-1toN:	
+AtoN:	
 	I:SYN,ACK,SYN_ACK,FIN
 	O:
-2toN:
+BtoN:
 	I:SYN,ACK,SYN_ACK,FIN
 	O:
-Nto1:
+NtoA:
 	I:
 	O:SYN,ACK,SYN_ACK,FIN
-Nto2:
+NtoB:
 	I:
 	O:SYN,ACK,SYN_ACK,FIN
