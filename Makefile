@@ -29,7 +29,7 @@ experiment1:
 			--Q=demo/TCP/network.pml          \
 			--IO=demo/TCP/IO.txt              \
 			--max_attacks=1                   \
-			--with_recovery=False                    \
+			--with_recovery=False             \
 			--name=experiment1                \
 			--characterize=False
 
@@ -47,7 +47,7 @@ avgExperiment:
 					--Q=demo/TCP/network.pml                                         \
 					--IO=demo/TCP/IO.txt                                             \
 					--max_attacks=10                                                 \
-					--with_recovery=$$b                                                     \
+					--with_recovery=$$b                                              \
 					--name=$$name;                                                   \
 			done;                                                                    \
 		done;                                                                        \

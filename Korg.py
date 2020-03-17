@@ -24,7 +24,7 @@ def main():
 		args.Q, 		             \
 		args.IO,                     \
 		args.max_attacks,            \
-		args.with_recovery,                 \
+		args.with_recovery,          \
 		args.name,                   \
 		args.characterize
 	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize)
