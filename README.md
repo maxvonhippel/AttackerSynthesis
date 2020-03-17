@@ -5,7 +5,7 @@ Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Projec
 
 ## How to Read Docs
 
-The documentation for this project consists of this README as well as all the files in `docs/`.  They natively link to one another so that you can navigate without ever using the file system.  These documents are written in [Github Markdown](https://developer.github.com/v3/markdown/) and are best viewed online, in the Github repository, e.g., [here](https://github.com/maxvonhippel/AttackerSynthesis), or on Github pages, e.g., [here](https://mxvh.pl/AttackerSynthesis).  We use features of Github flavor Markdown such as emojis and `HTML`.
+The documentation for this project consists of this README as well as all the files in `docs/`.  They natively link to one another so that you can navigate without ever using the file system.  These documents are written in [Github Markdown](https://developer.github.com/v3/markdown/) and are best viewed online on Github pages, [here](https://mxvh.pl/AttackerSynthesis).  We use features of Github flavor Markdown such as emojis, automatic tables of contents, and `HTML`.
 
 * :clipboard: [`README.md` = this file](README.md)
 	
