@@ -39,11 +39,11 @@ Korg is a tool for *attacker synthesis*.  Specifically, given a system model `M`
 
 # How can I install Korg?
 
-See the [Install docs](Install.md).
+See the [install docs](Install.md).
 
 # How can I use Korg?
 
-See the [Usage docs](Usage.md).
+See the [usage docs](Usage.md).
 
 ## ... using the Makefile
 
@@ -71,7 +71,7 @@ Use `Cygwin`, or, remove your operating system, and replace it with a [better on
 
 ## I ran Korg on my threat model.  Now, how do I interpret the results?
 
-See [interpreting outputs](InterpretingOutputs.md)
+See [interpreting outputs](InterpretingOutputs.md).
 
 ## Help!  It's not working!
 
