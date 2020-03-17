@@ -183,3 +183,65 @@ out/experiment2_True/
 	* if neither command reports at least one violation or acceptance cycle, then there is something *very very wrong* with the code, and you should submit the inputs and outputs for us to inspect on the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues);
 	* likewise, if `spin -run -a artifacts/attacker_0_WITH_RECOVERY_E.pml` reports no violation or acceptance cycle, but `spin -run -a artifacts/attacker_0_WITH_RECOVERY_A.pml` reports at least one violation or acceptance cycle, then there is something *very very wrong* with the code, and you should submit the inputs and outputs for us to inspect on the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues).
 	* Obviously `artifacts/attacker_$n_WITH_RECOVERY_E.pml` and `artifacts_attacker_$n_WITH_RECOVERY_A.pml` serve the same respective purposes for the attacker `attacker_$n_WITH_RECOVERY.pml`, for `$n ∈ { 0, 1, 2 }`.
+
+### `Ψ`
+
+There is one more thing for us to notice here: `Ψ`.  In the paper, we take a property `Φ`, and we construct a new property `Ψ = (G (recover ⇒ Φ))`.  We use a bit `b` to detect recovery in our models, like so:
+
+````
+bit b= 0;
+active proctype daisy () {
+	do
+	:: AtoN?ACK;
+	:: AtoN?FIN;
+	:: AtoN?SYN;
+	
+	// etc etc etc
+
+	:: break; // recovery to N ... 
+	od
+	b = 1;
+	// N begins here ... 
+
+	do
+	:: AtoN ? SYN -> 
+		if
+		:: NtoB ! SYN;
+		fi unless timeout;
+	:: BtoN ? SYN -> 
+		if
+		:: NtoA ! SYN;
+		fi unless timeout;
+	
+	// etc etc etc
+
+	:: _nr_pr < 3 -> break;
+	od
+end:
+
+}
+````
+
+Then, given a `Φ`, for example:
+
+````
+ltl exp2 {
+	( (always ( eventually ( state[0] == 1 && state[1] == 2 ) ) ) 
+		implies ( eventually ( state[0] == 4 ) ) )
+}
+
+````
+... we can construct a `Ψ`, as evident at the top-level directory in `experiment2_daisy_check.pml`:
+
+````
+ltl newPhi {
+	always ( ( b == 1 ) implies (
+		
+	( (always ( eventually ( state[0] == 1 && state[1] == 2 ) ) ) 
+		implies ( eventually ( state[0] == 4 ) ) )
+  ) )
+}
+````
+However, we do not use this property in our `artifacts`, because we know that there must exist a violating run with `b == 1` in order for us to get a result in the first place.
+
+If this worries you, you can add the bit `b` back in to the attacker before recovery, and run the artifacts with `Ψ`, and you should get the expected results.
