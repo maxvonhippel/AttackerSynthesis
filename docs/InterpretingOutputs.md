@@ -87,11 +87,11 @@ active proctype attacker() {
 ````
 The first line gives the command that was used to produce the trail file which was interpreted in order to synthesize this attacker.  The rest of the lines give us the `attacker()` process, which, in order:
 
-1. Sends `ACK` over `NtoA` (called `Nto1` in the paper) (:exclamation:)
-2. Sends `SYN` over `NtoB` (called `Nto2` in the paper) (:exclamation:)
-3. Receives `SYN_ACK` over `BtoN` (called `2toN` in the paper) (:question:)
-4. Sends `ACK` over `NtoB` (called `Nto2` in the paper) (:exclamation:)
-5. Does nothing forever. (:interrobang:)
+1. Sends `ACK` over `NtoA`
+2. Sends `SYN` over `NtoB`
+3. Receives `SYN_ACK` over `BtoN`
+4. Sends `ACK` over `NtoB`
+5. Does nothing forever.
 
 So, as a process, the attacker looks something like this.
 
