@@ -177,3 +177,5 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadatalogs/**
+*.tmp
+logs/*
