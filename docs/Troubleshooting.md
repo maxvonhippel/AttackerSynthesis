@@ -16,7 +16,7 @@ Here are some important caveats to be aware of.
 
 ## Return Values
 
-You can infer a lot from the value returned by Korg (the [exit status](https://en.wikipedia.org/wiki/Exit_status)).
+You can infer a lot from the value returned by Korg (the [exit status](https://en.wikipedia.org/wiki/Exit_status) or [error code](https://en.wikipedia.org/wiki/Error_code)).
 
 | Exit Status | Meaning (Written)                                                                     | Meaning (Visual)  |
 |-------------|:--------------------------------------------------------------------------------------|:------------------|
