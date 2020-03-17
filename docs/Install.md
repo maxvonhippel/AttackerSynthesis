@@ -1,6 +1,6 @@
-#Korg Installation Instructions
+# Korg Installation Instructions
 
-We have tried to make this easy by providing the installation script `setup.sh`.  However, if this does not work for you, then:
+We have tried to make this easy by providing the installation script [`setup.sh`](../install.sh).  However, if this does not work for you, then:
 
 1. Install [Spin](www.spinroot.com) *globally*.  So, you should be able to run it from the command line from anywhere in your computer.  (If you are unsure if you have successfully done this, just open a terminal, and type `mkdir demo && cd demo && spin`, and see if you get some output like `Spin Version 6.5.0 -- 17 July 2019 \n spin: error, no filename specified` where `\n` is a newline.)
 
