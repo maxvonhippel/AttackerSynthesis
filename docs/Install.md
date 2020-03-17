@@ -1,3 +1,5 @@
+[`↞` Back to **README.md**](../README.md), [`↞` Back to **Korg.md**](Korg.md)
+
 # Korg Installation Instructions
 
 ## Instructions
