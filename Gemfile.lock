@@ -244,6 +244,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll
+  jekyll-watch
   jemoji
 
 BUNDLED WITH
