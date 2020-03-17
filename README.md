@@ -1,4 +1,4 @@
-Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.  For an up-to-date list of what remains to be done in this repository, see [`TODO.md`](TODO.md).
+Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.
 
 * TOC
 {:toc}
