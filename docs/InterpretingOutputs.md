@@ -10,6 +10,9 @@
 
 # Interpreting Korg's Outputs
 
+* TOC
+{:toc}
+
 ## With `--characterize=False`
 
 Suppose I run Korg wit the following parameters.

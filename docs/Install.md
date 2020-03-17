@@ -10,6 +10,9 @@
 
 # Korg Installation Instructions
 
+* TOC
+{:toc}
+
 ## Instructions
 
 We have tried to make this easy by providing the installation script [`setup.sh`](../setup.sh).  

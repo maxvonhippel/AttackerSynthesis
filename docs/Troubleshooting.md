@@ -10,6 +10,9 @@
 
 # Troubleshooting
 
+* TOC
+{:toc}
+
 ## Caveats
 
 Here are some important caveats to be aware of.

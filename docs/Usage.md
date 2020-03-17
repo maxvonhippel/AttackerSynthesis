@@ -10,6 +10,9 @@
 
 # How to use Korg
 
+* TOC
+{:toc}
+
 ## As a Tool
 
 As a tool, Korg should be used through the command line (Bash).

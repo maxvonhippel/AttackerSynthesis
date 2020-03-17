@@ -7,6 +7,9 @@
 	<img src="images/korg.png">
 </p>
 
+* TOC
+{:toc}
+
 
 # What is Korg?
 

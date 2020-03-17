@@ -1,21 +1,21 @@
 Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.  For an up-to-date list of what remains to be done in this repository, see [`TODO.md`](TODO.md).
 
+* TOC
+{:toc}
+
 ## How to Read Docs
 
 The documentation for this project consists of this README as well as all the files in `docs/`.  They natively link to one another so that you can navigate without ever using the file system.  These documents are written in [Github Markdown](https://developer.github.com/v3/markdown/) and are best viewed online, in the Github repository, e.g., [here](https://github.com/maxvonhippel/AttackerSynthesis), or on Github pages, e.g., [here](https://mxvh.pl/AttackerSynthesis).  We use features of Github flavor Markdown such as emojis and `HTML`.
 
 ### Table of Contents
 
-* TOC
-{:toc}
-
-<!-- * :clipboard: [`README.md` = this file](README.md)
+* :clipboard: [`README.md` = this file](README.md)
 	
 	* :pushpin: [`Korg.md` = Korg tool overview](docs/Korg.md)
 	* :pushpin: [`Install.md` = Korg install instuctions](docs/Install.md)
 	* :pushpin: [`InterpretingOutputs.md` = details on Korg outputs](docs/InterpretingOutputs.md)
 	* :pushpin: [`Troubleshooting.md` = troubleshooting tips for Korg](docs/Troubleshooting.md)
-	* :pushpin: [`Usage.md` = usage instructions for Korg](docs/Usage.md) -->
+	* :pushpin: [`Usage.md` = usage instructions for Korg](docs/Usage.md)
 
 ## Repository Structure
 
