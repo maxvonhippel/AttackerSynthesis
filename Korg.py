@@ -32,6 +32,7 @@
 #        \::|   |                  \::/____/               \::|   |                 \::::/    /       
 #         \:|   |                   ~~                      \:|   |                  \::/____/        
 #          \|___|                                            \|___|                                   
+# ASCII art courtesy of Patrick Gillespie's ASCII tool.
 
 from CLI          import *
 from Characterize import *

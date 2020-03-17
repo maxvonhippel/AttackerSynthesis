@@ -1,33 +1,4 @@
-````
-  ______  x  __      __                          __                    0            
- /      \   |  \    |  \            o           |  \                               
-|  $$$$$$\ _| $$_  _| $$_     ______    _______ | $$   __   ______    ______       
-| $$__| $$|   $$ \|   $$ \   |      \  /       \| $$  /  \ /      \  /      \      
-| $$    $$ \$$$$$$ \$$$$$$ o  \$$$$$$\|  $$$$$$$| $$_/  $$|  $$$$$$\|  $$$$$$\     
-| $$$$$$$$  | $$ __ | $$ __  /      $$| $$      | $$   $$ | $$    $$| $$   \$$     
-| $$  | $$  | $$|  \| $$|  \|  $$$$$$$| $$_____ | $$$$$$\ | $$$$$$$$| $$          o 
-| $$  | $$   \$$  $$ \$$  $$ \$$    $$ \$$     \| $$  \$$\ \$$     \| $$           
- \$$   \$$ o  \$$$$   \$$$$   \$$$$$$$  \$$$$$$$ \$$   \$$  \$$$$$$$ \$$           
-                                                                                   
-                         x                              o                           
-    x                                                    x                     x     
-  ______                       0__      __   .                        __           
- /      \         o            |  \    |  \                          |  \          
-|  $$$$$$\ __    __  _______  _| $$_   | $$____    ______    _______  \$$  _______ 
-| $$___\$$|  \  |  \|       \|   $$ \  | $$    \  /      \  /       \|  \ /       \
- \$$    \ | $$  | $$| $$$$$$$\\$$$$$$  | $$$$$$$\|  $$$$$$\|  $$$$$$$| $$|  $$$$$$$
- _\$$$$$$\| $$  | $$| $$  | $$ | $$ __ | $$  | $$| $$    $$ \$$    \ | $$ \$$    \ 
-|  \__| $$| $$__/ $$| $$  | $$ | $$|  \| $$  | $$| $$$$$$$$ _\$$$$$$\| $$ _\$$$$$$\ x
- \$$    $$ \$$    $$| $$  | $$  \$$  $$| $$  | $$ \$$     \|       $$| $$|       $$
-  \$$$$$$  _\$$$$$$$ \$$   \$$   \$$$$  \$$   \$$  \$$$$$$$ \$$$$$$$  \$$ \$$$$$$$ 
-          |  \__| $$                                                               
-           \$$    $$                        ..                                       
-            \$$$$$$        x                                     0                  
-````
-
-<p align="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.  ASCII art courtesy of <a href="http://patorjk.com/software/taag/#p=display&f=Alpha&t=KORG">Patrick Gillespie's ASCII tool.</a></p>
-
-For an up-to-date list of what remains to be done in this repository, see [`TODO.md`](TODO.md).
+Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.  For an up-to-date list of what remains to be done in this repository, see [`TODO.md`](TODO.md).
 
 ## How to Read Docs
 
