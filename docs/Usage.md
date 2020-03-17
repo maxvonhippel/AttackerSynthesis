@@ -73,7 +73,7 @@ In other words, for each channel :ear: that the process can communicate over, yo
 
 > :ear::
 
-followed by a tab, then `I:` and a comma-seperated list of the inputs the process can hear over :ear:, followed by a newline and then a tab and then `O:` and a comma-seperated list of the outputs the process can send over :ear:.
+followed by a newline and a tab, then `I:` and a comma-seperated list of the inputs the process can hear over :ear:, followed by a newline and then a tab and then `O:` and a comma-seperated list of the outputs the process can send over :ear:.
 
 We assume that when you provide Korg with an interface, it is the interface of the `Q` argument, however, we do not computationally enforce this assumption.  (Your results might not make sense if this assumption is not met.)
 
