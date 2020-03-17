@@ -37,12 +37,14 @@ experiment1:
 
 # Reproduces our results from the Case Study
 avgExperiment:
+	mkdir -p logs;                                                                   \
 	for exp in 3 2 1; do                                                             \
 		for b in False True; do                                                      \
 			for n in 1 2 3 4 5 6 7 8 9 10; do                                        \
 				rm *.pml;                                                            \
 				name="experiment"$$exp"_"$$n"_"$$b;                                  \
 				echo "\n\n~~~~~~~~~~~~~ EXPERIMENT :: "$$name" ~~~~~~~~~~~~~~~\n\n"; \
+				touch "logs/"$$name"_log.txt";                                       \
 				/usr/bin/time -o "logs/"$$name"_log.txt" python3 Korg.py             \
 					--model=demo/TCP/TCP.pml                                         \
 					--phi="experiments/experiment"$$exp".pml"                        \
