@@ -1,3 +1,0 @@
-channel:
-	I:A,B
-	O:C
