@@ -57,6 +57,51 @@ Stats on memory usage (in Megabytes):
 
 pan: elapsed time 0.01 seconds
 ````
-First of all, we can basically ignore the output in the command line.  This is just un-supressed Spin output.
+First of all, we can basically ignore the output in the command line.  This is just unsuppressed Spin output.
 
 What we are really interested is the output in `out/experiment1_False`.  Notice the naming scheme is `out/$(name)_$(with_recovery)`.
+
+````
+(env) mvh:AttackerSynthesis$ tree out
+out
+└── experiment1_False
+    └── attacker_0.pml
+
+1 directory, 1 file
+
+````
+Let's look at `attacker_0.pml`.
+
+````
+/* spin -t -s -r experiment1_daisy_check.pml */
+active proctype attacker() {
+	
+	NtoA ! ACK;
+	NtoB ! SYN;
+	BtoN ? SYN_ACK;
+	NtoB ! ACK;
+	// Acceptance Cycle part of attack
+}
+````
+The first line gives the command that was used to produce the trail file which was interpreted in order to synthesize this attacker.  The rest of the lines give us the `attacker()` process, which, in order:
+
+1. Sends `ACK` over `NtoA` (called `Nto1` in the paper);
+2. Sends `SYN` over `NtoB` (called `Nto2` in the paper);
+3. Receives `SYN_ACK` over `BtoN` (called `2toN` in the paper);
+4. Sends `ACK` over `NtoB` (called `Nto2` in the paper);
+5. Does nothing forever.
+
+So, as a process, the attacker looks something like this.
+
+````
+              Nto1 ! ACK             Nto2 ! SYN
+---> ( s_0 ) ------------> ( s_ 1) -------------> ( s_3 )
+                                                    |
+                                                    | 2toN ? SYN_ACK
+                                     Nto2 ! ACK     V
+                           ( s_5 ) <------------- ( s_4 )
+````
+
+Note that this attacker has a trivial acceptance cycle.  But we can also make an attacker with a non-trivial acceptance cycle, like so.
+
+TODO
