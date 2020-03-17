@@ -7,6 +7,7 @@
 #             unfamiliar with Makefiles.
 # ==============================================================================
 
+# Deletes all the left-over files produced by running the other targets in this file.
 clean:
 	- rm -rf out/*
 	- rm *.trail

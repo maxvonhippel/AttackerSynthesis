@@ -152,7 +152,7 @@ def parseTrail(trailBody):
 	
 	return ret
 
-def parseAllTrails(cmds, finite=False, debug=False):
+def parseAllTrails(cmds, with_recovery=False, debug=False):
 	ret = []
 	prov = []
 	with open(os.devnull, 'w') as devnull:
@@ -176,13 +176,13 @@ def attackType(A, E):
 		return "E-attack"
 	return "NOT AN ATTACK"
 
-def characterizeAttacks(model, phi, finite=True, name="run"):
+def characterizeAttacks(model, phi, with_recovery=True, name="run"):
 	assert(os.path.isdir("out/" + name))
 	nE, nA = 0, 0
 	with open("out/" + name + "/log.txt", "w") as fw:
 		if not (os.path.isdir("out/" + name + "/artifacts")):
 			os.mkdir("out/" + name + "/artifacts")
-		fw.write("model,A/E,finite?\n")
+		fw.write("model,A/E,with_recovery?\n")
 		for attackModel in glob("out/" + name + "/attacker*.pml"):
 			# is it a forall attack?
 			attackName = os.path.basename(attackModel).replace(".pml", "")
@@ -195,5 +195,5 @@ def characterizeAttacks(model, phi, finite=True, name="run"):
 			elif E:
 				nE += 1
 			fw.write(",".join([ \
-				attackModel, attackType(A, E), str(finite)]) + "\n")
+				attackModel, attackType(A, E), str(with_recovery)]) + "\n")
 	return (nE, nA)

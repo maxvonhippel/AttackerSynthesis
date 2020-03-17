@@ -8,7 +8,7 @@
 import os
 import subprocess
 
-def makeDaisy(events, N, finite=False, daisyName="daisy.pml"):
+def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	"""
 	Scan the model for all send and receive events,
 	and their complements. Effectively, this is all 
@@ -16,12 +16,12 @@ def makeDaisy(events, N, finite=False, daisyName="daisy.pml"):
 	the (I/O) interface of the model.
 	@param events: the IO interface of the network
 	@param N:      model of the network
-	@param finite: do we want finite attacks?
+	@param with_recovery: do we want with_recovery attacks?
 	"""
 	assert(len(events) != 0)
 
 	network = innerContents(fileRead(N))
-	if finite and (network in { False, None } or len(network.strip()) == 0):
+	if with_recovery and (network in { False, None } or len(network.strip()) == 0):
 		return None
 
 	recovery_bitflag = "b"
@@ -32,17 +32,17 @@ def makeDaisy(events, N, finite=False, daisyName="daisy.pml"):
 
 	return network, recovery_bitflag
 
-def makeDaisyWithEvents(events, finite, network, b):
+def makeDaisyWithEvents(events, with_recovery, network, b):
 	"""
 	Make a daisy using all those ! and ? events. Add
-	recovery using the finite flag.
+	recovery using the with_recovery flag.
 	"""
 	daisy = "active proctype daisy () {\n\tdo"
-	if finite:
+	if with_recovery:
 		daisy = "bit " + b + "= 0;\n" + daisy
 	for event in events:
 		daisy += "\n\t:: " + event
-	if finite:
+	if with_recovery:
 		daisy += "\n\t:: break; // recovery to N ... \n\tod\n\t" + b + " = 1;\n\t"
 		# Add recovery to N
 		daisy += "// N begins here ... \n" + network + "\n}"
@@ -62,7 +62,7 @@ def makeDaisyPhiFinite(label, phi):
 		   + "\t\t" + phiBody + "  ) )\n}"
 	return newPhi
 
-def makeAttacker(events, prov, net, DIR=None, finite=True, k=0):
+def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	"""
 	Create the attacker string given the events that the 
 	daisy made. This method also writes the string to a 
@@ -78,7 +78,7 @@ def makeAttacker(events, prov, net, DIR=None, finite=True, k=0):
 	for ae in acyclicEvents:
 		proc += "\n\t" + ae  + ";"
 	name = None
-	if finite:
+	if with_recovery:
 		proc += "\n// recovery to N\n// N begins here ... \n" + net + "\n}"
 	else:
 		proc += "\n\t// Acceptance Cycle part of attack" 
@@ -89,7 +89,7 @@ def makeAttacker(events, prov, net, DIR=None, finite=True, k=0):
 		proc += "\n}"
 	attackerName = "attacker_"               \
 				 + str(k)                    \
-				 + ("_FINITE" * int(finite)) \
+				 + ("_FINITE" * int(with_recovery)) \
 				 + ".pml"
 
 	name = (DIR + "/") * int(DIR != None) + attackerName
@@ -123,7 +123,7 @@ def innerContents(singleModelBody):
 	return singleModelBody[i+1:j]
 
 
-def writeAttacks(attacks, provenance, net, finite=True, name="run"):
+def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 	"""
 	Write given attacks to named directory, provided it doesn't
 	already exist.
@@ -137,7 +137,7 @@ def writeAttacks(attacks, provenance, net, finite=True, name="run"):
 			prov   = provenance[j], \
 			net    = net,           \
 			DIR    = name,          \
-			finite = finite,        \
+			with_recovery = with_recovery,        \
 			k      = j)
 
 def negateClaim(phi):
