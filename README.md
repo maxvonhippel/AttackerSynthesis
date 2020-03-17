@@ -29,17 +29,18 @@
 
 **This repository is currently in flux.  In the near future, the repository will become stable.  At that time this README will be updated accordingly.**
 
-<b align="center">REPOSITORY STATUS</b>
-
-| Documentation                 | *in progress* | :expressionless:    |
-|:------------------------------|---------------|---------------------|
-| Citation                      | *coming soon* | :zipper_mouth_face: |
-| ArXiV version                 | *coming soon* | :zipper_mouth_face: |
-| Instructions for using `Korg` | *coming soon* | :zipper_mouth_face: |
-| `Korg` passing tests          |*done*         | :sparkling_heart:   |
-| Makefile working              | *coming soon* | :zipper_mouth_face: |
-| `Korg` CLI improved           |*coming soon*  | :sparkling_heart:	  |
-| `Korg` build system           | *coming soon* | :zipper_mouth_face: |
+| **REPOSITORY STATUS**                                                       | banana |
+|-----------------------------------------------------------------------------|--------|
+|                                                                             |  x     |
+|	| Documentation                 | *in progress* | :expressionless:    |   |        |
+|	|:------------------------------|---------------|---------------------|   |        |
+|	| Citation                      | *coming soon* | :zipper_mouth_face: |   |        |
+|	| ArXiV version                 | *coming soon* | :zipper_mouth_face: |   |        |
+|	| Instructions for using `Korg` | *coming soon* | :zipper_mouth_face: |   |        |
+|	| `Korg` passing tests          |*done*         | :sparkling_heart:   |   |        |
+|	| Makefile working              | *coming soon* | :zipper_mouth_face: |   |        |
+|	| `Korg` CLI improved           |*coming soon*  | :sparkling_heart:	  |   |        |
+|	| `Korg` build system           | *coming soon* | :zipper_mouth_face: |   |        |
 
 ## How to Read Docs
 
