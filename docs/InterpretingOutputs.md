@@ -2,6 +2,12 @@
 
 # Interpreting Korg's Outputs
 
+<p align="center">
+	Pictured: Korg Volca Beats, Bass, & Keys.  Image courtesy of <a href="https://www.attackmagazine.com/reviews/gear-software/korg-volca-beats-bass-keys/2/">Attack Magazine</a>.
+	<br><br>
+	<img src="images/multiple_korgs.png">
+</p>
+
 ## With `--characterize=False`
 
 Suppose I run Korg wit the following parameters.
