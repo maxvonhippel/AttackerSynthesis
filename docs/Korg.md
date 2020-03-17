@@ -1,8 +1,7 @@
 [`↞` Back to **README.md**](../README.md)
 
-<div>
-    <div style="float:left;"> 
-      <div style="font-family: monospace; white-space: pre; font-size: 30px">
+
+<div style="font-family: monospace; white-space: pre; font-size: 25px">
           _____                   _______                   _____                    _____          
          /\    \                 /::\    \                 /\    \                  /\    \         
         /::\____\               /::::\    \               /::\    \                /::\    \        
@@ -24,17 +23,15 @@
        \::|   |                  \::/____/               \::|   |                 \::::/    /       
         \:|   |                   ~~                      \:|   |                  \::/____/        
          \|___|                                            \|___|                                   
-      </div>
-    </div>
-    <div style="float:left;">
-        <p align="center">
-          <b>Korg</b> is named after the <b>KORG MicroKorg</b> synthesizer, which has a dedicated <i>attack</i> knob (Knob 3).  (Source: <a href="https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf">KORG MicroKorg Owner's Manual, page 9</a>).  Image below courtesty of <a href="https://www.korg.com/us/products/synthesizers/microkorg/">KORG</a>.  ASCII art courtesy of <a href="http://patorjk.com/software/taag/#p=display&f=Alpha&t=KORG">Patrick Gillespie's ASCII tool.</a>
-          <br><br>
-          <img src="images/korg.png">
-        </p>
-    </div>
-    <div style="clear:both;">
+                                                                                                    
+
 </div>
+<!-- small comment 2 -->
+<p align="center">
+	<b>Korg</b> is named after the <b>KORG MicroKorg</b> synthesizer, which has a dedicated <i>attack</i> knob (Knob 3).  (Source: <a href="https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf">KORG MicroKorg Owner's Manual, page 9</a>).  Image below courtesty of <a href="https://www.korg.com/us/products/synthesizers/microkorg/">KORG</a>.  ASCII art courtesy of <a href="http://patorjk.com/software/taag/#p=display&f=Alpha&t=KORG">Patrick Gillespie's ASCII tool.</a>
+	<br><br>
+	<img src="images/korg.png">
+</p>
 
 # What is Korg?
 
