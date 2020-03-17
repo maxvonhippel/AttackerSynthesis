@@ -9,7 +9,13 @@ As a tool, Korg should be used through the command line (Bash).
 The Korg usage is as follows.
 
 ````
-python3 Korg.py --model=$1 --phi=$2 --Q=$3 --IO=$4 --max_attacks=$5 --with_recovery=$6 --name=$7 --characterize=$8
+python3 Korg.py --model=$1 
+				--phi=$2 
+				--Q=$3 --IO=$4 
+				--max_attacks=$5 
+				--with_recovery=$6 
+				--name=$7 
+				--characterize=$8
 ````
 
 We break down these arguments below.  Required parameters are marked with a :japanese_ogre:, while optional parameters are marked with a :ghost:.  Arguments may be given in any order.
