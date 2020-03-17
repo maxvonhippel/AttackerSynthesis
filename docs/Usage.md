@@ -30,7 +30,7 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 * :japanese_ogre: `$1` is the system model, e.g., [`TCP.pml`](../demo/TCP/TCP.pml).  
 
-	* This is what we call `M` in the paper.
+	* This is what we call `P` in the paper.
 
 * :japanese_ogre: `$2` is the property the attacker wants to violate, e.g., [`experiment1.pml`](../experiments/experiment1.pml).  
 

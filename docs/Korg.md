@@ -35,7 +35,7 @@
 
 # What is Korg?
 
-Korg is a tool for *attacker synthesis*.  Specifically, given a system model `M`, a process model `Q` with interface `IO`, and a property `phi`, where `M` composed with `Q` satisfies `phi` and `Q` has interface `IO`, Korg will try to generate a new process `A` called an attacker that has the interface `IO` and violates `phi` when composed with `M`.  (It's a bit more complex than that, but that's the basic idea.  For more, see our paper!)
+Korg is a tool for *attacker synthesis*.  Specifically, given a system model `P`, a process model `Q` with interface `IO`, and a property `phi`, where `P` composed with `Q` satisfies `phi` and `Q` has interface `IO`, Korg will try to generate a new process `A` called an attacker that has the interface `IO` and violates `phi` when composed with `P`.  (It's a bit more complex than that, but that's the basic idea.  For more, see our paper!)
 
 # How can I install Korg?
 
