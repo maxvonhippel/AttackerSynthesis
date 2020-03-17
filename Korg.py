@@ -10,8 +10,7 @@
 #             expose yourself to a basically trivial remote code execution issue 
 #             in Bash, because of the way I am hacking on subprocess.
 # ==============================================================================
-
-            _____                   _______                   _____                    _____          
+#           _____                   _______                   _____                    _____          
 #          /\    \                 /::\    \                 /\    \                  /\    \         
 #         /::\____\               /::::\    \               /::\    \                /::\    \        
 #        /:::/    /              /::::::\    \             /::::\    \              /::::\    \       
@@ -33,6 +32,8 @@
 #         \:|   |                   ~~                      \:|   |                  \::/____/        
 #          \|___|                                            \|___|                                   
 # ASCII art courtesy of Patrick Gillespie's ASCII tool.
+# ==============================================================================
+
 
 from CLI          import *
 from Characterize import *
