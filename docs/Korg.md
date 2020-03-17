@@ -37,15 +37,15 @@ Korg is a tool for *attacker synthesis*.  Specifically, given a system model `M`
 
 # How can I install Korg?
 
-See the [Install docs](docs/Install.md).
+See the [Install docs](Install.md).
 
 # How can I use Korg?
 
-See the [Usage docs](docs/Usage.md).
+See the [Usage docs](Usage.md).
 
 ## ... using the Makefile
 
-Read the `#comments` in the [Makefile](Makefile).  *TL;DR:*
+Read the `#comments` in the [Makefile](../Makefile).  *TL;DR:*
 
 * To run `experiment1` without recovery, do `make experiment1`.
 * To run `experiment2` or `experiment3`, change `--phi=experiments/experiment1.pml` to `--phi=experiments/experiment2.pml` or `--phi=experiments/experiment3.pml` in the `experiment1` target.  Then do `make experiment1`.
@@ -59,7 +59,7 @@ Read the `#comments` in the [Makefile](Makefile).  *TL;DR:*
 
 ## ... using Bash
 
-See the [Usage docs](docs/Usage.md), or, adapt the commands in the Makefile to your needs.
+See the [Usage docs](Usage.md), or, adapt the commands in the Makefile to your needs.
 
 ## ... using Windows
 
