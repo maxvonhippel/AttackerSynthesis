@@ -20,7 +20,7 @@ Korg is a tool for *attacker synthesis*.  Specifically, given:
 
 Korg will try to generate a new process `A` called an attacker that has the interface `IO` and violates `phi` when composed with `P`.
 
-Intuitively, Korg assumes the adversary can "hack" a process `Q` in an environment `P`, and attempts to prove that in so doing, an adversary might induce `P` to violate `phi`.
+Intuitively, Korg assumes the adversary can "hack" a process `Q` in an environment `P`, and attempts to prove that in so doing, an adversary might induce `P` to violate `phi`.  The `IO` is used to stop the adversary from performing actions that `Q` could never perform in the first place.
 
 # How can I install Korg?
 
