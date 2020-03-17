@@ -78,19 +78,19 @@ Let's look at `attacker_0.pml`.
 /* spin -t -s -r experiment1_daisy_check.pml */
 active proctype attacker() {
 	
-	NtoA ! ACK;
-	NtoB ! SYN;
-	BtoN ? SYN_ACK;
-	NtoB ! ACK;
+	Nto1 ! ACK;
+	Nto2 ! SYN;
+	2toN ? SYN_ACK;
+	Nto2 ! ACK;
 	// Acceptance Cycle part of attack
 }
 ````
 The first line gives the command that was used to produce the trail file which was interpreted in order to synthesize this attacker.  The rest of the lines give us the `attacker()` process, which, in order:
 
-1. Sends `ACK` over `NtoA`
-2. Sends `SYN` over `NtoB`
-3. Receives `SYN_ACK` over `BtoN`
-4. Sends `ACK` over `NtoB`
+1. Sends `ACK` over `Nto1`
+2. Sends `SYN` over `Nto2`
+3. Receives `SYN_ACK` over `2toN`
+4. Sends `ACK` over `Nto2`
 5. Does nothing forever.
 
 So, as a process, the attacker looks something like this.
@@ -114,12 +114,12 @@ Inspecting `experiment2_False/attacker_2.pml`, I see:
 /* spin -t2 -s -r experiment2_daisy_check.pml */
 active proctype attacker() {
 	
-	NtoA ! ACK;
-	NtoB ! ACK;
+	Nto1 ! ACK;
+	Nto2 ! ACK;
 	// Acceptance Cycle part of attack
 	do
 	::
-	   BtoN ? SYN;
+	   2toN ? SYN;
 	od
 }
 ````
@@ -194,9 +194,9 @@ There is one more thing for us to notice here: `Ψ`.  In the paper, we take a pr
 bit b= 0;
 active proctype daisy () {
 	do
-	:: AtoN?ACK;
-	:: AtoN?FIN;
-	:: AtoN?SYN;
+	:: 1toN?ACK;
+	:: 1toN?FIN;
+	:: 1toN?SYN;
 	
 	// etc etc etc
 
@@ -206,13 +206,13 @@ active proctype daisy () {
 	// N begins here ... 
 
 	do
-	:: AtoN ? SYN -> 
+	:: 1toN ? SYN -> 
 		if
-		:: NtoB ! SYN;
+		:: Nto2 ! SYN;
 		fi unless timeout;
-	:: BtoN ? SYN -> 
+	:: 2toN ? SYN -> 
 		if
-		:: NtoA ! SYN;
+		:: Nto1 ! SYN;
 		fi unless timeout;
 	
 	// etc etc etc

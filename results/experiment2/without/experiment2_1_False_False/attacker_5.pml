@@ -1,8 +1,8 @@
 /* spin -t5 -s -r experiment2_1_False_daisy_check.pml */
 active proctype attacker() {
 	
-	NtoA ! ACK;
-	NtoB ! ACK;
-	BtoN ? SYN;
+	Nto1 ! ACK;
+	Nto2 ! ACK;
+	2toN ? SYN;
 	// Acceptance Cycle part of attack
 }

@@ -1,59 +1,59 @@
 /* spin -t10 -s -r experiment1_9_True_daisy_check.pml */
 active proctype attacker() {
 	
-	NtoA ! ACK;
-	NtoB ! SYN;
-	BtoN ? SYN_ACK;
-	NtoB ! ACK;
-	BtoN ? FIN;
-	NtoB ! ACK;
-	NtoB ! FIN;
-	BtoN ? ACK;
-	NtoB ! SYN;
-	NtoB ! ACK;
-	NtoB ! ACK;
-	BtoN ? SYN_ACK;
-	NtoB ! FIN;
-	NtoB ! SYN;
-	BtoN ? FIN;
-	NtoB ! ACK;
-	BtoN ? ACK;
-	BtoN ? SYN_ACK;
+	Nto1 ! ACK;
+	Nto2 ! SYN;
+	2toN ? SYN_ACK;
+	Nto2 ! ACK;
+	2toN ? FIN;
+	Nto2 ! ACK;
+	Nto2 ! FIN;
+	2toN ? ACK;
+	Nto2 ! SYN;
+	Nto2 ! ACK;
+	Nto2 ! ACK;
+	2toN ? SYN_ACK;
+	Nto2 ! FIN;
+	Nto2 ! SYN;
+	2toN ? FIN;
+	Nto2 ! ACK;
+	2toN ? ACK;
+	2toN ? SYN_ACK;
 // recovery to N
 // N begins here ... 
 
 	do
-	:: AtoN ? SYN -> 
+	:: 1toN ? SYN -> 
 		if
-		:: NtoB ! SYN;
+		:: Nto2 ! SYN;
 		fi unless timeout;
-	:: BtoN ? SYN -> 
+	:: 2toN ? SYN -> 
 		if
-		:: NtoA ! SYN;
+		:: Nto1 ! SYN;
 		fi unless timeout;
-	:: AtoN ? FIN -> 
+	:: 1toN ? FIN -> 
 		if
-		:: NtoB ! FIN;
+		:: Nto2 ! FIN;
 		fi unless timeout;
-	:: BtoN ? FIN -> 
+	:: 2toN ? FIN -> 
 		if
-		:: NtoA ! FIN;
+		:: Nto1 ! FIN;
 		fi unless timeout;
-	:: AtoN ? ACK -> 
+	:: 1toN ? ACK -> 
 		if
-		:: NtoB ! ACK;
+		:: Nto2 ! ACK;
 		fi unless timeout;
-	:: BtoN ? ACK -> 
+	:: 2toN ? ACK -> 
 		if
-		:: NtoA ! ACK;
+		:: Nto1 ! ACK;
 		fi unless timeout;
-	:: AtoN ? SYN_ACK -> 
+	:: 1toN ? SYN_ACK -> 
 		if
-		:: NtoB ! SYN_ACK;
+		:: Nto2 ! SYN_ACK;
 		fi unless timeout;
-	:: BtoN ? SYN_ACK -> 
+	:: 2toN ? SYN_ACK -> 
 		if
-		:: NtoA ! SYN_ACK;
+		:: Nto1 ! SYN_ACK;
 		fi unless timeout;
 	:: _nr_pr < 3 -> break;
 	od
