@@ -25,7 +25,7 @@
             \$$$$$$        x                                     0                  
 ````
 
-<p align="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.</p>
+<p align="center">Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.  ASCII art courtesy of <a href="http://patorjk.com/software/taag/#p=display&f=Alpha&t=KORG">Patrick Gillespie's ASCII tool.</a></p>
 
 For an up-to-date list of what remains to be done in this repository, see [`TODO.md`](TODO.md).
 
