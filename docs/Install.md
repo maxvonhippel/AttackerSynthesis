@@ -4,7 +4,11 @@
 
 ## Instructions
 
-We have tried to make this easy by providing the installation script [`setup.sh`](../setup.sh).  However, if this does not work for you, then:
+We have tried to make this easy by providing the installation script [`setup.sh`](../setup.sh).  
+
+* Note: this script assumes `Python3` is already globally installed.
+
+However, if this does not work for you, then:
 
 1. Install [Spin](www.spinroot.com) *globally*.  So, you should be able to run it from the command line from anywhere in your computer.
 	
