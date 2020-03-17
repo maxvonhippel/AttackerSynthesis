@@ -28,9 +28,10 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 	* This is what we call `Φ` in the paper, and should be written in linear temporal logic.
 
-* `$3` is the vulnerable process that the attacker will replace, e.g., [`network.pml`](../demo/TCP/network.pml).  
+* :japanese_ogre: `$3` is the vulnerable process that the attacker will replace, e.g., [`network.pml`](../demo/TCP/network.pml).  
 
 	* This is what we call `Q` in the paper in the centralized-attacker case, as in, `TM = (P, (Q), Φ)`.
+	* In other words, the threat model is `TM = ($1, ($3), $2)`.
 
 * :japanese_ogre: `$4` is the `IO` file.  
 
