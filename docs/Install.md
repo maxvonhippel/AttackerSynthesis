@@ -10,7 +10,7 @@ We have tried to make this easy by providing the installation script [`setup.sh`
 
 However, if this does not work for you, then:
 
-1. Install <a href="www.spinroot.com">Spin</a> *globally*.  So, you should be able to run it from the command line from anywhere in your computer.
+1. Install <a href="https://www.spinroot.com">Spin</a> *globally*.  So, you should be able to run it from the command line from anywhere in your computer.
 	
 	* An easy way to confirm this is to run `spin` from some arbitrary folder in the command line, and see if something sensible happens! 
 
