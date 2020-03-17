@@ -5,7 +5,7 @@
 <p align="center">
   Pictured: Korg Pa4X User Manual.  Image courtesy of <a href="https://www.scribd.com/document/368305380/Korg-Pa4X-User-Manual-v2-0-E13">Anonymous HGOomkn69</a>.
   <br><br>
-  <img style="border-radius: 50%;" src="images/Korg_manual.png" width="200">
+  <img style="border-radius: 50%; border: 2px solid black;" src="images/Korg_manual.png" width="200">
 </p>
 
 ## Instructions
