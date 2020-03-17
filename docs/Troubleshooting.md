@@ -23,7 +23,7 @@ You can infer a lot from the value returned by Korg (the [exit status](https://e
 | 0           | Success!                                                                              |:money_mouth_face: |
 | 1           | Invalid `max_attacks` argument                                                        |:thumbsdown:       |
 | 2           | Couldn't negate `phi`, probablty because the file does not exist or is not accessible |:eyes:             |
-| 3           | `M || Q |/= phi`, so the threat model is *invalid*!                                   |:policewoman:      |
+| 3           | `M || Q |≠ phi`, so the threat model is *invalid*!                                   |:policewoman:      |
 | 4           | Invalid `IO.txt`, probably wrong file path or permissions or something.               |:ear:              |
 | 5           | Empty `IO.txt`.  In this case there is no possible attacker.                          |:thinking:         |
 | 6           | No solution!  In other words, the daisy does not violate `phi`.                       |:mag:              |
