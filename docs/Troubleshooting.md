@@ -26,13 +26,13 @@ Here are some important caveats to be aware of.
 
 You can infer a lot from the value returned by Korg (the [exit status](https://en.wikipedia.org/wiki/Exit_status) or [error code](https://en.wikipedia.org/wiki/Error_code)).
 
-| Exit Status | Meaning (Written)                                                                     | Meaning (Visual)  |
-|-------------|:--------------------------------------------------------------------------------------|:------------------|
-| 0           | Success!                                                                              |:money_mouth_face: |
-| 1           | Invalid `max_attacks` argument                                                        |:thumbsdown:       |
-| 2           | Couldn't negate `phi`, probablty because the file does not exist or is not accessible |:eyes:             |
-| 3           | The threat model is *invalid*.  The composition of `P` with `Q` violates `phi`.       |:policewoman:      |
-| 4           | Invalid `IO.txt`, probably wrong file path or permissions or something.               |:ear:              |
-| 5           | Empty `IO.txt`.  In this case there is no possible attacker.                          |:thinking:         |
-| 6           | No solution!  In other words, the daisy does not violate `phi`.                       |:mag:              |
-| -1          | No attackers found, even though the daisy worked.  (This really should never happen.) |:confused:         |
+| Exit Status | Meaning                                                                               |
+|-------------|:--------------------------------------------------------------------------------------|
+| 0           | Success!                                                                              |
+| 1           | Invalid `max_attacks` argument                                                        |
+| 2           | Couldn't negate `phi`, probablty because the file does not exist or is not accessible |
+| 3           | The threat model is *invalid*.  The composition of `P` with `Q` violates `phi`.       |
+| 4           | Invalid `IO.txt`, probably wrong file path or permissions or something.               |
+| 5           | Empty `IO.txt`.  In this case there is no possible attacker.                          |
+| 6           | No solution!  In other words, the daisy does not violate `phi`.                       |
+| -1          | No attackers found, even though the daisy worked.  (This really should never happen.) |
