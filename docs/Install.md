@@ -1,11 +1,12 @@
 [`↞` Back to **README.md**](../README.md), [`↞` Back to **Korg.md**](Korg.md)
 
+<p align="center">
 <img
-    align="center" 
     title="Pictured: Korg Pa4X User Manual.  Image courtesy of @AnonymousHGOomkn69 on Scribd: https://www.scribd.com/document/368305380/Korg-Pa4X-User-Manual-v2-0-E13."
     style="border-radius: 50%; border: 2px solid black;" 
     src="images/Korg_manual.png" 
     width="200">
+</p>
 
 # Korg Installation Instructions
 

@@ -1,11 +1,12 @@
 [`↞` Back to **README.md**](../README.md), [`↞` Back to **Korg.md**](Korg.md)
 
+<p align="center">
 <img
-    align="center" 
     title="Pictured: Korg Volca Beats, Bass, & Keys.  Image courtesy of Attack Magazine: https://www.attackmagazine.com/reviews/gear-software/korg-volca-beats-bass-keys/2/."
     style="border-radius: 50%; border: 2px solid black;" 
     src="images/multiple_korgs.png" 
     width="200">
+</p>
 
 # Interpreting Korg's Outputs
 
