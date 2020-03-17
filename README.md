@@ -29,6 +29,7 @@
 
 This repository is currently in flux.  In the near future, the repository will become stable.  At that time this README will be updated accordingly.  The status of my TODO tasks in order to complete the stabalization of the repository is detailed in the table below.
          
+| Item                          | Status (Words) | Status (Visual)     |
 |:------------------------------|----------------|---------------------|
 | Documentation                 | *in progress*  | :expressionless:    |
 | Citation                      | *coming soon*  | :zipper_mouth_face: |
