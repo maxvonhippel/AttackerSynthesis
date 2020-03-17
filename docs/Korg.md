@@ -1,7 +1,7 @@
 [`↞` Back to **README.md**](../README.md)
 
 
-<div style="font-family: monospace; white-space: pre; font-size: 25px">
+<div style="font-family: monospace; white-space: pre; font-size: 30px">
           _____                   _______                   _____                    _____          
          /\    \                 /::\    \                 /\    \                  /\    \         
         /::\____\               /::::\    \               /::\    \                /::\    \        
