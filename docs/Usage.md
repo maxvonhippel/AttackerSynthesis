@@ -5,7 +5,7 @@
 <p align="center">
   Pictured: Korg NuTekt synth.  Image courtesy of <a href="https://store.attackmagazine.com/products/korg-nts-1-digital-kit">Attack Magazine</a>.
   <br><br>
-  <img src="images/Korg_NuTekt.png">
+  <img style="border-radius: 50%;" src="images/Korg_NuTekt.png">
 </p>
 
 ## As a Tool
