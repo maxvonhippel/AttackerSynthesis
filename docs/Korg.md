@@ -50,9 +50,9 @@ See the [Usage docs](Usage.md), or, adapt the commands in the Makefile to your n
 
 ## ... using Windows
 
-Use `Cygwin`, or, remove your operating system, and replace it with a [better one](https://www.linuxmint.com/), or, use a [virtual machine](https://www.virtualbox.org/).
+Use `Cygwin`, or, a [virtual machine](https://www.virtualbox.org/), or, [the Linux Subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
-* Jokes aside, I have not tried this on `Cygwin`.  If you are brave enough to do so, please let me know if you run into any issues, and I'm happy to try and debug them!  The [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues) is a good place to do this.
+* Please use the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues) to report any issues.  We have not yet tested on Windows.
 
 ## I ran Korg on my threat model.  Now, how do I interpret the results?
 
