@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>AttackerSynthesis | Tool, Models, and Supplementary Materials for Attacker Synthesis Project</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="AttackerSynthesis" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tool, Models, and Supplementary Materials for Attacker Synthesis Project" />
+<meta property="og:description" content="Tool, Models, and Supplementary Materials for Attacker Synthesis Project" />
+<link rel="canonical" href="http://localhost:4000/docs/Korg.html" />
+<meta property="og:url" content="http://localhost:4000/docs/Korg.html" />
+<meta property="og:site_name" content="AttackerSynthesis" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/docs/Korg.html","headline":"AttackerSynthesis","description":"Tool, Models, and Supplementary Materials for Attacker Synthesis Project","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5113cfe4cabec5e515d14f9fac0d83af9daf0acb">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">AttackerSynthesis</a></h1>
+      
+
+      <p><a href="/"><code class="language-plaintext highlighter-rouge">↞</code> Back to <strong>README.md</strong></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+          _____                   _______                   _____                    _____          
+         /\    \                 /::\    \                 /\    \                  /\    \         
+        /::\____\               /::::\    \               /::\    \                /::\    \        
+       /:::/    /              /::::::\    \             /::::\    \              /::::\    \       
+      /:::/    /              /::::::::\    \           /::::::\    \            /::::::\    \      
+     /:::/    /              /:::/~~\:::\    \         /:::/\:::\    \          /:::/\:::\    \     
+    /:::/____/              /:::/    \:::\    \       /:::/__\:::\    \        /:::/  \:::\    \    
+   /::::\    \             /:::/    / \:::\    \     /::::\   \:::\    \      /:::/    \:::\    \   
+  /::::::\____\________   /:::/____/   \:::\____\   /::::::\   \:::\    \    /:::/    / \:::\    \  
+ /:::/\:::::::::::\    \ |:::|    |     |:::|    | /:::/\:::\   \:::\____\  /:::/    /   \:::\ ___\ 
+/:::/  |:::::::::::\____\|:::|____|     |:::|    |/:::/  \:::\   \:::|    |/:::/____/  ___\:::|    |
+\::/   |::|~~~|~~~~~      \:::\    \   /:::/    / \::/   |::::\  /:::|____|\:::\    \ /\  /:::|____|
+ \/____|::|   |            \:::\    \ /:::/    /   \/____|:::::\/:::/    /  \:::\    /::\ \::/    / 
+       |::|   |             \:::\    /:::/    /          |:::::::::/    /    \:::\   \:::\ \/____/  
+       |::|   |              \:::\__/:::/    /           |::|\::::/    /      \:::\   \:::\____\    
+       |::|   |               \::::::::/    /            |::| \::/____/        \:::\  /:::/    /    
+       |::|   |                \::::::/    /             |::|  ~|               \:::\/:::/    /     
+       |::|   |                 \::::/    /              |::|   |                \::::::/    /      
+       \::|   |                  \::/____/               \::|   |                 \::::/    /       
+        \:|   |                   ~~                      \:|   |                  \::/____/        
+         \|___|                                            \|___|                                   
+                                                                                                    
+
+</code></pre></div></div>
+
+<p align="center">
+	<b>Korg</b> is named after the <b>KORG MicroKorg</b> synthesizer, which has a dedicated <i>attack</i> knob (Knob 3).  (Source: <a href="https://cdn.korg.com/us/support/download/files/8f226053113b3be59753dcce14e74cca.pdf">KORG MicroKorg Owner's Manual, page 9</a>).  To learn more about how cool Korg synthesizers are, look <a href="https://www.theverge.com/2020/3/16/21181915/synth-apps-free-moog-korg-kaossilator-minimoog-model-d-coronavirus">here</a>.  Image below courtesty of <a href="https://www.korg.com/us/products/synthesizers/microkorg/">KORG</a>.  ASCII art courtesy of <a href="http://patorjk.com/software/taag/#p=display&amp;f=Alpha&amp;t=KORG">Patrick Gillespie's ASCII tool.</a>
+	<br /><br />
+	<img src="images/korg.png" />
+</p>
+
+<h1 id="what-is-korg">What is Korg?</h1>
+
+<p>Korg is a tool for <em>attacker synthesis</em>.  Specifically, given a system model <code class="language-plaintext highlighter-rouge">P</code>, a process model <code class="language-plaintext highlighter-rouge">Q</code> with interface <code class="language-plaintext highlighter-rouge">IO</code>, and a property <code class="language-plaintext highlighter-rouge">phi</code>, where <code class="language-plaintext highlighter-rouge">P</code> composed with <code class="language-plaintext highlighter-rouge">Q</code> satisfies <code class="language-plaintext highlighter-rouge">phi</code> and <code class="language-plaintext highlighter-rouge">Q</code> has interface <code class="language-plaintext highlighter-rouge">IO</code>, Korg will try to generate a new process <code class="language-plaintext highlighter-rouge">A</code> called an attacker that has the interface <code class="language-plaintext highlighter-rouge">IO</code> and violates <code class="language-plaintext highlighter-rouge">phi</code> when composed with <code class="language-plaintext highlighter-rouge">P</code>.  (It’s a bit more complex than that, but that’s the basic idea.  For more, see our paper!)</p>
+
+<h1 id="how-can-i-install-korg">How can I install Korg?</h1>
+
+<p>See the <a href="/docs/Install.html">install docs</a>.</p>
+
+<h1 id="how-can-i-use-korg">How can I use Korg?</h1>
+
+<p>See the <a href="/docs/Usage.html">usage docs</a>.</p>
+
+<h2 id="-using-the-makefile">… using the Makefile</h2>
+
+<p>Read the <code class="language-plaintext highlighter-rouge">#comments</code> in the <a href="/Makefile">Makefile</a>.  <em>TL;DR:</em></p>
+
+<ul>
+  <li>To run <code class="language-plaintext highlighter-rouge">experiment1</code> without recovery, do <code class="language-plaintext highlighter-rouge">make experiment1</code>.</li>
+  <li>To run <code class="language-plaintext highlighter-rouge">experiment2</code> or <code class="language-plaintext highlighter-rouge">experiment3</code>, change <code class="language-plaintext highlighter-rouge">--phi=experiments/experiment1.pml</code> to <code class="language-plaintext highlighter-rouge">--phi=experiments/experiment2.pml</code> or <code class="language-plaintext highlighter-rouge">--phi=experiments/experiment3.pml</code> in the <code class="language-plaintext highlighter-rouge">experiment1</code> target.  Then do <code class="language-plaintext highlighter-rouge">make experiment1</code>.</li>
+  <li>To run <code class="language-plaintext highlighter-rouge">experiment1</code> with recovery, change <code class="language-plaintext highlighter-rouge">--with_recovery=False</code> to <code class="language-plaintext highlighter-rouge">--with_recovery=True</code> in the <code class="language-plaintext highlighter-rouge">experiment1</code> target, then do <code class="language-plaintext highlighter-rouge">make experiment1</code>.</li>
+  <li>To reproduce our results, do <code class="language-plaintext highlighter-rouge">make avgExperiment</code>.</li>
+  <li>To run unit tests for main body of <code class="language-plaintext highlighter-rouge">Korg</code> logic, do <code class="language-plaintext highlighter-rouge">make testKorg</code>.</li>
+  <li>To run unit tests for <code class="language-plaintext highlighter-rouge">Characterize.py</code>, do <code class="language-plaintext highlighter-rouge">make testChar</code>.</li>
+  <li>To run unit tests for <code class="language-plaintext highlighter-rouge">Construct.py</code>, do <code class="language-plaintext highlighter-rouge">make testCons</code>.</li>
+  <li>To run all the unit tests, do <code class="language-plaintext highlighter-rouge">make test</code>.</li>
+  <li>To clean up after running one of the targets, do <code class="language-plaintext highlighter-rouge">make clean</code>.</li>
+</ul>
+
+<h2 id="-using-bash">… using Bash</h2>
+
+<p>See the <a href="/docs/Usage.html">Usage docs</a>, or, adapt the commands in the Makefile to your needs.</p>
+
+<h2 id="-using-windows">… using Windows</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">Cygwin</code>, or, remove your operating system, and replace it with a <a href="https://www.linuxmint.com/">better one</a>, or, use a <a href="https://www.virtualbox.org/">virtual machine</a>.</p>
+
+<ul>
+  <li>Jokes aside, I have not tried this on <code class="language-plaintext highlighter-rouge">Cygwin</code>.  If you are brave enough to do so, please let me know if you run into any issues, and I’m happy to try and debug them!  The <a href="https://github.com/maxvonhippel/AttackerSynthesis/issues">Issue Tracker</a> is a good place to do this.</li>
+</ul>
+
+<h2 id="i-ran-korg-on-my-threat-model--now-how-do-i-interpret-the-results">I ran Korg on my threat model.  Now, how do I interpret the results?</h2>
+
+<p>See <a href="/docs/InterpretingOutputs.html">interpreting outputs</a>.</p>
+
+<h2 id="help--its-not-working">Help!  It’s not working!</h2>
+
+<p>See <a href="/docs/Troubleshooting.html">troubleshooting</a>.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>

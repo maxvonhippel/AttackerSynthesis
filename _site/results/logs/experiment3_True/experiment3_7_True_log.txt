@@ -1,0 +1,2 @@
+1352.20user 1.04system 22:33.30elapsed 99%CPU (0avgtext+0avgdata 147288maxresident)k
+0inputs+16864outputs (0major+638587minor)pagefaults 0swaps

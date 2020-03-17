@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>AttackerSynthesis | Tool, Models, and Supplementary Materials for Attacker Synthesis Project</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="AttackerSynthesis" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tool, Models, and Supplementary Materials for Attacker Synthesis Project" />
+<meta property="og:description" content="Tool, Models, and Supplementary Materials for Attacker Synthesis Project" />
+<link rel="canonical" href="http://localhost:4000/docs/Install.html" />
+<meta property="og:url" content="http://localhost:4000/docs/Install.html" />
+<meta property="og:site_name" content="AttackerSynthesis" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/docs/Install.html","headline":"AttackerSynthesis","description":"Tool, Models, and Supplementary Materials for Attacker Synthesis Project","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=5113cfe4cabec5e515d14f9fac0d83af9daf0acb">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">AttackerSynthesis</a></h1>
+      
+
+      <p><a href="/"><code class="language-plaintext highlighter-rouge">↞</code> Back to <strong>README.md</strong></a>, <a href="/docs/Korg.html"><code class="language-plaintext highlighter-rouge">↞</code> Back to <strong>Korg.md</strong></a></p>
+
+<h1 id="korg-installation-instructions">Korg Installation Instructions</h1>
+
+<p align="center">
+  Pictured: Korg Pa4X User Manual.  Image courtesy of <a href="https://www.scribd.com/document/368305380/Korg-Pa4X-User-Manual-v2-0-E13">Anonymous HGOomkn69</a>.
+  <br /><br />
+  <img src="images/Korg_manual.png" />
+</p>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>We have tried to make this easy by providing the installation script <a href="/setup.sh"><code class="language-plaintext highlighter-rouge">setup.sh</code></a>.</p>
+
+<ul>
+  <li>Note: this script assumes <code class="language-plaintext highlighter-rouge">Python3</code> is already globally installed.</li>
+</ul>
+
+<p>However, if this does not work for you, then:</p>
+
+<ol>
+  <li>
+    <p>Install <a href="https://www.spinroot.com">Spin</a> <em>globally</em>.  So, you should be able to run it from the command line from anywhere in your computer.</p>
+
+    <ul>
+      <li>An easy way to confirm this is to run <code class="language-plaintext highlighter-rouge">spin</code> from some arbitrary folder in the command line, and see if something sensible happens!</li>
+    </ul>
+  </li>
+  <li>
+    <p>Make sure you have <code class="language-plaintext highlighter-rouge">Python3</code> installed.</p>
+
+    <ul>
+      <li>An easy way to confirm this is to run <code class="language-plaintext highlighter-rouge">echo "print('awesome')" | python3</code> from some arbitrary folder in the command line, and see if the resulting output is, indeed, <code class="language-plaintext highlighter-rouge">awesome</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">pip3 install green</code> so the tests will run correctly from the <code class="language-plaintext highlighter-rouge">Makefile</code>.</p>
+  </li>
+  <li>
+    <p>If somehow <code class="language-plaintext highlighter-rouge">make</code> is not installed on your system, consider installing it so you can use the <code class="language-plaintext highlighter-rouge">Makefile</code>!</p>
+  </li>
+  <li>
+    <p>Then to confirm everything is up and running, try <code class="language-plaintext highlighter-rouge">make test</code>, and see if you get a ton of output ending with confirmation that the tests passed!</p>
+
+    <ul>
+      <li>See the example output at the bottom of this page.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>If you have any questions, feel free to email me at maxvonhippel@gmail.com, or, open up an issue in the <a href="https://github.com/maxvonhippel/AttackerSynthesis/issues">Issue Tracker</a>.</p>
+
+<h2 id="example-test-output">Example Test Output</h2>
+
+<p>Example output for <code class="language-plaintext highlighter-rouge">make test</code> is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(env) mvh:AttackerSynthesis$ make test
+rm -rf tests/__pycache__
+rm -rf __pycache__
+make clean testChar clean testKorg clean testCons
+make[1]: Entering directory '/home/mvh/projects/research/AttackerSynthesis'
+rm -rf out/*
+rm *.trail
+rm: cannot remove '*.trail': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm *.pml
+rm: cannot remove '*.pml': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm ./*.pml
+rm: cannot remove './*.pml': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm *pan*
+rm: cannot remove '*pan*': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm *.tcl
+rm: cannot remove '*.tcl': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm .*.swp
+rm: cannot remove '.*.swp': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm *.pyc
+rm: cannot remove '*.pyc': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm test_exp*
+rm: cannot remove 'test_exp*': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+rm ._n_i_p_s_
+rm: cannot remove '._n_i_p_s_': No such file or directory
+Makefile:12: recipe for target 'clean' failed
+make[1]: [clean] Error 1 (ignored)
+echo "All clean!"
+All clean!
+green tests/test_Characterize.py
+.....
+
+Captured stdout for tests.test_Characterize.TestCharacterize.test_violate_exp1
+Search depth was too small at 10000  doubling depth ...
+Search depth was too small at 20000  doubling depth ...
+
+Ran 5 tests in 37.003s using 8 processes
+
+OK (passes=5)
+make[1]: 'clean' is up to date.
+green tests/test_Korg.py
+.....ltl eventuallyAlwaysWEqualZero: &lt;&gt; ([] ((w==0)))
+pan:1: acceptance cycle (at depth 0)
+pan: wrote test_works_on_Liveness_False_daisy_check.pml.trail
+
+(Spin Version 6.5.0 -- 17 July 2019)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (eventuallyAlwaysWEqualZero)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 36 byte, depth reached 12, errors: 1
+        5 states, stored (8 visited)
+        3 states, matched
+       11 transitions (= visited+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.290	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+.ltl eventuallyAlwaysWEqualZero: &lt;&gt; ([] ((w==0)))
+pan:1: acceptance cycle (at depth 0)
+pan: wrote test_works_on_Coles_example_False_daisy_check.pml.trail
+
+(Spin Version 6.5.0 -- 17 July 2019)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (eventuallyAlwaysWEqualZero)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 36 byte, depth reached 12, errors: 1
+        5 states, stored (8 visited)
+        3 states, matched
+       11 transitions (= visited+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.290	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+.ltl newPhi: [] ((! ((b==1))) || ([] ((! ((state[0]==0))) || (! ((state[1]==4))))))
+pan:1: assertion violated  !(( !( !((b==1)))&amp;&amp; !(( !((state[0]==0))|| !((state[1]==4)))))) (at depth 86)
+pan: wrote test_works_on_TCP_exp1_True_daisy_check.pml.trail
+
+(Spin Version 6.5.0 -- 17 July 2019)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (newPhi)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 108 byte, depth reached 325, errors: 1
+    33462 states, stored
+    57861 states, matched
+    91323 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:        38 (resolved)
+
+Stats on memory usage (in Megabytes):
+    4.340	equivalent memory usage for states (stored*(State-vector + overhead))
+    3.002	actual memory usage for states (compression: 69.16%)
+         	state-vector as stored = 66 byte + 28 byte overhead
+  128.000	memory used for hash table (-w24)
+    0.611	memory used for DFS stack (-m10000)
+  131.540	total actual memory usage
+
+
+
+pan: elapsed time 0.05 seconds
+pan: rate    669240 states/second
+ltl exp1: [] ((! ((state[0]==0))) || (! ((state[1]==4))))
+pan:1: assertion violated  !( !(( !((state[0]==0))|| !((state[1]==4))))) (at depth 36)
+pan: wrote test_works_on_TCP_exp1_False_daisy_check.pml.trail
+
+(Spin Version 6.5.0 -- 17 July 2019)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (exp1)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 108 byte, depth reached 359, errors: 1
+     3742 states, stored
+     7291 states, matched
+    11033 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         2 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.485	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.575	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  129.022	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+.ltl newPhi: [] ((! ((b==1))) || ((! ([] (&lt;&gt; (((state[0]==1)) &amp;&amp; ((state[1]==2)))))) || (&lt;&gt; ((state[0]==4)))))
+pan:1: acceptance cycle (at depth 58)
+pan: wrote test_works_on_TCP_exp2_True_daisy_check.pml.trail
+
+(Spin Version 6.5.0 -- 17 July 2019)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (newPhi)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 108 byte, depth reached 151, errors: 1
+      279 states, stored (280 visited)
+       90 states, matched
+      370 transitions (= visited+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.036	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.267	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.611	memory used for DFS stack (-m10000)
+  128.806	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+ltl exp2: (! ([] (&lt;&gt; (((state[0]==1)) &amp;&amp; ((state[1]==2)))))) || (&lt;&gt; ((state[0]==4)))
+pan:1: acceptance cycle (at depth 28)
+pan: wrote test_works_on_TCP_exp2_False_daisy_check.pml.trail
+
+(Spin Version 6.5.0 -- 17 July 2019)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (exp2)
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 108 byte, depth reached 61, errors: 1
+       37 states, stored (39 visited)
+        7 states, matched
+       46 transitions (= visited+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.005	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.282	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+.
+
+Captured stdout for tests.test_Korg.TestKorg.test_errors_if_IO_None
+We could not find any inputs or outputs in dne.blarg; giving up.
+We could not find any inputs or outputs in demo/emptyFile; giving up.
+We could not find any inputs or outputs in dne.blarg; giving up.
+We could not find any inputs or outputs in demo/emptyFile; giving up.
+
+Captured stdout for tests.test_Korg.TestKorg.test_errors_if_cannot_negate_phi
+No property phi provided; giving up.
+No property phi provided; giving up.
+
+Captured stdout for tests.test_Korg.TestKorg.test_errors_if_no_attackers_requested
+--num option must be &gt; 0, was: 0; giving up.
+--num option must be &gt; 0, was: 0; giving up.
+
+Captured stdout for tests.test_Korg.TestKorg.test_errors_if_no_solution
+We could not find any with_recovery(model, (N), phi)-attacker A.
+We could not find any (model, (N), phi)-attacker A.
+
+Captured stdout for tests.test_Korg.TestKorg.test_errors_if_trivial
+In order for the problem (model, phi, N) to be non-trivial, we 		   require that (model || N) |= phi.  However, this does not appear 		   to be the case.
+In order for the problem (model, phi, N) to be non-trivial, we 		   require that (model || N) |= phi.  However, this does not appear 		   to be the case.
+
+Captured stdout for tests.test_Korg.TestKorg.test_on_Liveness
+We could not find any with_recovery(model, (N), phi)-attacker A.
+
+Captured stdout for tests.test_Korg.TestKorg.test_works_on_Coles_example
+We could not find any with_recovery(model, (N), phi)-attacker A.
+
+Ran 9 tests in 72.915s using 8 processes
+
+OK (passes=9)
+make[1]: 'clean' is up to date.
+green tests/test_Construct.py
+...
+
+Ran 3 tests in 0.112s using 8 processes
+
+OK (passes=3)
+make[1]: Leaving directory '/home/mvh/projects/research/AttackerSynthesis'
+
+</code></pre></div></div>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>
