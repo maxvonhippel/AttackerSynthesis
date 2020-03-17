@@ -7,8 +7,6 @@ Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Projec
 
 The documentation for this project consists of this README as well as all the files in `docs/`.  They natively link to one another so that you can navigate without ever using the file system.  These documents are written in [Github Markdown](https://developer.github.com/v3/markdown/) and are best viewed online, in the Github repository, e.g., [here](https://github.com/maxvonhippel/AttackerSynthesis), or on Github pages, e.g., [here](https://mxvh.pl/AttackerSynthesis).  We use features of Github flavor Markdown such as emojis and `HTML`.
 
-### Table of Contents
-
 * :clipboard: [`README.md` = this file](README.md)
 	
 	* :pushpin: [`Korg.md` = Korg tool overview](docs/Korg.md)
