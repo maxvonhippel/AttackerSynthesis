@@ -1,12 +1,14 @@
 [`↞` Back to **README.md**](../README.md), [`↞` Back to **Korg.md**](Korg.md)
 
-# How to use Korg
-
 <p align="center">
-  Pictured: Korg NuTekt synth.  Image courtesy of <a href="https://store.attackmagazine.com/products/korg-nts-1-digital-kit">Attack Magazine</a>.
-  <br><br>
-  <img style="border-radius: 50%;" src="images/Korg_NuTekt.png">
+<img
+    title="Pictured: Korg NuTekt synth.  Image courtesy of Attack Magazine: https://store.attackmagazine.com/products/korg-nts-1-digital-kit"
+    style="border-radius: 50%; border: 2px solid black;" 
+    src="images/Korg_NuTekt.png"
+    width="130">
 </p>
+
+# How to use Korg
 
 ## As a Tool
 
