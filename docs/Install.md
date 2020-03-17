@@ -20,7 +20,7 @@ We have tried to make this easy by providing the installation script [`setup.sh`
 
 	* See the example output at the bottom of this page.
 
-If you have any questions, feel free to email me at maxvonhippel@gmail.com, or, open up an issue in the Github Issue Tracker.
+If you have any questions, feel free to email me at maxvonhippel@gmail.com, or, open up an issue in the [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues).
 
 ## Example Test Output
 

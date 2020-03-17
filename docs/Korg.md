@@ -65,7 +65,7 @@ See the [Usage docs](Usage.md), or, adapt the commands in the Makefile to your n
 
 Use `Cygwin`, or, remove your operating system, and replace it with a [better one](https://www.linuxmint.com/), or, use a [virtual machine](https://www.virtualbox.org/).
 
-* Jokes aside, I have not tried this on `Cygwin`.  If you are brave enough to do so, please let me know if you run into any issues, and I'm happy to try and debug them!  The Github Issue Tracker is a good place to do this.
+* Jokes aside, I have not tried this on `Cygwin`.  If you are brave enough to do so, please let me know if you run into any issues, and I'm happy to try and debug them!  The [Issue Tracker](https://github.com/maxvonhippel/AttackerSynthesis/issues) is a good place to do this.
 
 ## I ran Korg on my threat model.  Now, how do I interpret the results?
 
