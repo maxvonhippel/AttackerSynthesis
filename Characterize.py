@@ -52,7 +52,7 @@ def makeAllTrails(modelFile, numTrails=100):
 	if numTrails <= 1:
 		args = "spin -run -a " + modelFile
 	else:
-		args = "spin -run -a -e -c" + str(numTrails) + " " + modelFile
+		args = "spin -run -a -e -c" + str(numTrails - 1) + " " + modelFile
 	subprocess.run(args.split(" "))
 	
 '''

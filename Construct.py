@@ -89,7 +89,7 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 		proc += "\n}"
 	attackerName = "attacker_"               \
 				 + str(k)                    \
-				 + ("_FINITE" * int(with_recovery)) \
+				 + ("_WITH_RECOVERY" * int(with_recovery)) \
 				 + ".pml"
 
 	name = (DIR + "/") * int(DIR != None) + attackerName
