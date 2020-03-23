@@ -179,3 +179,5 @@ _site/
 .jekyll-metadatalogs/**
 *.tmp
 logs/*
+
+.vscode
