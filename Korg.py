@@ -64,11 +64,11 @@ def parseArgs(args):
 		P, Q, IO, Phi = args.model, args.Q, args.IO, args.Phi
 	return P, 	             \
 	Phi, 		             \
-	Q, 		             \
-	IO,                     \
-	args.max_attacks,            \
-	args.with_recovery,                 \
-	args.name,                   \
+	Q, 		                 \
+	IO,                      \
+	args.max_attacks,        \
+	args.with_recovery,      \
+	args.name,               \
 	args.characterize
 
 def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
