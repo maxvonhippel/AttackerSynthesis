@@ -181,5 +181,6 @@ _site/
 logs/*
 
 .vscode
-pan
+.vscode/*
 *.trail
+pan

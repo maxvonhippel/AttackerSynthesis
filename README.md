@@ -26,6 +26,7 @@ This repository contains the tool `Korg` as well as various Promela models from 
 		-- `phi.pml` a liveness property;
 		-- `theta.pml` the trivial property; and
 		-- `wrongPhi.pml` a safety property also used in unit-testing.
+	- `smallDemo1-3` are more small examples with explanations 
 	- :pushpin: `TCP/` contains the entire TCP model used in our Case Study.
 * :pushpin: `experiments/` - contains the three properties `phi_1.pml`, `phi_2.pml`, `phi_3.pml` used in the Case Study for `TM_1`, `TM_2`, `TM_3`.
 * `out/` - this is where the outputs of the program are written to.
@@ -42,6 +43,9 @@ This repository contains the tool `Korg` as well as various Promela models from 
 * `Korg.py` - the main code file for the tool.  Drives the rest of the code.
 * `Makefile` - a Makefile containing various useful commands for using the tool, and for cleaning up afterword.
 * `README` - this README.
+
+## How to run an example
+From the top-level to run smallDemo1, run the command `python3 Korg.py --name=smallDemo1 --dir='demo/smallDemo1/*'`. The output of the demo will appear in `out/smallDemo1`. You can change what directory the results appear in by changing the `name` flag.
 
 ## How to cite
 
