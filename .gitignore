@@ -179,3 +179,8 @@ _site/
 .jekyll-metadatalogs/**
 *.tmp
 logs/*
+
+.vscode
+.vscode/*
+*.trail
+pan
