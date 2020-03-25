@@ -51,6 +51,7 @@ def getArgs():
 	parser.add_argument(
 		'--max_attacks',
 		metavar='max_attacks',
+		default=1,
 		type=int,
 		help='The maximum number of attackers to generate.')
 	parser.add_argument(
@@ -75,6 +76,12 @@ def getArgs():
 		const=True,
 		help='True iff you want the tool to tell you if the results are ' \
 			+ 'A-, E-, or not attackers at all.  May substantially add to runtime!')
+	parser.add_argument(
+		'--dir',
+		metavar='dir',
+		type=str,
+		help='The path to the directory that contains your models, directory MUST contain ' \
+			+ 'P.pml, Q.pml, Phi.pml, IO.txt')
 
 	args = parser.parse_args()
 	return args
