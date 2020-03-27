@@ -61,7 +61,7 @@ def makeDaisyPhiFinite(label, phi):
 	"""
 	phiBody = innerContents(fileRead(phi))
 	newPhi = "ltl newPhi {\n\t(eventually ( " + label + \
-		   + " == 1 ) ) implies (\n\t\t" + phiBody + "  )\n}"
+		     " == 1 ) ) implies (\n\t\t" + phiBody + "  )\n}"
 	return newPhi
 
 def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
