@@ -38,20 +38,37 @@
 from CLI          import *
 from Characterize import *
 from Construct    import *
+from glob 		  import glob
 
 @cleanUp
 def main():
 	args, parser = getArgs()
-	model, phi, Q, IO, max_attacks, with_recovery, name, characterize = \
-		args.model, 	             \
-		args.phi, 		             \
-		args.Q, 		             \
-		args.IO,                     \
-		args.max_attacks,            \
-		args.with_recovery,          \
-		args.name,                   \
-		args.characterize
+	model, phi, Q, IO, max_attacks, with_recovery, name, characterize = parseArgs(args)
 	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize, parser)
+
+def parseArgs(args):
+	P, Q, IO, Phi = (None,)*4
+	if args.dir:
+		demo_items = glob(args.dir)
+		for item in demo_items:
+			if 'P.pml' in item:
+				P = item
+			elif 'Q.pml' in item:
+				Q = item
+			elif 'Phi.pml' in item:
+				Phi = item
+			elif 'IO.txt' in item:
+				IO = item
+	else:
+		P, Q, IO, Phi = args.model, args.Q, args.IO, args.Phi
+	return P, 	             \
+	Phi, 		             \
+	Q, 		                 \
+	IO,                      \
+	args.max_attacks,        \
+	args.with_recovery,      \
+	args.name,               \
+	args.characterize
 
 def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	if max_attacks == None or max_attacks < 1:

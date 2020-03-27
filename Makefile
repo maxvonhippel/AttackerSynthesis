@@ -73,3 +73,10 @@ test:
 	rm -rf tests/__pycache__
 	rm -rf __pycache__
 	make clean testChar clean testKorg clean testCons
+
+# create new example directory
+# `make newExample dir=new_dir_name`
+newExample: 
+	- mkdir ${dir} 
+	- cd ${dir}
+	- touch P.pml Q.pml IO.txt Phi.pml
