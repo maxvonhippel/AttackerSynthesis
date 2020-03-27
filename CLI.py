@@ -33,24 +33,24 @@ def getArgs():
 		'--model', 
 		metavar='model', 
 		type=str, 
-		help='A relative or absolute path to a Promela model of a protocol M \
-			  to be attacked, e.g. demo/TCP.pml.',
+		help='A relative or absolute path to a Promela model of a protocol M ' \
+			+ 'to be attacked, e.g. demo/TCP.pml.',
 		required=False)
 	required.add_argument(
 		'--phi', 
 		metavar='phi', 
 		type=str, 
-		help='A relative or absolute path to a Promela file containing an LTL \
-			  claim phi about M and N, such that (M || N) |= phi, e.g. \
-			  demo/noHalfOpenConnections.pml.',
+		help='A relative or absolute path to a Promela file containing an LTL '\
+			+ 'claim phi about M and N, such that (M || N) |= phi, e.g. '\
+			+ 'demo/noHalfOpenConnections.pml.',
 		required=False)
 	required.add_argument(
 		'--Q',
 		metavar='Q',
 		type=str,
-		help='A relative or absolute path to a Promela model of a protocol Q \
-			  to be replaced and recovered-to by our attacker, e.g. \
-			  demo/network.pml.',
+		help='A relative or absolute path to a Promela model of a protocol Q '\
+			+ 'to be replaced and recovered-to by our attacker, e.g. '\
+			+ 'demo/network.pml.',
 		required=False)
 	required.add_argument(
 		'--IO',
@@ -72,8 +72,8 @@ def getArgs():
 		default=False,
 		nargs='?',
 		const=True,
-		help='True iff you want the recovered attackers to be attackers with \
-			  recovery, else false.',
+		help='True iff you want the recovered attackers to be attackers with '\
+			+ 'recovery, else false.',
 		required=False)
 	required.add_argument(
 		'--name',
@@ -88,16 +88,16 @@ def getArgs():
 		default=False,
 		nargs='?',
 		const=True,
-		help='True iff you want the tool to tell you if the results are  \
-			  A-, E-, or not attackers at all.  May substantially add to \
-			  runtime!',
+		help='True iff you want the tool to tell you if the results are '\
+			+ 'A-, E-, or not attackers at all.  May substantially add to '\
+			+ 'runtime!',
 		required=False)
 	required.add_argument(
 		'--dir',
 		metavar='dir',
 		type=str,
-		help='The path to the directory that contains your models, directory \
-		      MUST contain P.pml, Q.pml, Phi.pml, IO.txt.',
+		help='The path to the directory that contains your models, directory '\
+		    + 'MUST contain P.pml, Q.pml, Phi.pml, IO.txt.',
 		required=False)
 
 	if len(sys.argv[1:])==0:
@@ -155,9 +155,9 @@ def trailParseCMDs(tmpName):
 
 # Error message for if we were handed apparently invalid inputs.
 def printInvalidInputs(model, phi, N):
-	print("In order for the problem (model, phi, N) to be non-trivial, we \
-		   require that (model || N) |= phi.  However, this does not appear \
-		   to be the case.")
+	print("In order for the problem (model, phi, N) to be non-trivial, we "\
+		 + "require that (model || N) |= phi.  However, this does not appear "\
+		 + "to be the case.")
 
 # Error message for if we cannot find any solution.
 def printNoSolution(model, phi, N, with_recovery):

@@ -43,7 +43,9 @@ def check(modelFile, maxDepth=10000):
 	if ret == None:
 		return False
 	if "depth too small" in ret:
-		print("Search depth was too small at " + str(maxDepth), " doubling depth ...")
+		print("Search depth was too small at " \
+			 + str(maxDepth), \
+			 " doubling depth ...")
 		return check(modelFile, maxDepth * 2)
 	return not ("violated" in ret or "acceptance cycle" in ret)
 
