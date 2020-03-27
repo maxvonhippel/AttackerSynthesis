@@ -23,7 +23,8 @@ def str2bool(v):
 
 def getArgs():
 	parser = argparse.ArgumentParser(
-		description='Synthesize a (P, phi)-Attacker.')
+		description='Synthesize a (P, phi)-Attacker.',
+		formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 	parser._action_groups.pop()
 	required = parser.add_argument_group('required arguments')
 	optional = parser.add_argument_group('optional arguments')
@@ -71,7 +72,8 @@ def getArgs():
 		default=False,
 		nargs='?',
 		const=True,
-		help='True iff you want the recovered attackers to be attackers with recovery, else false.',
+		help='True iff you want the recovered attackers to be attackers with \
+			  recovery, else false.',
 		required=False)
 	required.add_argument(
 		'--name',
@@ -86,15 +88,16 @@ def getArgs():
 		default=False,
 		nargs='?',
 		const=True,
-		help='True iff you want the tool to tell you if the results are ' \
-			+ 'A-, E-, or not attackers at all.  May substantially add to runtime!',
+		help='True iff you want the tool to tell you if the results are  \
+			  A-, E-, or not attackers at all.  May substantially add to \
+			  runtime!',
 		required=False)
 	optional.add_argument(
 		'--dir',
 		metavar='dir',
 		type=str,
-		help='The path to the directory that contains your models, directory MUST contain ' \
-			+ 'P.pml, Q.pml, Phi.pml, IO.txt',
+		help='The path to the directory that contains your models, directory \
+		      MUST contain P.pml, Q.pml, Phi.pml, IO.txt',
 		required=False)
 
 	if len(sys.argv[1:])==0:
@@ -151,7 +154,9 @@ def printInvalidInputs(model, phi, N):
 # Error message for if we cannot find any solution.
 def printNoSolution(model, phi, N, with_recovery):
 	possiblyFinite = "with_recovery" if with_recovery else ""
-	print("We could not find any " + possiblyFinite + "(model, (N), phi)-attacker A.")
+	print("We could not find any " \
+		  + possiblyFinite         \
+		  + "(model, (N), phi)-attacker A.")
 
 # Error message when we could not negate the claim phi.
 def printCouldNotNegateClaim(phi):
