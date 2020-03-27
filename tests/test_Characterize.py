@@ -15,9 +15,9 @@ class TestCharacterize(unittest.TestCase):
 	model = 'demo/TCP/TCP.pml'
 	N     = 'demo/TCP/network.pml'
 	D     = 'demo/TCP/daisy.pml'
-	exp1  = 'experiments/experiment1.pml'
-	exp2  = 'experiments/experiment2.pml'
-	exp3  = 'experiments/experiment3.pml'
+	exp1  = 'demo/TCP/phi1.pml'
+	exp2  = 'demo/TCP/phi2.pml'
+	exp3  = 'demo/TCP/phi3.pml'
 
 	# Test that M || N |= exp1 therefore TM_1 is a valid threat model
 	def test_exp1(self):

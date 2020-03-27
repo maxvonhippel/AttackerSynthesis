@@ -18,7 +18,7 @@
 Suppose I run Korg wit the following parameters.
 
 * `--model=demo/TCP/TCP.pml`
-* `--phi=experiments/experiment1.pml`
+* `--phi=demo/TCP/phi1.pml`
 * `--Q=demo/TCP/network.pml`
 * `--IO=demo/TCP/IO.txt`
 * `--max_attacks=1`
@@ -29,7 +29,7 @@ Suppose I run Korg wit the following parameters.
 Like this:
 
 ````
-(env) mvh:AttackerSynthesis$ python3 Korg.py --model=demo/TCP/TCP.pml --phi=experiments/experiment1.pml --Q=demo/TCP/network.pml --IO=demo/TCP/IO.txt --max_attacks=1 --with_recovery=False --name=experiment1 --characterize=False
+(env) mvh:AttackerSynthesis$ python3 Korg.py --model=demo/TCP/TCP.pml --phi=demo/TCP/phi1.pml --Q=demo/TCP/network.pml --IO=demo/TCP/IO.txt --max_attacks=1 --with_recovery=False --name=experiment1 --characterize=False
 ltl exp1: [] ((! ((state[0]==0))) || (! ((state[1]==4))))
 pan:1: assertion violated  !( !(( !((state[0]==0))|| !((state[1]==4))))) (at depth 36)
 pan: wrote experiment1_daisy_check.pml.trail
@@ -109,7 +109,7 @@ So, as a process, the attacker looks something like this.
 
 Note that this attacker has a trivial acceptance cycle.  But we can also make an attacker with a non-trivial acceptance cycle, like so.
 
-> python3 Korg.py --model=demo/TCP/TCP.pml --phi=experiments/experiment2.pml --Q=demo/TCP/network.pml --IO=demo/TCP/IO.txt --max_attacks=3 --with_recovery=False --name=experiment2 --characterize=False
+> python3 Korg.py --model=demo/TCP/TCP.pml --phi=demo/TCP/phi2.pml --Q=demo/TCP/network.pml --IO=demo/TCP/IO.txt --max_attacks=3 --with_recovery=False --name=experiment2 --characterize=False
 
 Inspecting `experiment2_False/attacker_2.pml`, I see:
 
@@ -146,7 +146,7 @@ Clearly this attacker has a non-trivial acceptance cycle (again, using the paper
 
 Running the code with `--characterize=True` does everything that Korg would do with `--characterize=False`, plus it saves the *artifacts* and writes a log file.  This is best explained via an example.  Suppose I run the following.
 
-> python3 Korg.py --model=demo/TCP/TCP.pml --phi=experiments/experiment2.pml --Q=demo/TCP/network.pml --IO=demo/TCP/IO.txt --max_attacks=3 --with_recovery=True --name=experiment2 --characterize=True
+> python3 Korg.py --model=demo/TCP/TCP.pml --phi=demo/TCP/phi2.pml --Q=demo/TCP/network.pml --IO=demo/TCP/IO.txt --max_attacks=3 --with_recovery=True --name=experiment2 --characterize=True
 
 So, I am running the same experiment as I did immediately previously, except with recovery, and with `--characterize=True`.  Then in `out/experiment2_True/`, I find the following.
 

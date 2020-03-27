@@ -39,7 +39,7 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 	* This is what we call `P` in the paper.
 
-* :japanese_ogre: `$2` is the property the attacker wants to violate, e.g., [`experiment1.pml`](../experiments/experiment1.pml).  
+* :japanese_ogre: `$2` is the property the attacker wants to violate, e.g., [`phi1.pml`](../demo/TCP/phi1.pml).  
 
 	* This is what we call `Φ` in the paper, and should be written in linear temporal logic.
 
@@ -66,7 +66,7 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 * :ghost: `$8` is `True` if you want to have artifacts generated with which to assess the quality and type of your synthesized attackers, or `False` if you do not want to generate these artifacts.  Defaults to `False`.
 
-	* For more on these artifacts, see [`InterpretingOutputs.md`](InterpretingOutputs.md).  Note that setting this to `True` will slow down Korg, possibly by quite a lot (as in `TM_3` in the paper, which corresponds to [`experiment3.pml`](../experiments/experiment3.pml)).  I usually tun the experiment with this `False` first, and then try again with it `True`.
+	* For more on these artifacts, see [`InterpretingOutputs.md`](InterpretingOutputs.md).  Note that setting this to `True` will slow down Korg, possibly by quite a lot (as in `TM_3` in the paper, which corresponds to [`phi3.pml`](../demo/TCP/phi3.pml)).  I usually tun the experiment with this `False` first, and then try again with it `True`.
 
 * :ghost: `$9` is a path to a directory containing `phi.pml`, `P.pml`, `Q.pml`, and `IO.txt`.  If you provide this then you do not need to provide `$1`, `$2`, `$3`, or `$4`.
 

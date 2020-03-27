@@ -23,9 +23,9 @@ class TestKorg(unittest.TestCase):
 	TCP   = 'demo/TCP/TCP.pml'
 	net   = 'demo/TCP/network.pml'
 	IO    = 'demo/TCP/IO.txt'
-	exp1  = 'experiments/experiment1.pml'
-	exp2  = 'experiments/experiment2.pml'
-	exp3  = 'experiments/experiment3.pml'
+	exp1  = 'demo/TCP/phi1.pml'
+	exp2  = 'demo/TCP/phi2.pml'
+	exp3  = 'demo/TCP/phi3.pml'
 	
 	# Test Cole's experiments
 	s_P   = 'demo/livenessExample1/P.pml'
