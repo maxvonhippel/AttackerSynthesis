@@ -41,7 +41,7 @@ from Construct    import *
 
 @cleanUp
 def main():
-	args = getArgs()
+	args, parser = getArgs()
 	model, phi, Q, IO, max_attacks, with_recovery, name, characterize = \
 		args.model, 	             \
 		args.phi, 		             \
@@ -51,7 +51,7 @@ def main():
 		args.with_recovery,          \
 		args.name,                   \
 		args.characterize
-	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize)
+	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize, parser)
 
 def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	if max_attacks == None or max_attacks < 1:
@@ -79,7 +79,8 @@ def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	
 	return _IO
 
-def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, name=None, characterize=False):
+def body(model, phi, Q, IO, max_attacks=1, \
+	     with_recovery=True, name=None, characterize=False, parser=None):
 	'''
 	Body attempts to find attackers against a given model. The attacker 
 	is successful if the given phi is violated. The phi is initially 
@@ -93,7 +94,6 @@ def body(model, phi, Q, IO, max_attacks=1, with_recovery=True, name=None, charac
 	@param name         : name of the files
 	@param characterize : do you want us to characterize attackers after producing them?
 	'''
-	assert(name != None)
 	
 	# The name of the file we use to check that model || Q |= phi
 	basic_check_name  = name + "_model_Q_phi.pml"

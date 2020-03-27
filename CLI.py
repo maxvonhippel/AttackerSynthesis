@@ -9,6 +9,7 @@
 import argparse
 from   glob import glob
 import os
+import sys
 
 def str2bool(v):
     if isinstance(v, bool):
@@ -23,50 +24,62 @@ def str2bool(v):
 def getArgs():
 	parser = argparse.ArgumentParser(
 		description='Synthesize a (P, phi)-Attacker.')
-	parser.add_argument(
+	parser._action_groups.pop()
+	required = parser.add_argument_group('required arguments')
+	optional = parser.add_argument_group('optional arguments')
+
+	required.add_argument(
 		'--model', 
 		metavar='model', 
 		type=str, 
 		help='A relative or absolute path to a Promela model of a protocol M \
-			  to be attacked, e.g. demo/TCP.pml.')
-	parser.add_argument(
+			  to be attacked, e.g. demo/TCP.pml.',
+		required=True)
+	required.add_argument(
 		'--phi', 
 		metavar='phi', 
 		type=str, 
 		help='A relative or absolute path to a Promela file containing an LTL \
 			  claim phi about M and N, such that (M || N) |= phi, e.g. \
-			  demo/noHalfOpenConnections.pml.')
-	parser.add_argument(
+			  demo/noHalfOpenConnections.pml.',
+		required=True)
+	required.add_argument(
 		'--Q',
 		metavar='Q',
 		type=str,
 		help='A relative or absolute path to a Promela model of a protocol Q \
 			  to be replaced and recovered-to by our attacker, e.g. \
-			  demo/network.pml.')
-	parser.add_argument(
+			  demo/network.pml.',
+		required=True)
+	required.add_argument(
 		'--IO',
 		metavar='IO',
 		type=str,
-		help='The input-output interface of N, in a yaml-ish format.')
-	parser.add_argument(
+		help='The input-output interface of N, in a yaml-ish format.',
+		required=True)
+	required.add_argument(
 		'--max_attacks',
 		metavar='max_attacks',
 		type=int,
-		help='The maximum number of attackers to generate.')
-	parser.add_argument(
+		help='The maximum number of attackers to generate.',
+		default=5,
+		required=False)
+	optional.add_argument(
 		'--with_recovery',
 		metavar='with_recovery',
 		type=str2bool,
 		default=False,
 		nargs='?',
 		const=True,
-		help='True iff you want the recovered attackers to be attackers with recovery, else false.')
-	parser.add_argument(
+		help='True iff you want the recovered attackers to be attackers with recovery, else false.',
+		required=False)
+	required.add_argument(
 		'--name',
 		metavar='name',
 		type=str,
-		help='The name you want to give to this experiment.')
-	parser.add_argument(
+		help='The name you want to give to this experiment.',
+		required=True)
+	optional.add_argument(
 		'--characterize',
 		metavar='characterize',
 		type=str2bool,
@@ -74,10 +87,14 @@ def getArgs():
 		nargs='?',
 		const=True,
 		help='True iff you want the tool to tell you if the results are ' \
-			+ 'A-, E-, or not attackers at all.  May substantially add to runtime!')
+			+ 'A-, E-, or not attackers at all.  May substantially add to runtime!',
+		required=False)
 
+	if len(sys.argv[1:])==0:
+	    parser.print_help()
+	    parser.exit()
 	args = parser.parse_args()
-	return args
+	return args, parser
 
 trails = lambda : glob("*.trail")
 
