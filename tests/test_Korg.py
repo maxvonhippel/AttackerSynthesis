@@ -41,7 +41,8 @@ class TestKorg(unittest.TestCase):
 	# Test that if max_attacks < 1 we get back error code 1
 	def test_errors_if_no_attackers_requested(self):
 		for _with_recovery in [ True, False ]:
-			_name = "test_errors_if_no_attackers_requested_" + str(_with_recovery)
+			_name = "test_errors_if_no_attackers_requested_" 
+			_name += str(_with_recovery)
 			self.assertEqual(Korg.body(                        \
 				model = None, phi = None, Q = None, IO = None, \
 				max_attacks   = 0, 	                           \
@@ -134,9 +135,10 @@ class TestKorg(unittest.TestCase):
 				characterize   = True), 0)
 
 	# We don't test exp3 because it takes too long, but we encourage you to
-	# try it out if you're curious!  See the documentation and Makefile for more.
+	# try it out if you're curious!  See the documentation and Makefile for 
+	# more.
 
-	# Now let's try a toy problem where we can solve it without recovery but not with.
+	# Now let's try a toy problem where we can solve w/out recovery but not w/.
 	def test_on_Liveness(self):
 		for _recovery in [ True, False ]:
 			self.assertEqual(Korg.body(          \
@@ -164,3 +166,7 @@ class TestKorg(unittest.TestCase):
 				name          = "test_works_on_Coles_example_" \
 							  + str(_recovery),  \
 				characterize  = True), 6 if _recovery else 0)
+
+	@classmethod
+	def tearDownClass(cls):
+		cleanUp()

@@ -113,23 +113,22 @@ def getArgs():
 			   "required.  This is an exclusive-or *either*.")
 		parser.exit()
 
-	return args, parser
+	return args
 
 trails = lambda : glob("*.trail")
 
 def cleanUpTargeted(target):
 	files = glob(target)
+	print("Cleaning up " + str(files))
 	for file in files:
 		os.remove(file)
 
-def cleanUp(func):
-	def wrapped():
-		a = func()
-		cleanUpTargeted("*.trail")
-		cleanUpTargeted("*tmp*"  )
-		cleanUpTargeted("pan"    )
-		return a
-	return wrapped
+def cleanUp():
+	cleanUpTargeted("*.trail"   )
+	cleanUpTargeted("*tmp*"     )
+	cleanUpTargeted("pan"       )
+	cleanUpTargeted("*.pml"     )
+	cleanUpTargeted("._n_i_p_s_")
 
 def addTrailNumberToArgs(args, num):
 	ret = []

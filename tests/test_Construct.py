@@ -25,10 +25,11 @@ class TestConstruct(unittest.TestCase):
 
     # Tests that daisy in a particular example was made correctly
     def test_makeDaisyWithEvent(self):
-        daisy_string = c.makeDaisyWithEvents(self.IO, False, self.s_network, self.s_label)
-        self.assertEqual(\
-            daisy_string, \
-            'active proctype daisy () {\n\tdo\n\t:: channel!C;\n\t:: channel?A;\n\t:: channel?B;\n\tod\n}')
+        daisyBod = 'active proctype daisy () {\n\tdo\n\t:: channel!C;'
+        daisyBod += '\n\t:: channel?A;\n\t:: channel?B;\n\tod\n}'
+        daisy_string = c.makeDaisyWithEvents(
+            self.IO, False, self.s_network, self.s_label)
+        self.assertEqual(daisy_string, daisyBod)
 
     # Same but for recovery case
     def test_makeDaisyPhiFinite(self):
@@ -39,6 +40,10 @@ class TestConstruct(unittest.TestCase):
                      .replace("\t", " ")                          \
                      .split(" ")] if len(b) > 0])
 
-        self.assertEqual(\
-            d_phi, \
-            "ltl newPhi { (eventually ( b == 1 ) ) implies ( eventually ( always ( w == 0 ) ) )}")
+        daisyBod = "ltl newPhi { (eventually ( b == 1 ) ) implies ( eventually"
+        daisyBod += " ( always ( w == 0 ) ) )}"
+        self.assertEqual(d_phi, daisyBod)
+
+    @classmethod
+    def tearDownClass(cls):
+        cleanUp()

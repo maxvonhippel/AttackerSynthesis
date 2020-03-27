@@ -40,11 +40,10 @@ from Characterize import *
 from Construct    import *
 from glob 		  import glob
 
-@cleanUp
 def main():
-	args, parser = getArgs()
+	args = getArgs()
 	model, phi, Q, IO, max_attacks, with_recovery, name, characterize = parseArgs(args)
-	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize, parser)
+	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize)
 
 def parseArgs(args):
 	P, Q, IO, Phi = (None,)*4
@@ -97,7 +96,7 @@ def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	return _IO
 
 def body(model, phi, Q, IO, max_attacks=1, \
-	     with_recovery=True, name=None, characterize=False, parser=None):
+	     with_recovery=True, name=None, characterize=False):
 	'''
 	Body attempts to find attackers against a given model. The attacker 
 	is successful if the given phi is violated. The phi is initially 
@@ -125,6 +124,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 
 	IO = checkArgs(max_attacks, phi, model, Q, basic_check_name, IO)
 	if IO in { 1, 2, 3, 4, 5 }:
+		cleanUp()
 		return IO
 	IO = sorted(list(IO)) # sorted list of events
 	# Make daisy attacker
@@ -146,6 +146,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 		
 	if net == None or _models:
 		printNoSolution(model, phi, Q, with_recovery)
+		cleanUp()
 		return 6
 	
 	makeAllTrails(daisy_models_name, max_attacks) 
@@ -157,14 +158,13 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	# Write these attacks to models
 	writeAttacks(attacks, provenance, net, with_recovery, attacker_name)
 	
-	# Delete the trail files
-	cleanUpTargeted("*.trail")
-	
 	# Characterize the attacks
 	if characterize:
 		(E, A) = characterizeAttacks(model, phi, with_recovery, attacker_name)
+		cleanUp()
 		return 0 if (E + A) > 0 else -1
 	else:
+		cleanUp()
 		return 0 # assume it worked if not asked to prove it ...
 
 if __name__== "__main__":
