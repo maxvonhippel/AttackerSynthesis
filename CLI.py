@@ -35,7 +35,7 @@ def getArgs():
 		type=str, 
 		help='A relative or absolute path to a Promela model of a protocol M \
 			  to be attacked, e.g. demo/TCP.pml.',
-		required=True)
+		required=False)
 	required.add_argument(
 		'--phi', 
 		metavar='phi', 
@@ -43,7 +43,7 @@ def getArgs():
 		help='A relative or absolute path to a Promela file containing an LTL \
 			  claim phi about M and N, such that (M || N) |= phi, e.g. \
 			  demo/noHalfOpenConnections.pml.',
-		required=True)
+		required=False)
 	required.add_argument(
 		'--Q',
 		metavar='Q',
@@ -51,13 +51,13 @@ def getArgs():
 		help='A relative or absolute path to a Promela model of a protocol Q \
 			  to be replaced and recovered-to by our attacker, e.g. \
 			  demo/network.pml.',
-		required=True)
+		required=False)
 	required.add_argument(
 		'--IO',
 		metavar='IO',
 		type=str,
 		help='The input-output interface of N, in a yaml-ish format.',
-		required=True)
+		required=False)
 	required.add_argument(
 		'--max_attacks',
 		metavar='max_attacks',
@@ -92,18 +92,27 @@ def getArgs():
 			  A-, E-, or not attackers at all.  May substantially add to \
 			  runtime!',
 		required=False)
-	optional.add_argument(
+	required.add_argument(
 		'--dir',
 		metavar='dir',
 		type=str,
 		help='The path to the directory that contains your models, directory \
-		      MUST contain P.pml, Q.pml, Phi.pml, IO.txt',
+		      MUST contain P.pml, Q.pml, Phi.pml, IO.txt.',
 		required=False)
 
 	if len(sys.argv[1:])==0:
 	    parser.print_help()
+	    print("\nNote: *either* --dir *or* (--phi, --P, --Q, and --IO) is " + \
+	    	   "required.  This is an exclusive-or *either*.")
 	    parser.exit()
+
 	args = parser.parse_args()
+	if (not (parser.dir or 
+		    (parser.phi and parser.Q and parser.P and parser.IO))):
+		print("\nNote: *either* --dir *or* (--phi, --P, --Q, and --IO) is " + \
+			   "required.  This is an exclusive-or *either*.")
+		parser.exit()
+
 	return args, parser
 
 trails = lambda : glob("*.trail")
