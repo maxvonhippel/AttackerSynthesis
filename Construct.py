@@ -60,12 +60,8 @@ def makeDaisyPhiFinite(label, phi):
 	@param phi: specification for the daisy
 	"""
 	phiBody = innerContents(fileRead(phi))
-	newPhi = "ltl newPhi {\n\t(eventually ( " \
-		   + label 
-		   + " == 1 ) ) implies (\n" \
-		   + "\t\t" 
-		   + phiBody 
-		   + "  )\n}"
+	newPhi = "ltl newPhi {\n\t(eventually ( " + label + \
+		   + " == 1 ) ) implies (\n\t\t" + phiBody + "  )\n}"
 	return newPhi
 
 def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
@@ -103,6 +99,9 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	# Only write the attacker if it isn't a duplicate, as
 	# determined using our hash function naming convention.
 
+	if (DIR != None and not os.path.exists(DIR)):
+		os.mkdir(DIR)
+
 	if not os.path.exists(name):
 		with open(name, "w") as fw:
 			fw.write("/* " + " ".join(prov) + " */\n")
@@ -136,15 +135,17 @@ def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 	already exist.
 	"""
 	name = "out/" + name
+	if (not os.path.isdir("out")):
+		os.mkdir("out")
 	assert(not os.path.isdir(name))
 	os.mkdir(name)
 	for j in range(len(attacks)):
-		makeAttacker(               \
-			events = attacks[j],    \
-			prov   = provenance[j], \
-			net    = net,           \
-			DIR    = name,          \
-			with_recovery = with_recovery,        \
+		makeAttacker(                      \
+			events = attacks[j],           \
+			prov   = provenance[j],        \
+			net    = net,                  \
+			DIR    = name,                 \
+			with_recovery = with_recovery, \
 			k      = j)
 
 def negateClaim(phi):

@@ -25,7 +25,7 @@ def main():
 				with_recovery, name, characterize)
 
 def parseArgs(args):
-	P, Q, IO, Phi = (None,)*4
+	P, Q, IO, phi = (None,)*4
 	if args.dir:
 		demo_items = glob(args.dir)
 		for item in demo_items:
@@ -34,13 +34,13 @@ def parseArgs(args):
 			elif 'Q.pml' in item:
 				Q = item
 			elif 'Phi.pml' in item:
-				Phi = item
+				phi = item
 			elif 'IO.txt' in item:
 				IO = item
 	else:
-		P, Q, IO, Phi = args.model, args.Q, args.IO, args.Phi
+		P, Q, IO, phi = args.model, args.Q, args.IO, args.phi
 	return P, 	             \
-	Phi, 		             \
+	phi, 		             \
 	Q, 		                 \
 	IO,                      \
 	args.max_attacks,        \

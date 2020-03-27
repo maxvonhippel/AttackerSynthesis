@@ -107,8 +107,8 @@ def getArgs():
 	    parser.exit()
 
 	args = parser.parse_args()
-	if (not (parser.dir or 
-		    (parser.phi and parser.Q and parser.P and parser.IO))):
+	if (not (args.dir or 
+		    (args.phi and args.Q and args.model and args.IO))):
 		print("\nNote: *either* --dir *or* (--phi, --P, --Q, and --IO) is " + \
 			   "required.  This is an exclusive-or *either*.")
 		parser.exit()
@@ -119,7 +119,6 @@ trails = lambda : glob("*.trail")
 
 def cleanUpTargeted(target):
 	files = glob(target)
-	print("Cleaning up " + str(files))
 	for file in files:
 		os.remove(file)
 
