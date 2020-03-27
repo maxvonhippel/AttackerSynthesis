@@ -38,7 +38,7 @@ See the [usage docs](Usage.md).
 Read the `#comments` in the [Makefile](../Makefile).  *TL;DR:*
 
 * To run `experiment1` without recovery, do `make experiment1`.
-* To run `experiment2` or `experiment3`, change `--phi=experiments/experiment1.pml` to `--phi=experiments/experiment2.pml` or `--phi=experiments/experiment3.pml` in the `experiment1` target.  Then do `make experiment1`.
+* To run `experiment2` or `experiment3`, change `--phi=demo/TCP/phi1.pml` to `--phi=demo/TCP/phi2.pml` or `--phi=demo/TCP/phi3.pml` in the `experiment1` target.  Then do `make experiment1`.
 * To run `experiment1` with recovery, change `--with_recovery=False` to `--with_recovery=True` in the `experiment1` target, then do `make experiment1`.
 * To reproduce our results, do `make avgExperiment`.
 * To run unit tests for main body of `Korg` logic, do `make testKorg`.

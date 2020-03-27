@@ -29,7 +29,7 @@ clean:
 experiment1:
 	time python3 Korg.py                      \
 			--model=demo/TCP/TCP.pml          \
-			--phi=experiments/experiment1.pml \
+			--phi=demo/TCP/phi1.pml \
 			--Q=demo/TCP/network.pml          \
 			--IO=demo/TCP/IO.txt              \
 			--max_attacks=1                   \
@@ -49,7 +49,7 @@ avgExperiment:
 				touch "logs/"$$name"_log.txt";                                       \
 				/usr/bin/time -o "logs/"$$name"_log.txt" python3 Korg.py             \
 					--model=demo/TCP/TCP.pml                                         \
-					--phi="experiments/experiment"$$exp".pml"                        \
+					--phi="demo/TCP/phi"$$exp".pml"                        \
 					--Q=demo/TCP/network.pml                                         \
 					--IO=demo/TCP/IO.txt                                             \
 					--max_attacks=10                                                 \

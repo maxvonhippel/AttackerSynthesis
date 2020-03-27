@@ -26,9 +26,9 @@ This repository contains the tool `Korg` as well as various Promela models from 
 		-- `phi.pml` a liveness property;
 		-- `theta.pml` the trivial property; and
 		-- `wrongPhi.pml` a safety property also used in unit-testing.
+		-- the three properties `phi1.pml`, `phi2.pml`, `phi3.pml` used in the Case Study for `TM_1`, `TM_2`, `TM_3`.
 	- `smallDemo1-3` are more small examples with explanations 
 	- :pushpin: `TCP/` contains the entire TCP model used in our Case Study.
-* :pushpin: `experiments/` - contains the three properties `phi_1.pml`, `phi_2.pml`, `phi_3.pml` used in the Case Study for `TM_1`, `TM_2`, `TM_3`.
 * `out/` - this is where the outputs of the program are written to.
 * `results/` - this contains the results of the Case Study from the paper.  You can reproduce these results using the tool.
 * `tests/` - this contains unit-test code for `Korg`.
