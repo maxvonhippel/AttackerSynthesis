@@ -24,11 +24,13 @@ The Korg usage is as follows.
 ````
 python3 Korg.py --model=$1 
 		--phi=$2 
-		--Q=$3 --IO=$4 
+		--Q=$3 
+		--IO=$4 
 		--max_attacks=$5 
 		--with_recovery=$6 
 		--name=$7 
 		--characterize=$8
+		--dir=$9
 ````
 
 We break down these arguments below.  Required parameters are marked with a :japanese_ogre:, while optional parameters are marked with a :ghost:.  Arguments may be given in any order.
@@ -54,7 +56,7 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 	* Korg can make many many attackers, and often it will generate many very similar or even identical attackers, for subtle reasons having to do with how the trail files are interpreted, so it is a good idea to set this number fairly low until you have a strong grasp of how to best use the tool.  I typically like to use `--max_attacks=10`.
 
-* :ghost: `$6` is `True` if you want to solve the `R∃ASP` (that is, the ∃-problem with recovery), or `False` if you want to solve the `∃ASP` (that is, the ∃-problem without recovery).  
+* :ghost: `$6` is `True` if you want to solve the `R∃ASP` (that is, the ∃-problem with recovery), or `False` if you want to solve the `∃ASP` (that is, the ∃-problem without recovery).  Defaults to `False` (meaning, `EASP`).
 
 	* I tend to find attackers with recovery more interesting, but it is generally a good idea to try running it both ways as sometimes attackers with recovery might not exist but attackers without recovery do.
 
@@ -62,9 +64,11 @@ We break down these arguments below.  Required parameters are marked with a :jap
 
 	* It is usually a good idea to pick something particular to your specific experiment, so you can find your results later on after you have run Korg many times.  For some examples, see the names used in our [tests](../tests/test_Korg.py).  For more documentation on these outputs, see [`InterpretingOutputs.md`](InterpretingOutputs.md).
 
-* :ghost: `$8` is `True` if you want to have artifacts generated with which to assess the quality and type of your synthesized attackers.  
+* :ghost: `$8` is `True` if you want to have artifacts generated with which to assess the quality and type of your synthesized attackers, or `False` if you do not want to generate these artifacts.  Defaults to `False`.
 
 	* For more on these artifacts, see [`InterpretingOutputs.md`](InterpretingOutputs.md).  Note that setting this to `True` will slow down Korg, possibly by quite a lot (as in `TM_3` in the paper, which corresponds to [`experiment3.pml`](../experiments/experiment3.pml)).  I usually tun the experiment with this `False` first, and then try again with it `True`.
+
+* :ghost: `$9` is a path to a directory containing `phi.pml`, `P.pml`, `Q.pml`, and `IO.txt`.  If you provide this then you do not need to provide `$1`, `$2`, `$3`, or `$4`.
 
 #### IO File Grammar / Syntax
 
