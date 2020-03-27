@@ -10,29 +10,6 @@
 #             expose yourself to a basically trivial remote code execution issue 
 #             in Bash, because of the way I am hacking on subprocess.
 # ==============================================================================
-#           _____                   _______                   _____                    _____          
-#          /\    \                 /::\    \                 /\    \                  /\    \         
-#         /::\____\               /::::\    \               /::\    \                /::\    \        
-#        /:::/    /              /::::::\    \             /::::\    \              /::::\    \       
-#       /:::/    /              /::::::::\    \           /::::::\    \            /::::::\    \      
-#      /:::/    /              /:::/~~\:::\    \         /:::/\:::\    \          /:::/\:::\    \     
-#     /:::/____/              /:::/    \:::\    \       /:::/__\:::\    \        /:::/  \:::\    \    
-#    /::::\    \             /:::/    / \:::\    \     /::::\   \:::\    \      /:::/    \:::\    \   
-#   /::::::\____\________   /:::/____/   \:::\____\   /::::::\   \:::\    \    /:::/    / \:::\    \  
-#  /:::/\:::::::::::\    \ |:::|    |     |:::|    | /:::/\:::\   \:::\____\  /:::/    /   \:::\ ___\ 
-# /:::/  |:::::::::::\____\|:::|____|     |:::|    |/:::/  \:::\   \:::|    |/:::/____/  ___\:::|    |
-# \::/   |::|~~~|~~~~~      \:::\    \   /:::/    / \::/   |::::\  /:::|____|\:::\    \ /\  /:::|____|
-#  \/____|::|   |            \:::\    \ /:::/    /   \/____|:::::\/:::/    /  \:::\    /::\ \::/    / 
-#        |::|   |             \:::\    /:::/    /          |:::::::::/    /    \:::\   \:::\ \/____/  
-#        |::|   |              \:::\__/:::/    /           |::|\::::/    /      \:::\   \:::\____\    
-#        |::|   |               \::::::::/    /            |::| \::/____/        \:::\  /:::/    /    
-#        |::|   |                \::::::/    /             |::|  ~|               \:::\/:::/    /     
-#        |::|   |                 \::::/    /              |::|   |                \::::::/    /      
-#        \::|   |                  \::/____/               \::|   |                 \::::/    /       
-#         \:|   |                   ~~                      \:|   |                  \::/____/        
-#          \|___|                                            \|___|                                   
-# ASCII art courtesy of Patrick Gillespie's ASCII tool.
-# ==============================================================================
 
 
 from CLI          import *
@@ -42,8 +19,10 @@ from glob 		  import glob
 
 def main():
 	args = getArgs()
-	model, phi, Q, IO, max_attacks, with_recovery, name, characterize = parseArgs(args)
-	return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize)
+	model, phi, Q, IO, max_attacks, with_recovery, name, characterize \
+		= parseArgs(args)
+	return body(model, phi, Q, IO, max_attacks, \
+				with_recovery, name, characterize)
 
 def parseArgs(args):
 	P, Q, IO, Phi = (None,)*4
@@ -108,14 +87,16 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	@param max_attacks  : how many attackers to generate
 	@param with_recovery: should the attackers be with_recovery?
 	@param name         : name of the files
-	@param characterize : do you want us to characterize attackers after producing them?
+	@param characterize : do you want us to characterize attackers after 
+						  producing them?
 	'''
 	
 	# The name of the file we use to check that model || Q |= phi
 	basic_check_name  = name + "_model_Q_phi.pml"
 	# The name of the file where we write daisy(Q)
 	daisy_name        = name + "_daisy.pml"
-	# The name of the file we use to check that (model, (Q), phi) has a with_recovery attacker
+	# The name of the file we use to check that (model, (Q), phi) has a 
+	# with_recovery attacker
 	with_recovery_phi_name   = name + "_with_recovery_phi.pml"
 	# The subdirectory of out/ where we write our results
 	attacker_name     = name + "_" + str(with_recovery)

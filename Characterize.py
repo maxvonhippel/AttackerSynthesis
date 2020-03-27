@@ -94,34 +94,7 @@ def models(model, phi, N, name):
 
 	return check(name)
 
-# Example snippet of what sort of text parseTrail parses:
-'''
-(env) mvh:attempt2$ spin -t -s -r 956233795109139376_tmp.pml
-ltl exp3: (! ([] (<> (((state[0]==1)) && ((state[1]==2)))))) || (<> ((state[0]==4)))
-starting claim 3
-Never claim moves to line 4	[(!((state[0]==4)))]
-  2:	proc  1 (daisy:1) 956233795109139376_tmp.pml:93 Send SYN_ACK	-> queue 1 (NtoB)
-  4:	proc  1 (daisy:1) 956233795109139376_tmp.pml:94 Send SYN_ACK	-> queue 2 (NtoA)
- 34:	proc  3 (TCP:1) 956233795109139376_tmp.pml:24 Send SYN	-> queue 4 (snd)
-Never claim moves to line 3	[((!((state[0]==4))&&((state[0]==1)&&(state[1]==2))))]
- 38:	proc  3 (TCP:1) 956233795109139376_tmp.pml:42 Recv SYN_ACK	<- queue 1 (rcv)
-Never claim moves to line 8	[(!((state[0]==4)))]
- 40:	proc  1 (daisy:1) 956233795109139376_tmp.pml:96 Recv SYN	<- queue 4 (BtoN)
-Never claim moves to line 3	[((!((state[0]==4))&&((state[0]==1)&&(state[1]==2))))]
- 42:	proc  3 (TCP:1) 956233795109139376_tmp.pml:42 Send ACK	-> queue 4 (snd)
-Never claim moves to line 8	[(!((state[0]==4)))]
-Never claim moves to line 4	[(!((state[0]==4)))]
- 46:	proc  1 (daisy:1) 956233795109139376_tmp.pml:92 Recv ACK	<- queue 4 (BtoN)
- 48:	proc  3 (TCP:1) 956233795109139376_tmp.pml:54 Send FIN	-> queue 4 (snd)
- 52:	proc  1 (daisy:1) 956233795109139376_tmp.pml:100 Recv FIN	<- queue 4 (BtoN)
- 54:	proc  1 (daisy:1) 956233795109139376_tmp.pml:106 Send FIN	-> queue 1 (NtoB)
- 56:	proc  3 (TCP:1) 956233795109139376_tmp.pml:62 Recv FIN	<- queue 1 (rcv)
- 58:	proc  3 (TCP:1) 956233795109139376_tmp.pml:62 Send ACK	-> queue 4 (snd)
- 62:	proc  1 (daisy:1) 956233795109139376_tmp.pml:92 Recv ACK	<- queue 4 (BtoN)
- 64:	proc  1 (daisy:1) 956233795109139376_tmp.pml:107 Send ACK	-> queue 1 (NtoB)
- 66:	proc  3 (TCP:1) 956233795109139376_tmp.pml:74 Recv ACK	<- queue 1 (rcv)
- 76:	proc  1 (daisy:1) 956233795109139376_tmp.pml:102 Send SYN	-> queue 1 (NtoB)
-'''
+# Parses output of reading trail using Spin.
 def parseTrail(trailBody):
 
 	ret, i = [[], []], 0
@@ -162,7 +135,8 @@ def parseAllTrails(cmds, with_recovery=False, debug=False):
 			output = subprocess.check_output(cmd, stderr=devnull)
 			if sys.stdout.encoding != None:
 				output = output.decode(sys.stdout.encoding)
-			output = str(output).strip().replace("\\n", "\n").replace("\\t", "\t")
+			output = str(output).strip().replace("\\n", "\n")\
+										.replace("\\t", "\t")
 			parsed = parseTrail(output)
 			ret.append(parsed)
 			prov.append(cmd)

@@ -21,7 +21,8 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	assert(len(events) != 0)
 
 	network = innerContents(fileRead(N))
-	if with_recovery and (network in { False, None } or len(network.strip()) == 0):
+	if with_recovery and \
+		(network in { False, None } or len(network.strip()) == 0):
 		return None
 
 	recovery_bitflag = "b"
@@ -43,7 +44,8 @@ def makeDaisyWithEvents(events, with_recovery, network, b):
 	for event in events:
 		daisy += "\n\t:: " + event
 	if with_recovery:
-		daisy += "\n\t:: break; // recovery to N ... \n\tod\n\t" + b + " = 1;\n\t"
+		daisy += "\n\t:: break; // recovery to N ... \n\tod"
+		daisy += "\n\t" + b + " = 1;\n\t"
 		# Add recovery to N
 		daisy += "// N begins here ... \n" + network + "\n}"
 	else:
@@ -58,8 +60,12 @@ def makeDaisyPhiFinite(label, phi):
 	@param phi: specification for the daisy
 	"""
 	phiBody = innerContents(fileRead(phi))
-	newPhi = "ltl newPhi {\n\t(eventually ( " + label + " == 1 ) ) implies (\n" \
-		   + "\t\t" + phiBody + "  )\n}"
+	newPhi = "ltl newPhi {\n\t(eventually ( " \
+		   + label 
+		   + " == 1 ) ) implies (\n" \
+		   + "\t\t" 
+		   + phiBody 
+		   + "  )\n}"
 	return newPhi
 
 def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
@@ -109,7 +115,8 @@ def innerContents(singleModelBody):
 	This method returns the body of the given 
 	model, as an array. The body is between the 
 	two curly brace { }. 
-	We assume no comments in the model at the moment ... same with in the properties.
+	We assume no comments in the model at the moment ... 
+	same with in the properties.
 	"""
 	if singleModelBody == False:
 		return False
@@ -180,7 +187,8 @@ def getIO(IOfile):
 				if j == 0:
 					chan = parts[0]
 					continue
-				part2 = [] if len(parts) < 2 else [a.strip() for a in parts[1].split(",")]
+				part2 = [] if len(parts) < 2 else \
+						[a.strip() for a in parts[1].split(",")]
 				part2 = list(set(part2))
 				for msg in part2:
 					if j == 1 and chan != None:
