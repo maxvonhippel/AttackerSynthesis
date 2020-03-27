@@ -1,0 +1,5 @@
+it's a bit inconvenient to have the models in one directory and the properties in another. also properties are called "experiments", which seems strange. i would put the entire TCP example in one directory, and rename properties property1.pml, property2.pml, etc.
+
+the tool is a bit too "silent" in that it generates the files in the out/ dir, but doesn't output any message in the console saying so.
+
+a bit of explanation of the livenessExamples1 and 2 would be nice to have (unless we plan to explain them / include them in the arxiv report, in which case it's ok to just wait and point to the report for explanations).
