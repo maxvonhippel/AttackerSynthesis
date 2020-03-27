@@ -1,0 +1,15 @@
+it's a bit inconvenient to have the models in one directory and the properties in another. also properties are called "experiments", which seems strange. i would put the entire TCP example in one directory, and rename properties property1.pml, property2.pml, etc.
+
+the tool is a bit too "silent" in that it generates the files in the out/ dir, but doesn't output any message in the console saying so.
+
+also, the tool generates several auxiliary files like bla_daisy.pml, ... which it leaves it the ./ directory. i think this is not a good idea. either it should leave them in the out/ directory (which the user can just remove without worry) or it should delete them (cleanup) before it exits. it could be a tool option.
+
+a bit of explanation of the livenessExamples1 and 2 would be nice to have (unless we plan to explain them / include them in the arxiv report, in which case it's ok to just wait and point to the report for explanations).
+
+the tool gives an exception when the out/ dir is not present, perhaps it should just go ahead and create it?
+
+there is some extra space in this message:
+
+In order for the problem (model, phi, N) to be non-trivial, we             requi
+re that (model || N) |= phi.  However, this does not appear                to be
+ the case.
