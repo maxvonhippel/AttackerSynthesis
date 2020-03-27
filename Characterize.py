@@ -23,14 +23,17 @@ OUTPUT:
 	or violations else false
 '''
 def check(modelFile, maxDepth=10000):
+
 	if maxDepth > 10000 * 20:
 		print("maxDepth too large for any realistic run.  Edit the code if " \
 			+ "you actually really want to do this ... in Characterize.py.")
 		return False
+
 	args = "spin -run -a -m" + str(maxDepth) + " -RS88 " + modelFile
 	args = [a.strip() for a in args.split(" ")]
 	args = [a for a in args if len(a) > 0]
 	ret = None
+
 	with open(os.devnull, 'w') as devnull:
 		try:
 			ret = subprocess.check_output(args, stderr=devnull)
@@ -40,13 +43,16 @@ def check(modelFile, maxDepth=10000):
 				ret = str(ret)
 		except Exception as e:
 			raise e
+
 	if ret == None:
 		return False
+
 	if "depth too small" in ret:
 		print("Search depth was too small at " \
 			 + str(maxDepth), \
 			 " doubling depth ...")
 		return check(modelFile, maxDepth * 2)
+
 	return not ("violated" in ret or "acceptance cycle" in ret)
 
 def makeAllTrails(modelFile, numTrails=100):
@@ -153,11 +159,16 @@ def attackType(A, E):
 	return "NOT AN ATTACK"
 
 def characterizeAttacks(model, phi, with_recovery=True, name="run"):
+
 	assert(os.path.isdir("out/" + name))
+
 	nE, nA = 0, 0
+
 	with open("out/" + name + "/log.txt", "w") as fw:
+
 		if not (os.path.isdir("out/" + name + "/artifacts")):
 			os.mkdir("out/" + name + "/artifacts")
+
 		fw.write("model,A/E,with_recovery?\n")
 		for attackModel in glob("out/" + name + "/attacker*.pml"):
 			# is it a forall attack?
@@ -172,4 +183,5 @@ def characterizeAttacks(model, phi, with_recovery=True, name="run"):
 				nE += 1
 			fw.write(",".join([ \
 				attackModel, attackType(A, E), str(with_recovery)]) + "\n")
+			
 	return (nE, nA)
