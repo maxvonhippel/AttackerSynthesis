@@ -1,5 +1,8 @@
+# Running the example
+Run the following command: `python3 Korg.py --name='smallDemo3' --dir='./demo/smallDemo3/*'` in the top level directory.
+Expect: Spin output in cli and output in `out/smallDemo3`
 # P and Q 
-P and Q are represneted by the NFAs below. Phi is the safety propety `G w` or always `w = 1`. 
+P and Q are represented by the NFAs below. Phi is the safety propety `G w` or always `w = 1`. 
 
 # P Diagram
 ```
