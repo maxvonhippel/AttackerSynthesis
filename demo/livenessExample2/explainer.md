@@ -1,4 +1,5 @@
 # Liveness Example 2
+Running this example won't work. Read below for the rationale.
 
 The process `P` is as follows.
 
