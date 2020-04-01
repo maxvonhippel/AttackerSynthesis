@@ -1,3 +1,6 @@
+# Running the example
+Run the following command: `python3 Korg.py --name='smallDemo1' --dir='./demo/smallDemo1/*'` in the top level directory.
+Expect: Spin output in cli and output in `out/smallDemo1`
 # P and Q
 P and Q, written as NFAs below, are the two models that make up the network. Here Phi is the liveness property `F G ~ w`, meaning that the atomic propostition w will eventually always equal zero. P and Q satisfy this property, we reject any P and Q that do not satisfy phi at the outset. Notice that Q does not contain any reference to w or any other atomic propositions. 
 
