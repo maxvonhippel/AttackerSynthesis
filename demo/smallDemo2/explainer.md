@@ -1,5 +1,9 @@
+# Running the example
+Run the following command: `python3 Korg.py --name='smallDemo2' --dir='./demo/smallDemo2/*'` in the top level directory.
+Expect: `We could not find any (model, (N), phi)-attacker A.`
 # P and Q 
 P and Q are represented by the NFAs below. The Phi  is `G F w`, which can be read as always eventually `w = 1`. Just from looking at the diagrams below it should become apparant that this Phi might not be made true by P and Q. Study the diagrams and then read the explanation below. 
+
 # P Diagram
 ```
                                          A!

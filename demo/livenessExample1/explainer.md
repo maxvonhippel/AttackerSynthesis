@@ -1,5 +1,5 @@
 # Liveness Example 1
-
+To run this example, type `python3 Korg.py --name='liveness1' --dir='./demo/livenessExample1/*'` in the top level directory.
 The process `P` looks like this.
 
 ````
