@@ -49,11 +49,24 @@ From the top-level to run smallDemo1, run the command `python3 Korg.py --name=sm
 
 ## How to cite
 
-Coming soon.
+In BibTeX:
+
+````
+@misc{hippel2020automated,
+    title={Automated Attacker Synthesis for Distributed Protocols},
+    author={Max von Hippel and Cole Vick and Stavros Tripakis and Cristina Nita-Rotaru},
+    year={2020},
+    eprint={2004.01220},
+    archivePrefix={arXiv},
+    primaryClass={cs.CR}
+}
+````
+
+For more, view the article in [Semantic Scholar](https://api.semanticscholar.org/CorpusID:214795205).
 
 ## ArXiV version with proofs.
 
-Coming soon.
+Available [here](https://arxiv.org/abs/2004.01220).
 
 ## How to use the tool.
 
