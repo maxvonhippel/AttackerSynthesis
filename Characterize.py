@@ -119,9 +119,14 @@ def parseTrail(trailBody):
 				msg = LL[line.rfind("Recv ")+5:].split()[0]
 				evt = "?"
 			
-			elif "Send" in line:
+			if "Send" in line and msg == None and evt == None:
 			
 				msg = LL[line.rfind("Send ")+5:].split()[0]
+				evt = "!"
+
+			if "Sent" in line and msg == None and evt == None:
+			
+				msg = LL[line.rfind("Sent ")+5:].split()[0]
 				evt = "!"
 			
 			if evt != None and msg != None:
