@@ -29,13 +29,25 @@ clean:
 experiment1:
 	time python3 Korg.py                      \
 			--model=demo/TCP/TCP.pml          \
-			--phi=demo/TCP/phi1.pml \
+			--phi=demo/TCP/phi1.pml 		  \
 			--Q=demo/TCP/network.pml          \
 			--IO=demo/TCP/IO.txt              \
 			--max_attacks=1                   \
 			--with_recovery=False             \
 			--name=experiment1                \
 			--characterize=False
+
+# Runs the semaphore demo
+semaphoreDemo:
+	python3 Korg.py \
+		--model=demo/smallDemo4/Alice.pml \
+		--phi=demo/smallDemo4/Phi.pml     \
+		--Q=demo/smallDemo4/Bob.pml       \
+		--IO=demo/smallDemo4/IO.txt       \
+		--max_attacks=1                   \
+		--with_recovery=False             \
+		--name=semaphoreDemo              \
+		--characterize=True
 
 # Reproduces our results from the Case Study
 avgExperiment:
