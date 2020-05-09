@@ -142,7 +142,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	# Characterize the attacks
 	if characterize:
 		(E, A) = characterizeAttacks(model, phi, with_recovery, attacker_name)
-		# cleanUp()
+		cleanUp()
 		return 0 if (E + A) > 0 else -1
 	else:
 		cleanUp()
