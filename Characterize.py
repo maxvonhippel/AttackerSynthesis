@@ -77,26 +77,31 @@ OUTPUTS:
 '''
 def models(model, phi, N, name):
 	
-	if None in { model, phi, N, name }:
+	if None == model or \
+	   None == phi   or \
+	   None == N     or \
+	   None == name:
+
 		return False
 	
-	fmrLines = ""
-	fNrLines = ""
-	fprLines = ""
-	
+	fmrLines, fNrLines, fprLines = "", "", ""
+
 	with open(model, 'r') as fmr:
 		fmrLines = fmr.read()
 
-	if os.path.isfile(N):
+	if isinstance(N, list):
+		for _N in N:
+			with open(_N, 'r') as fNr:
+				fNrLines += fNr.read()
+	elif os.path.isfile(N):
 		with open(N, 'r') as fNr:
 			fNrLines = fNr.read()
 	else:
 		if not os.path.isdir(N):
 			print("Something is wrong with " + str(N))
 			return False
-		fNrLines = ""
-		for _N in glob.glob(N + "/*.pml"):
-			with open(N, 'r') as fNr:
+		for _N in glob(N + "/*.pml"):
+			with open(_N, 'r') as fNr:
 				fNrLines += fNr.read()
 
 	with open(phi, 'r') as fpr:
@@ -104,6 +109,8 @@ def models(model, phi, N, name):
 
 	with open(name, 'w') as fw:
 		fw.write(fmrLines + "\n" + fNrLines + "\n" + fprLines)
+
+	print("WROTE TO : " + name)
 
 	assert(os.path.isfile(name))
 

@@ -7,6 +7,7 @@
 # ==============================================================================
 import os
 import subprocess
+from glob import glob
 
 def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	"""
@@ -24,6 +25,9 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	if with_recovery and \
 		(network in { False, None } or len(network.strip()) == 0):
 		return None
+
+	# TODO: make this bit distinct for each individual process
+	# to support multi-process.
 
 	recovery_bitflag = "b"
 	j = 0
@@ -176,6 +180,9 @@ def getIO(IOfile):
 		I: [inputs]
 		O: [outputs]
 	'''
+	if os.path.isdir(IOfile):
+		return [getIO(f) for f in glob(IOfile + "/IO*.txt")]
+	# else is a file
 	events = set()
 	chan   = None
 	lineType = lambda x : 2 if "O:" in x else 1 if "I:" in x else 0
