@@ -34,7 +34,7 @@ multi:
 		--max_attacks=1              \
 		--with_recovery=True         \
 		--name=multiExperiment       \
-		--characterize=False
+		--characterize=True
 
 # Tests on TCP w/ experiment1 (phi_1)
 experiment1:

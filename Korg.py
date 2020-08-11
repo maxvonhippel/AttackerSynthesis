@@ -105,16 +105,17 @@ def body(model, phi, Q, IO, max_attacks=1, \
 
 	IO = checkArgs(max_attacks, phi, model, Q, basic_check_name, IO)
 
-	print(IO)
+	distributed = isinstance(IO, list)
 
-	if not isinstance(IO, list) and IO in { 1, 2, 3, 4, 5 }:
+	if not distributed and IO in { 1, 2, 3, 4, 5 }:
 		cleanUp()
 		return IO
 
 	IO = sorted(list(IO)) # sorted list of events
 
 	daisynames = []
-	if isinstance(IO, list):
+	labels = set()
+	if distributed:
 		Qs = [f for f in glob(Q + "/*.pml")]
 		# Make many daisy attackers
 		k = 0
@@ -127,7 +128,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 				                   with_recovery, \
 				                   _daisyname,    \
 				                   j=k)
-			print("label = ", label)
+			labels.add(label)
 			daisy_string = makeDaisyWithEvents(io, with_recovery, net, label)
 			writeDaisyToFile(daisy_string, _daisyname)
 			daisynames.append(_daisyname)
@@ -137,15 +138,18 @@ def body(model, phi, Q, IO, max_attacks=1, \
 		daisy_string = makeDaisyWithEvents(IO, with_recovery, net, label)
 		writeDaisyToFile(daisy_string, daisy_name)
 
-	
 	if with_recovery == False:
 		daisyPhi = phi 
 	else:
-		daisyPhiString = makeDaisyPhiFinite(label, phi)
+		daisyPhiString = ""
+		if distributed:
+			daisyPhiString = makeDaisyPhiFinite(labels, phi)
+		else:
+			daisyPhiString = makeDaisyPhiFinite(label, phi)
 		with open(with_recovery_phi_name, "w") as fw:
 			fw.write(daisyPhiString)
 		daisyPhi = with_recovery_phi_name
-			
+
 	_models = None 
 	# ^ to throw an error if neither path evaluates, somehow ...
 	if isinstance(IO, list):
@@ -162,17 +166,16 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	makeAllTrails(daisy_models_name, max_attacks) 
 	# second arg is max# attacks to make
 
-	return None
-
 	cmds      			= trailParseCMDs(daisy_models_name)
-	attacks, provenance = parseAllTrails(cmds, with_recovery)
+	attacks, provenance = parseAllTrails(cmds, with_recovery, False, len(daisynames))
 	
 	# Write these attacks to models
 	writeAttacks(attacks, provenance, net, with_recovery, attacker_name)
-	
+
 	# Characterize the attacks
 	if characterize:
-		(E, A) = characterizeAttacks(model, phi, with_recovery, attacker_name)
+		(E, A) = characterizeAttacks(\
+			model, phi, with_recovery, attacker_name, distributed)
 		cleanUp()
 		return 0 if (E + A) > 0 else -1
 	else:

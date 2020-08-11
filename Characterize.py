@@ -110,39 +110,41 @@ def models(model, phi, N, name):
 	with open(name, 'w') as fw:
 		fw.write(fmrLines + "\n" + fNrLines + "\n" + fprLines)
 
-	print("WROTE TO : " + name)
-
 	assert(os.path.isfile(name))
 
 	return check(name)
 
 # Parses output of reading trail using Spin.
-def parseTrail(trailBody):
+def parseTrail(trailBody, components=1, name="daisy"):
+
+	if components > 1:
+		return [parseTrail(trailBody, 1, name + "_b" + str(i + 1)) \
+		        for i in range(components)]
 
 	ret, i = [[], []], 0
 
 	for line in trailBody.split("\n"):
 
-		if "(daisy:" in line:
+		if "(" + name + ":" in line:
 
 			# https://stackoverflow.com/a/29571669/1586231
 			LL = line.rstrip("*")
-			chan = LL[line.rfind("(")+1:-1]
+			chan = LL[line.rfind("(") +1 : -1]
 			msg, evt = None, None
 			
 			if "Recv " in line:
 			
-				msg = LL[line.rfind("Recv ")+5:].split()[0]
+				msg = LL[line.rfind("Recv ") + 5 :].split()[0]
 				evt = "?"
 			
 			if "Send" in line and msg == None and evt == None:
 			
-				msg = LL[line.rfind("Send ")+5:].split()[0]
+				msg = LL[line.rfind("Send ") + 5 :].split()[0]
 				evt = "!"
 
 			if "Sent" in line and msg == None and evt == None:
 			
-				msg = LL[line.rfind("Sent ")+5:].split()[0]
+				msg = LL[line.rfind("Sent ") + 5 :].split()[0]
 				evt = "!"
 			
 			if evt != None and msg != None:
@@ -154,7 +156,7 @@ def parseTrail(trailBody):
 	
 	return ret
 
-def parseAllTrails(cmds, with_recovery=False, debug=False):
+def parseAllTrails(cmds, with_recovery=False, debug=False, components=1):
 	ret = []
 	prov = []
 	with open(os.devnull, 'w') as devnull:
@@ -164,7 +166,7 @@ def parseAllTrails(cmds, with_recovery=False, debug=False):
 				output = output.decode(sys.stdout.encoding)
 			output = str(output).strip().replace("\\n", "\n")\
 										.replace("\\t", "\t")
-			parsed = parseTrail(output)
+			parsed = parseTrail(output, components)
 			ret.append(parsed)
 			prov.append(cmd)
 	return ret, prov
@@ -179,9 +181,8 @@ def attackType(A, E):
 		return "E-attack"
 	return "NOT AN ATTACK"
 
-def characterizeAttacks(model, phi, with_recovery=True, name="run"):
-
-	assert(os.path.isdir("out/" + name))
+def characterizeAttacks(\
+	model, phi, with_recovery=True, name="run", distributed=False):
 
 	nE, nA = 0, 0
 
@@ -191,18 +192,41 @@ def characterizeAttacks(model, phi, with_recovery=True, name="run"):
 			os.mkdir("out/" + name + "/artifacts")
 
 		fw.write("model,A/E,with_recovery?\n")
-		for attackModel in glob("out/" + name + "/attacker*.pml"):
-			# is it a forall attack?
-			attackName = os.path.basename(attackModel).replace(".pml", "")
-			aName = "out/" + name + "/artifacts/" + attackName + "_A.pml"
-			eName = "out/" + name + "/artifacts/" + attackName + "_E.pml"
-			A = (models(model, "negated.pml", attackModel, aName) == True )
-			E = (models(model, phi,           attackModel, eName) == False)
-			if A:
-				nA += 1
-			elif E:
-				nE += 1
-			fw.write(",".join([ \
-				attackModel, attackType(A, E), str(with_recovery)]) + "\n")
+
+		if distributed:
+
+			j = 0
+			while True:
+				components = glob("out/" + name + "/attacker_*_" + str(j) + "_*.pml")
+				if len(components) == 0:
+					break
+				attackName = name + "_" + str(j)
+				aName = "out/" + name + "/artifacts/" + attackName + "_A.pml"
+				eName = "out/" + name + "/artifacts/" + attackName + "_E.pml"
+				A = (models(model, "negated.pml", components, aName) == True )
+				E = (models(model, phi,           components, eName) == False)
+				if A:
+					nA += 1
+				elif E:
+					nE += 1
+				fw.write(",".join([ \
+					attackName, attackType(A, E), str(with_recovery)]) + "\n")
+				j += 1
+
+		else:
+
+			for attackModel in glob("out/" + name + "/attacker*.pml"):
+				# is it a forall attack?
+				attackName = os.path.basename(attackModel).replace(".pml", "")
+				aName = "out/" + name + "/artifacts/" + attackName + "_A.pml"
+				eName = "out/" + name + "/artifacts/" + attackName + "_E.pml"
+				A = (models(model, "negated.pml", attackModel, aName) == True )
+				E = (models(model, phi,           attackModel, eName) == False)
+				if A:
+					nA += 1
+				elif E:
+					nE += 1
+				fw.write(",".join([ \
+					attackModel, attackType(A, E), str(with_recovery)]) + "\n")
 			
 	return (nE, nA)
