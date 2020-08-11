@@ -87,8 +87,17 @@ def models(model, phi, N, name):
 	with open(model, 'r') as fmr:
 		fmrLines = fmr.read()
 
-	with open(N, 'r') as fNr:
-		fNrLines = fNr.read()
+	if os.path.isfile(N):
+		with open(N, 'r') as fNr:
+			fNrLines = fNr.read()
+	else:
+		if not os.path.isdir(N):
+			print("Something is wrong with " + str(N))
+			return False
+		fNrLines = ""
+		for _N in glob.glob(N + "/*.pml"):
+			with open(N, 'r') as fNr:
+				fNrLines += fNr.read()
 
 	with open(phi, 'r') as fpr:
 		fprLines = fpr.read()

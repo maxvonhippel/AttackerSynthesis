@@ -9,6 +9,8 @@
 import unittest
 import Korg
 
+from CLI import _cleanUp
+
 class TestKorg(unittest.TestCase):
 
 	# Test on small toy problems
@@ -169,4 +171,4 @@ class TestKorg(unittest.TestCase):
 
 	@classmethod
 	def tearDownClass(cls):
-		cleanUp()
+		_cleanUp()

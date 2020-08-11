@@ -129,6 +129,8 @@ def cleanUp():
 	cleanUpTargeted("*.pml"     )
 	cleanUpTargeted("._n_i_p_s_")
 
+_cleanUp = lambda : cleanUp()
+
 def addTrailNumberToArgs(args, num):
 	ret = []
 	for arg in args:

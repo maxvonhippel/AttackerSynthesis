@@ -9,6 +9,8 @@
 import unittest
 import Construct as c
 
+from CLI import _cleanUp
+
 class TestConstruct(unittest.TestCase):
 
     s_Q   = 'demo/livenessExample1/Q.pml'
@@ -46,4 +48,4 @@ class TestConstruct(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cleanUp()
+        _cleanUp()
