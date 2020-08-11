@@ -25,7 +25,7 @@ def main():
 				with_recovery, name, characterize)
 
 def parseArgs(args):
-	P, Q, IO, phi = (None,)*4
+	P, Q, IO, phi = (None,) * 4
 	if args.dir:
 		demo_items = glob(args.dir)
 		for item in demo_items:
@@ -39,14 +39,14 @@ def parseArgs(args):
 				IO = item
 	else:
 		P, Q, IO, phi = args.model, args.Q, args.IO, args.phi
-	return P, 	             \
-	phi, 		             \
-	Q, 		                 \
-	IO,                      \
-	args.max_attacks,        \
-	args.with_recovery,      \
-	args.name,               \
-	args.characterize
+	return P, 	            \
+		phi, 		        \
+		Q, 		            \
+		IO,                 \
+		args.max_attacks,   \
+		args.with_recovery, \
+		args.name,          \
+		args.characterize
 
 def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	if max_attacks == None or max_attacks < 1:
