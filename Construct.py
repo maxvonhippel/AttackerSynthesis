@@ -9,7 +9,7 @@ import os
 import subprocess
 from glob import glob
 
-def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
+def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml", j=0):
 	"""
 	Scan the model for all send and receive events,
 	and their complements. Effectively, this is all 
@@ -22,6 +22,7 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	assert(len(events) != 0)
 
 	network = innerContents(fileRead(N))
+
 	if with_recovery and \
 		(network in { False, None } or len(network.strip()) == 0):
 		return None
@@ -30,10 +31,11 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	# to support multi-process.
 
 	recovery_bitflag = "b"
-	j = 0
 	while "bit " + recovery_bitflag in network:
 		recovery_bitflag = "b" + str(j)
 		j += 1
+	if j != 0 and recovery_bitflag == "b":
+		recovery_bitflag += str(j)
 
 	return network, recovery_bitflag
 
@@ -42,9 +44,10 @@ def makeDaisyWithEvents(events, with_recovery, network, b):
 	Make a daisy using all those ! and ? events. Add
 	recovery using the with_recovery flag.
 	"""
-	daisy = "active proctype daisy () {\n\tdo"
+	daisyname = "daisy" if b == "b" else "daisy_" + b
+	daisy = "\nactive proctype " + daisyname + "() {\n\tdo"
 	if with_recovery:
-		daisy = "bit " + b + "= 0;\n" + daisy
+		daisy = "\nbit " + b + "= 0;\n" + daisy
 	for event in events:
 		daisy += "\n\t:: " + event
 	if with_recovery:

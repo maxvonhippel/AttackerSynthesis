@@ -120,11 +120,14 @@ def body(model, phi, Q, IO, max_attacks=1, \
 		k = 0
 		for io in IO:
 			q = Qs[k]
+			k += 1
 			_daisyname = str(k) + "_" + daisy_name
 			net, label = makeDaisy(io,            \
 				                   q,             \
 				                   with_recovery, \
-				                   _daisyname)
+				                   _daisyname,    \
+				                   j=k)
+			print("label = ", label)
 			daisy_string = makeDaisyWithEvents(io, with_recovery, net, label)
 			writeDaisyToFile(daisy_string, _daisyname)
 			daisynames.append(_daisyname)
