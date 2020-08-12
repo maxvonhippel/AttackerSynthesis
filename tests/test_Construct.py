@@ -27,11 +27,11 @@ class TestConstruct(unittest.TestCase):
 
     # Tests that daisy in a particular example was made correctly
     def test_makeDaisyWithEvent(self):
-        daisyBod = 'active proctype daisy () {\n\tdo\n\t:: channel!C;'
+        daisyBod = 'active proctype daisy() {\n\tdo\n\t:: channel!C;'
         daisyBod += '\n\t:: channel?A;\n\t:: channel?B;\n\tod\n}'
         daisy_string = c.makeDaisyWithEvents(
             self.IO, False, self.s_network, self.s_label)
-        self.assertEqual(daisy_string, daisyBod)
+        self.assertEqual(daisy_string.strip(), daisyBod.strip())
 
     # Same but for recovery case
     def test_makeDaisyPhiFinite(self):

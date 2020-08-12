@@ -21,8 +21,9 @@ def main():
 	args = getArgs()
 	model, phi, Q, IO, max_attacks, with_recovery, name, characterize \
 		= parseArgs(args)
-	return body(model, phi, Q, IO, max_attacks, \
+	r = body(model, phi, Q, IO, max_attacks, \
 				with_recovery, name, characterize)
+	return r
 
 def parseArgs(args):
 	P, Q, IO, phi = (None,) * 4
@@ -107,7 +108,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 
 	distributed = isinstance(IO, list)
 
-	if not distributed and IO in { 1, 2, 3, 4, 5 }:
+	if (not distributed) and (IO in { 1, 2, 3, 4, 5 }):
 		cleanUp()
 		return IO
 
@@ -152,12 +153,12 @@ def body(model, phi, Q, IO, max_attacks=1, \
 
 	_models = None 
 	# ^ to throw an error if neither path evaluates, somehow ...
-	if isinstance(IO, list):
+	if isinstance(IO[0], list):
 		# model, phi, N, name
 		_models = models(model, daisyPhi, daisynames, daisy_models_name)
 	else:
 		_models = models(model, daisyPhi, daisy_name, daisy_models_name)
-		
+
 	if net == None or _models:
 		printNoSolution(model, phi, Q, with_recovery)
 		cleanUp()
@@ -170,7 +171,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	attacks, provenance = parseAllTrails(cmds, with_recovery, False, len(daisynames))
 	
 	# Write these attacks to models
-	writeAttacks(attacks, provenance, net, with_recovery, attacker_name)
+	writeAttacks(attacks, provenance, net, with_recovery, attacker_name, distributed)
 
 	# Characterize the attacks
 	if characterize:

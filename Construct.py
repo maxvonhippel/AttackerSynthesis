@@ -77,7 +77,8 @@ def makeDaisyPhiFinite(label, phi):
 		     " == 1 ) ) "
 	return newPhi + "implies (\n\t\t" + phiBody + "  )\n}"
 
-def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
+def makeAttacker(events, prov, net, DIR=None, \
+				 with_recovery=True, k=0, distributed=False):
 	"""
 	Create the attacker string given the events that the 
 	daisy made. This method also writes the string to a 
@@ -98,11 +99,10 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	"""
 
 	# this would make a type theorist faint ...
-	iscentralized = isinstance(events[0][0], str)
 
 	names = []
 
-	if iscentralized == True:
+	if not distributed:
 
 		events = [events]
 
@@ -112,12 +112,12 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 
 		print("Writing attacker " + str(j))
 
-		assert(j == 0 or not iscentralized)
+		assert(j == 0 or distributed)
 
 		acyclicEvents, cyclicEvents = attackersevents[0], attackersevents[1]
 		acyclicEvents = acyclicEvents if len(acyclicEvents) > 0 else [ "skip" ]
 
-		attackername = "attacker" if iscentralized else "attacker_" + str(j)
+		attackername = "attacker" if not distributed else "attacker_" + str(j)
 		
 		proc = "active proctype " + attackername + "() {\n\t"
 		
@@ -178,7 +178,7 @@ def innerContents(singleModelBody):
 	return singleModelBody[i+1:j]
 
 
-def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
+def writeAttacks(attacks, provenance, net, with_recovery=True, name="run", distributed=False):
 	"""
 	Write given attacks to named directory, provided it doesn't
 	already exist.
@@ -203,7 +203,8 @@ def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 			net           = net,           \
 			DIR           = name,          \
 			with_recovery = with_recovery, \
-			k             = j)
+			k             = j,             \
+			distributed   = distributed)
 
 def negateClaim(phi):
 	"""
