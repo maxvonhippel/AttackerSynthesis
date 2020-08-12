@@ -197,7 +197,9 @@ def characterizeAttacks(\
 
 			j = 0
 			while True:
-				components = glob("out/" + name + "/attacker_*_" + str(j) + "_*.pml")
+				postfix = "_*.pml" if with_recovery else ".pml"
+				pattern = "out/" + name + "/attacker_*_" + str(j) + postfix
+				components = glob(pattern)
 				if len(components) == 0:
 					break
 				attackName = name + "_" + str(j)

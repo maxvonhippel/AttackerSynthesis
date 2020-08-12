@@ -35,6 +35,12 @@ class TestKorg(unittest.TestCase):
 	s_IO  = 'demo/livenessExample1/IO.txt'
 	s_Phi = 'demo/livenessExample1/Phi.pml' 
 
+	# Test my distributed safety example
+	d_P   = 'demo/multiDemo/P.pml'
+	d_Q   = 'demo/multiDemo/Q'
+	d_IO  = 'demo/multiDemo/IO'
+	d_Phi = 'demo/multiDemo/Phi.pml'
+
 	maxAttacks = 1
 
 	# In below tests we invoke the following function from Generator3:
@@ -168,6 +174,20 @@ class TestKorg(unittest.TestCase):
 				name          = "test_works_on_Coles_example_" \
 							  + str(_recovery),  \
 				characterize  = True), 6 if _recovery else 0)
+
+	# Test on distributed safety example
+	def test_works_on_distributed_safety_example(self):
+		for _recovery in [ True, False ]:
+			self.assertEqual(Korg.body(                            \
+				model         = self.d_P,                          \
+				phi           = self.d_Phi,                        \
+				Q             = self.d_Q,                          \
+				IO            = self.d_IO,                         \
+				max_attacks   = self.maxAttacks,                   \
+				with_recovery = _recovery,                         \
+				name = "test_works_on_distributed_safety_example_" \
+				     + str(_recovery),                             \
+				characterize = True), 0)
 
 	@classmethod
 	def tearDownClass(cls):

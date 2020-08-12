@@ -23,6 +23,7 @@ def main():
 		= parseArgs(args)
 	r = body(model, phi, Q, IO, max_attacks, \
 				with_recovery, name, characterize)
+	print("r = ", r)
 	return r
 
 def parseArgs(args):
@@ -153,7 +154,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 
 	_models = None 
 	# ^ to throw an error if neither path evaluates, somehow ...
-	if isinstance(IO[0], list):
+	if distributed:
 		# model, phi, N, name
 		_models = models(model, daisyPhi, daisynames, daisy_models_name)
 	else:
@@ -177,10 +178,10 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	if characterize:
 		(E, A) = characterizeAttacks(\
 			model, phi, with_recovery, attacker_name, distributed)
-		cleanUp()
+		# cleanUp()
 		return 0 if (E + A) > 0 else -1
 	else:
-		cleanUp()
+		# cleanUp()
 		return 0 # assume it worked if not asked to prove it ...
 
 if __name__== "__main__":
