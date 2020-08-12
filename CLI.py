@@ -165,7 +165,8 @@ def printNoSolution(model, phi, N, with_recovery):
 	possiblyFinite = "with_recovery" if with_recovery else ""
 	print("We could not find any " \
 		  + possiblyFinite         \
-		  + "(model, (N), phi)-attacker A.")
+		  + "(model, (N), phi)-attacker A for M=" \
+		  + model + ", N = " + str(N) + ", phi=" + phi)
 
 # Error message when we could not negate the claim phi.
 def printCouldNotNegateClaim(phi):

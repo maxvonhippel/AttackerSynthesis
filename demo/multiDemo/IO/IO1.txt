@@ -1,6 +1,6 @@
-q02p:
+q12p:
 	I:
 	O:a,b,c
-p2q0:
+p2q1:
 	I:a,b,c
 	O:

@@ -7,8 +7,9 @@
 # ==============================================================================
 import os
 import subprocess
+from glob import glob
 
-def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
+def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml", j=0):
 	"""
 	Scan the model for all send and receive events,
 	and their complements. Effectively, this is all 
@@ -21,15 +22,20 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	assert(len(events) != 0)
 
 	network = innerContents(fileRead(N))
+
 	if with_recovery and \
 		(network in { False, None } or len(network.strip()) == 0):
 		return None
 
+	# TODO: make this bit distinct for each individual process
+	# to support multi-process.
+
 	recovery_bitflag = "b"
-	j = 0
 	while "bit " + recovery_bitflag in network:
 		recovery_bitflag = "b" + str(j)
 		j += 1
+	if j != 0 and recovery_bitflag == "b":
+		recovery_bitflag += str(j)
 
 	return network, recovery_bitflag
 
@@ -38,9 +44,10 @@ def makeDaisyWithEvents(events, with_recovery, network, b):
 	Make a daisy using all those ! and ? events. Add
 	recovery using the with_recovery flag.
 	"""
-	daisy = "active proctype daisy () {\n\tdo"
+	daisyname = "daisy" if b == "b" else "daisy_" + b
+	daisy = "\nactive proctype " + daisyname + "() {\n\tdo"
 	if with_recovery:
-		daisy = "bit " + b + "= 0;\n" + daisy
+		daisy = "\nbit " + b + "= 0;\n" + daisy
 	for event in events:
 		daisy += "\n\t:: " + event
 	if with_recovery:
@@ -60,54 +67,96 @@ def makeDaisyPhiFinite(label, phi):
 	@param phi: specification for the daisy
 	"""
 	phiBody = innerContents(fileRead(phi))
-	newPhi = "ltl newPhi {\n\t(eventually ( " + label + \
-		     " == 1 ) ) implies (\n\t\t" + phiBody + "  )\n}"
-	return newPhi
+	newPhi = "ltl newPhi {\n\t(eventually ( "
+	if isinstance(label, set):
+		# TODO
+		newPhi += " && ".join([l + " == 1" for l in label])
+		newPhi += " ) ) "
+	else:
+		newPhi += label + \
+		     " == 1 ) ) "
+	return newPhi + "implies (\n\t\t" + phiBody + "  )\n}"
 
-def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
+def makeAttacker(events, prov, net, DIR=None, \
+				 with_recovery=True, k=0, distributed=False):
 	"""
 	Create the attacker string given the events that the 
 	daisy made. This method also writes the string to a 
 	file provided one doesn't already exist.
 
 	@param prov: how spin was executed to return this process
+
+	example of multi (that is, distributed) events:
+	[
+	  [['q02p ! a'], []], 
+	  [['q22p ! c'], []], 
+	  [['q12p ! b'], []]
+	]
+	example of single (that is, centralized) events:
+	[
+		['q02p ! a'], []
+	]
 	"""
-	acyclicEvents, cyclicEvents = events[0], events[1]
-	acyclicEvents = acyclicEvents if len(acyclicEvents) > 0 else [ "skip" ]
-	
-	proc = "active proctype attacker() {\n\t"
-	
-	for ae in acyclicEvents:
-		proc += "\n\t" + ae  + ";"
-	name = None
-	if with_recovery:
-		proc += "\n// recovery to N\n// N begins here ... \n" + net + "\n}"
-	else:
-		proc += "\n\t// Acceptance Cycle part of attack" 
-		if len(cyclicEvents) > 0:
-			proc += "\n\tdo\n\t::" \
-				 + "".join(["\n\t   " + ce + ";" for ce in cyclicEvents]) \
-				 + "\n\tod"
-		proc += "\n}"
-	attackerName = "attacker_"               \
-				 + str(k)                    \
-				 + ("_WITH_RECOVERY" * int(with_recovery)) \
-				 + ".pml"
 
-	name = (DIR + "/") * int(DIR != None) + attackerName
+	# this would make a type theorist faint ...
 
-	# Only write the attacker if it isn't a duplicate, as
-	# determined using our hash function naming convention.
+	names = []
 
-	if (DIR != None and not os.path.exists(DIR)):
-		os.mkdir(DIR)
+	if not distributed:
 
-	if not os.path.exists(name):
-		with open(name, "w") as fw:
-			fw.write("/* " + " ".join(prov) + " */\n")
-			fw.write(proc)
+		events = [events]
 
-	return name
+	j = 0
+
+	for attackersevents in events:
+
+		print("Writing attacker " + str(j))
+
+		assert(j == 0 or distributed)
+
+		acyclicEvents, cyclicEvents = attackersevents[0], attackersevents[1]
+		acyclicEvents = acyclicEvents if len(acyclicEvents) > 0 else [ "skip" ]
+
+		attackername = "attacker" if not distributed else "attacker_" + str(j)
+		
+		proc = "active proctype " + attackername + "() {\n\t"
+		
+		for ae in acyclicEvents:
+			proc += "\n\t" + ae  + ";"
+		name = None
+		if with_recovery:
+			proc += "\n// recovery to N\n// N begins here ... \n" + net + "\n}"
+		else:
+			proc += "\n\t// Acceptance Cycle part of attack" 
+			if len(cyclicEvents) > 0:
+				proc += "\n\tdo\n\t::" \
+					 + "".join(["\n\t   " + ce + ";" for ce in cyclicEvents]) \
+					 + "\n\tod"
+			proc += "\n}"
+		
+		attackerfilename = attackername + "_"                  \
+					 + str(k)                                  \
+					 + ("_WITH_RECOVERY" * int(with_recovery)) \
+					 + ".pml"
+
+		name = (DIR + "/") * int(DIR != None) + attackerfilename
+
+		# Only write the attacker if it isn't a duplicate, as
+		# determined using our hash function naming convention.
+
+		if (DIR != None and not os.path.exists(DIR)):
+			os.mkdir(DIR)
+
+		if not os.path.exists(name):
+			with open(name, "w") as fw:
+				fw.write("/* " + " ".join(prov) + " */\n")
+				fw.write(proc)
+
+		names.append(attackerfilename)
+
+		j += 1
+
+	return names
 
 def innerContents(singleModelBody):
 	"""
@@ -129,10 +178,18 @@ def innerContents(singleModelBody):
 	return singleModelBody[i+1:j]
 
 
-def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
+def writeAttacks(attacks, provenance, net, with_recovery=True, name="run", distributed=False):
 	"""
 	Write given attacks to named directory, provided it doesn't
 	already exist.
+
+	[
+	  [
+	    [['q02p ! a'], []], 
+	    [['q22p ! c'], []], 
+	    [['q12p ! b'], []]
+	  ]
+	]
 	"""
 	name = "out/" + name
 	if (not os.path.isdir("out")):
@@ -140,13 +197,14 @@ def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 	assert(not os.path.isdir(name))
 	os.mkdir(name)
 	for j in range(len(attacks)):
-		makeAttacker(                      \
-			events = attacks[j],           \
-			prov   = provenance[j],        \
-			net    = net,                  \
-			DIR    = name,                 \
+		_ = makeAttacker(                  \
+			events        = attacks[j],    \
+			prov          = provenance[j], \
+			net           = net,           \
+			DIR           = name,          \
 			with_recovery = with_recovery, \
-			k      = j)
+			k             = j,             \
+			distributed   = distributed)
 
 def negateClaim(phi):
 	"""
@@ -176,6 +234,9 @@ def getIO(IOfile):
 		I: [inputs]
 		O: [outputs]
 	'''
+	if os.path.isdir(IOfile):
+		return [getIO(f) for f in glob(IOfile + "/IO*.txt")]
+	# else is a file
 	events = set()
 	chan   = None
 	lineType = lambda x : 2 if "O:" in x else 1 if "I:" in x else 0

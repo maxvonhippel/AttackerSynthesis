@@ -9,13 +9,13 @@ mtype = { a, b, c, d };
 
 bool bad = false;
 
-chan q02p = [1] of { mtype };
-chan q12p = [1] of { mtype };
-chan q22p = [1] of { mtype };
+chan q02p = [0] of { mtype };
+chan q12p = [0] of { mtype };
+chan q22p = [0] of { mtype };
 
-chan p2q0 = [1] of { mtype };
-chan p2q1 = [1] of { mtype };
-chan p2q2 = [1] of { mtype };
+chan p2q0 = [0] of { mtype };
+chan p2q1 = [0] of { mtype };
+chan p2q2 = [0] of { mtype };
 
 
 active proctype p() {
@@ -25,5 +25,5 @@ active proctype p() {
 	p2q1 ! b; /* respond "b" to q1 */
 	q22p ? c; /* get "c" from q2   */
 	p2q2 ! c; /* respond "c" to q2 */
-	bad = false;
+	bad = true;
 }
