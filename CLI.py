@@ -99,6 +99,16 @@ def getArgs():
 		help='The path to the directory that contains your models, directory '\
 		    + 'MUST contain P.pml, Q.pml, Phi.pml, IO.txt.',
 		required=False)
+	required.add_argument(
+		'--cleanUp',
+		metavar='cleanUp',
+		type=str2bool,
+		default=True,
+		nargs='?',
+		const=True,
+		help='True iff left-over files should be deleted at termination else '\
+		    + 'False',
+		required=False)
 
 	if len(sys.argv[1:])==0:
 	    parser.print_help()
@@ -125,7 +135,7 @@ def cleanUpTargeted(target):
 def cleanUp():
 	cleanUpTargeted("*.trail"   )
 	cleanUpTargeted("*tmp*"     )
-	cleanUpTargeted("pan"       )
+	cleanUpTargeted("pan*"      )
 	cleanUpTargeted("*.pml"     )
 	cleanUpTargeted("._n_i_p_s_")
 

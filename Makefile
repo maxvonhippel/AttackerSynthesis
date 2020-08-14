@@ -34,7 +34,8 @@ abs:
 		--max_attacks=1        \
 		--with_recovery=True   \
 		--name=absExperiment   \
-		--characterize=False
+		--characterize=False   \
+		--cleanUp=False
 
 multi:
 	time python3 Korg.py             \

@@ -76,8 +76,9 @@ def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	
 	return _IO
 
-def body(model, phi, Q, IO, max_attacks=1, \
-	     with_recovery=True, name=None, characterize=False):
+def body(model, phi, Q, IO, max_attacks=1,                  \
+	     with_recovery=True, name=None, characterize=False, \
+	     cleanUp=False):
 	'''
 	Body attempts to find attackers against a given model. The attacker 
 	is successful if the given phi is violated. The phi is initially 
@@ -91,6 +92,8 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	@param name         : name of the files
 	@param characterize : do you want us to characterize attackers after 
 						  producing them?
+	@param cleanUp      : do you want us to clean up left-over files at
+	                      termination?
 	'''
 	
 	# The name of the file we use to check that model || Q |= phi
@@ -110,7 +113,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	distributed = isinstance(IO, list)
 
 	if (not distributed) and (IO in { 1, 2, 3, 4, 5 }):
-		cleanUp()
+		_cleanUp(cleanUp)
 		return IO
 
 	IO = sorted(list(IO)) # sorted list of events
@@ -162,7 +165,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
 
 	if net == None or _models:
 		printNoSolution(model, phi, Q, with_recovery)
-		cleanUp()
+		_cleanUp(cleanUp)
 		return 6
 
 	makeAllTrails(daisy_models_name, max_attacks) 
@@ -178,10 +181,10 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	if characterize:
 		(E, A) = characterizeAttacks(\
 			model, phi, with_recovery, attacker_name, distributed)
-		# cleanUp()
+		_cleanUp(cleanUp)
 		return 0 if (E + A) > 0 else -1
 	else:
-		# cleanUp()
+		_cleanUp(cleanUp)
 		return 0 # assume it worked if not asked to prove it ...
 
 if __name__== "__main__":
