@@ -25,6 +25,17 @@ clean:
 	- rm *.txt
 	echo "All clean!"
 
+abs:
+	time python3 Korg.py       \
+		--model=demo/abs/P.pml \
+		--phi=demo/abs/Phi.pml \
+		--Q=demo/abs/Q         \
+		--IO=demo/abs/IO       \
+		--max_attacks=1        \
+		--with_recovery=True   \
+		--name=absExperiment   \
+		--characterize=False
+
 multi:
 	time python3 Korg.py             \
 		--model=demo/multiDemo/P.pml \
