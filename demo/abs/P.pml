@@ -1,43 +1,47 @@
 bool skidding = false;
 
-/* user brakes      -> speed--
- * user accelerates -> speed++
- * 
- * wheel can only decelerate 2 digits at a time
- * so if deceleration exceeds 2 digits, this means the wheel
- * locks up and the vehicle skids in the next time step.
- */
+chan driver2wheel = [0] of { short, short };
 
-chan sens0 = [0] of { short };
-chan sens1 = [0] of { short };
-chan sens2 = [0] of { short };
-
-chan flux0 = [0] of { short };
-chan flux1 = [0] of { short };
-chan flux2 = [0] of { short };
+active proctype driver() {
+	short gas = 3;
+	short brake = 0;
+	driver2wheel ! gas, brake;
+	do
+	:: 
+		select(gas   : 0..3); 
+		select(brake : 0..3); 
+		driver2wheel ! gas, brake;
+	od
+}
 
 active proctype wheel() {
-	short wheel_speed = 0;
-	short vehicle_speed = 0;
-	short gas_p, brake_p, abs_d, tmp, acc;
-LOOP:
-	// non-deterministically select gas amount.
-	select(gas_p : 1..4);
-	// non-deterministically select brake amount.
-	select(brake_p : 1..4);
-	// calculate new wheel speed.
-	tmp = wheel_speed + gas_p - brake_p;
-	if
-	:: tmp < 0 -> tmp = 0;
+	
+	short old_speed, new_speed, g, b;
+
+	driver2wheel ? g, b;
+	old_speed = g - b;
+	if 
+	:: old_speed < 0 -> old_speed = 0;
 	:: else -> skip;
 	fi
-	// calculate acceleration
-	acc = tmp - wheel_speed;
-	// check if skidding
-	if 
-	:: tmp < -2 -> skidding = true;
-	:: else -> skip
-	fi
-	// loop again
-	goto LOOP;
+
+	do
+	::
+		driver2wheel ? g, b;
+		new_speed = old_speed + g - b;
+		if
+		:: new_speed < 0 -> new_speed = 0;
+		:: else -> skip;
+		fi
+		if
+		:: new_speed - old_speed < -2 -> skidding = true;
+		:: else -> skip;
+		fi
+		old_speed = new_speed;
+	od
+
+}
+
+ltl no_skid { 
+	always ( skidding == false )
 }
