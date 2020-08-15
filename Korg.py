@@ -59,20 +59,28 @@ def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	if not negateClaim(phi):
 		printCouldNotNegateClaim(phi)
 		return 2
+
+	print("Successfully negated claim phi ...")
 	
 	# Check validity: Does model || Q |= phi?
 	if not models(model, phi, Q, basic_check_name):
 		printInvalidInputs(model, phi, Q)
 		return 3
+
+	print("Confirmed that model || Q |= phi ...")
 	
 	# Get the IO.  Is it empty?
 	if IO == None:
 		return 4
+
+	print("Checked IO is not None ...")
 	
 	_IO = getIO(IO)
 	if _IO == None or len(list(_IO)) == 0:
 		printZeroIO(IO)
 		return 5
+
+	print("Checked IO is not empty ...")
 	
 	return _IO
 
@@ -111,6 +119,9 @@ def body(model, phi, Q, IO, max_attacks=1,                  \
 	IO = checkArgs(max_attacks, phi, model, Q, basic_check_name, IO)
 
 	distributed = isinstance(IO, list)
+
+	if distributed:
+		print("This appears to be a distributed-component attacker TM ...")
 
 	if (not distributed) and (IO in { 1, 2, 3, 4, 5 }):
 		_cleanUp(cleanUp)
