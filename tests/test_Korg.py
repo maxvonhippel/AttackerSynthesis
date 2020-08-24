@@ -8,6 +8,7 @@
 
 import unittest
 import Korg
+from CLI import cleanUpAlias
 
 class TestKorg(unittest.TestCase):
 
@@ -169,4 +170,4 @@ class TestKorg(unittest.TestCase):
 
 	@classmethod
 	def tearDownClass(cls):
-		cleanUp()
+		cleanUpAlias()

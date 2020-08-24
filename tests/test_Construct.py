@@ -8,6 +8,7 @@
 
 import unittest
 import Construct as c
+from CLI import cleanUpAlias
 
 class TestConstruct(unittest.TestCase):
 
@@ -46,4 +47,4 @@ class TestConstruct(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cleanUp()
+        cleanUpAlias()
