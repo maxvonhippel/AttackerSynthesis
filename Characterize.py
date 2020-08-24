@@ -77,32 +77,18 @@ OUTPUTS:
 '''
 def models(model, phi, N, name):
 	
-	if None == model or \
-	   None == phi   or \
-	   None == N     or \
-	   None == name:
-
+	if None in { model, phi, N, name }:
 		return False
 	
-	fmrLines, fNrLines, fprLines = "", "", ""
-
+	fmrLines = ""
+	fNrLines = ""
+	fprLines = ""
+	
 	with open(model, 'r') as fmr:
 		fmrLines = fmr.read()
 
-	if isinstance(N, list):
-		for _N in N:
-			with open(_N, 'r') as fNr:
-				fNrLines += fNr.read()
-	elif os.path.isfile(N):
-		with open(N, 'r') as fNr:
-			fNrLines = fNr.read()
-	else:
-		if not os.path.isdir(N):
-			print("Something is wrong with " + str(N))
-			return False
-		for _N in glob(N + "/*.pml"):
-			with open(_N, 'r') as fNr:
-				fNrLines += fNr.read()
+	with open(N, 'r') as fNr:
+		fNrLines = fNr.read()
 
 	with open(phi, 'r') as fpr:
 		fprLines = fpr.read()
@@ -115,36 +101,32 @@ def models(model, phi, N, name):
 	return check(name)
 
 # Parses output of reading trail using Spin.
-def parseTrail(trailBody, components=1, name="daisy"):
-
-	if components > 1:
-		return [parseTrail(trailBody, 1, name + "_b" + str(i + 1)) \
-		        for i in range(components)]
+def parseTrail(trailBody):
 
 	ret, i = [[], []], 0
 
 	for line in trailBody.split("\n"):
 
-		if "(" + name + ":" in line:
+		if "(daisy:" in line:
 
 			# https://stackoverflow.com/a/29571669/1586231
 			LL = line.rstrip("*")
-			chan = LL[line.rfind("(") +1 : -1]
+			chan = LL[line.rfind("(")+1:-1]
 			msg, evt = None, None
 			
 			if "Recv " in line:
 			
-				msg = LL[line.rfind("Recv ") + 5 :].split()[0]
+				msg = LL[line.rfind("Recv ")+5:].split()[0]
 				evt = "?"
 			
 			if "Send" in line and msg == None and evt == None:
 			
-				msg = LL[line.rfind("Send ") + 5 :].split()[0]
+				msg = LL[line.rfind("Send ")+5:].split()[0]
 				evt = "!"
 
 			if "Sent" in line and msg == None and evt == None:
 			
-				msg = LL[line.rfind("Sent ") + 5 :].split()[0]
+				msg = LL[line.rfind("Sent ")+5:].split()[0]
 				evt = "!"
 			
 			if evt != None and msg != None:
@@ -156,7 +138,7 @@ def parseTrail(trailBody, components=1, name="daisy"):
 	
 	return ret
 
-def parseAllTrails(cmds, with_recovery=False, debug=False, components=1):
+def parseAllTrails(cmds, with_recovery=False, debug=False):
 	ret = []
 	prov = []
 	with open(os.devnull, 'w') as devnull:
@@ -166,7 +148,7 @@ def parseAllTrails(cmds, with_recovery=False, debug=False, components=1):
 				output = output.decode(sys.stdout.encoding)
 			output = str(output).strip().replace("\\n", "\n")\
 										.replace("\\t", "\t")
-			parsed = parseTrail(output, components)
+			parsed = parseTrail(output)
 			ret.append(parsed)
 			prov.append(cmd)
 	return ret, prov
@@ -181,8 +163,9 @@ def attackType(A, E):
 		return "E-attack"
 	return "NOT AN ATTACK"
 
-def characterizeAttacks(\
-	model, phi, with_recovery=True, name="run", distributed=False):
+def characterizeAttacks(model, phi, with_recovery=True, name="run"):
+
+	assert(os.path.isdir("out/" + name))
 
 	nE, nA = 0, 0
 
@@ -192,43 +175,18 @@ def characterizeAttacks(\
 			os.mkdir("out/" + name + "/artifacts")
 
 		fw.write("model,A/E,with_recovery?\n")
-
-		if distributed:
-
-			j = 0
-			while True:
-				postfix = "_*.pml" if with_recovery else ".pml"
-				pattern = "out/" + name + "/attacker_*_" + str(j) + postfix
-				components = glob(pattern)
-				if len(components) == 0:
-					break
-				attackName = name + "_" + str(j)
-				aName = "out/" + name + "/artifacts/" + attackName + "_A.pml"
-				eName = "out/" + name + "/artifacts/" + attackName + "_E.pml"
-				A = (models(model, "negated.pml", components, aName) == True )
-				E = (models(model, phi,           components, eName) == False)
-				if A:
-					nA += 1
-				elif E:
-					nE += 1
-				fw.write(",".join([ \
-					attackName, attackType(A, E), str(with_recovery)]) + "\n")
-				j += 1
-
-		else:
-
-			for attackModel in glob("out/" + name + "/attacker*.pml"):
-				# is it a forall attack?
-				attackName = os.path.basename(attackModel).replace(".pml", "")
-				aName = "out/" + name + "/artifacts/" + attackName + "_A.pml"
-				eName = "out/" + name + "/artifacts/" + attackName + "_E.pml"
-				A = (models(model, "negated.pml", attackModel, aName) == True )
-				E = (models(model, phi,           attackModel, eName) == False)
-				if A:
-					nA += 1
-				elif E:
-					nE += 1
-				fw.write(",".join([ \
-					attackModel, attackType(A, E), str(with_recovery)]) + "\n")
+		for attackModel in glob("out/" + name + "/attacker*.pml"):
+			# is it a forall attack?
+			attackName = os.path.basename(attackModel).replace(".pml", "")
+			aName = "out/" + name + "/artifacts/" + attackName + "_A.pml"
+			eName = "out/" + name + "/artifacts/" + attackName + "_E.pml"
+			A = (models(model, "negated.pml", attackModel, aName) == True )
+			E = (models(model, phi,           attackModel, eName) == False)
+			if A:
+				nA += 1
+			elif E:
+				nE += 1
+			fw.write(",".join([ \
+				attackModel, attackType(A, E), str(with_recovery)]) + "\n")
 			
 	return (nE, nA)

@@ -129,8 +129,6 @@ def cleanUp():
 	cleanUpTargeted("*.pml"     )
 	cleanUpTargeted("._n_i_p_s_")
 
-_cleanUp = lambda : cleanUp()
-
 def addTrailNumberToArgs(args, num):
 	ret = []
 	for arg in args:
@@ -165,8 +163,7 @@ def printNoSolution(model, phi, N, with_recovery):
 	possiblyFinite = "with_recovery" if with_recovery else ""
 	print("We could not find any " \
 		  + possiblyFinite         \
-		  + "(model, (N), phi)-attacker A for M=" \
-		  + model + ", N = " + str(N) + ", phi=" + phi)
+		  + "(model, (N), phi)-attacker A.")
 
 # Error message when we could not negate the claim phi.
 def printCouldNotNegateClaim(phi):

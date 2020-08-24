@@ -21,13 +21,11 @@ def main():
 	args = getArgs()
 	model, phi, Q, IO, max_attacks, with_recovery, name, characterize \
 		= parseArgs(args)
-	r = body(model, phi, Q, IO, max_attacks, \
+	return body(model, phi, Q, IO, max_attacks, \
 				with_recovery, name, characterize)
-	print("r = ", r)
-	return r
 
 def parseArgs(args):
-	P, Q, IO, phi = (None,) * 4
+	P, Q, IO, phi = (None,)*4
 	if args.dir:
 		demo_items = glob(args.dir)
 		for item in demo_items:
@@ -41,14 +39,14 @@ def parseArgs(args):
 				IO = item
 	else:
 		P, Q, IO, phi = args.model, args.Q, args.IO, args.phi
-	return P, 	            \
-		phi, 		        \
-		Q, 		            \
-		IO,                 \
-		args.max_attacks,   \
-		args.with_recovery, \
-		args.name,          \
-		args.characterize
+	return P, 	             \
+	phi, 		             \
+	Q, 		                 \
+	IO,                      \
+	args.max_attacks,        \
+	args.with_recovery,      \
+	args.name,               \
+	args.characterize
 
 def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 	if max_attacks == None or max_attacks < 1:
@@ -94,94 +92,60 @@ def body(model, phi, Q, IO, max_attacks=1, \
 	'''
 	
 	# The name of the file we use to check that model || Q |= phi
-	basic_check_name       = name + "_model_Q_phi.pml"
+	basic_check_name  = name + "_model_Q_phi.pml"
 	# The name of the file where we write daisy(Q)
-	daisy_name             = name + "_daisy.pml"
+	daisy_name        = name + "_daisy.pml"
 	# The name of the file we use to check that (model, (Q), phi) has a 
 	# with_recovery attacker
-	with_recovery_phi_name = name + "_with_recovery_phi.pml"
+	with_recovery_phi_name   = name + "_with_recovery_phi.pml"
 	# The subdirectory of out/ where we write our results
-	attacker_name          = name + "_" + str(with_recovery)
+	attacker_name     = name + "_" + str(with_recovery)
 	# The name of the file we use to check that model || daisy(Q) |/= phi
-	daisy_models_name      = name + "_daisy_check.pml" 
+	daisy_models_name = name + "_daisy_check.pml" 
 
 	IO = checkArgs(max_attacks, phi, model, Q, basic_check_name, IO)
-
-	distributed = isinstance(IO, list)
-
-	if (not distributed) and (IO in { 1, 2, 3, 4, 5 }):
+	if IO in { 1, 2, 3, 4, 5 }:
 		cleanUp()
 		return IO
-
 	IO = sorted(list(IO)) # sorted list of events
+	# Make daisy attacker
+	net, label = makeDaisy(IO, Q, with_recovery, daisy_name)
+	daisy_string = makeDaisyWithEvents(IO, with_recovery, net, label)
+	writeDaisyToFile(daisy_string, daisy_name)
 
-	daisynames = []
-	labels = set()
-	if distributed:
-		Qs = [f for f in glob(Q + "/*.pml")]
-		# Make many daisy attackers
-		k = 0
-		for io in IO:
-			q = Qs[k]
-			k += 1
-			_daisyname = str(k) + "_" + daisy_name
-			net, label = makeDaisy(io,            \
-				                   q,             \
-				                   with_recovery, \
-				                   _daisyname,    \
-				                   j=k)
-			labels.add(label)
-			daisy_string = makeDaisyWithEvents(io, with_recovery, net, label)
-			writeDaisyToFile(daisy_string, _daisyname)
-			daisynames.append(_daisyname)
-	else:
-		# Make daisy attacker
-		net, label = makeDaisy(IO, Q, with_recovery, daisy_name)
-		daisy_string = makeDaisyWithEvents(IO, with_recovery, net, label)
-		writeDaisyToFile(daisy_string, daisy_name)
-
+	
 	if with_recovery == False:
 		daisyPhi = phi 
 	else:
-		daisyPhiString = ""
-		if distributed:
-			daisyPhiString = makeDaisyPhiFinite(labels, phi)
-		else:
-			daisyPhiString = makeDaisyPhiFinite(label, phi)
+		daisyPhiString = makeDaisyPhiFinite(label, phi)
 		with open(with_recovery_phi_name, "w") as fw:
 			fw.write(daisyPhiString)
 		daisyPhi = with_recovery_phi_name
-
-	_models = None 
-	# ^ to throw an error if neither path evaluates, somehow ...
-	if distributed:
-		# model, phi, N, name
-		_models = models(model, daisyPhi, daisynames, daisy_models_name)
-	else:
-		_models = models(model, daisyPhi, daisy_name, daisy_models_name)
-
+			
+	# model, phi, N, name
+	_models = models(model, daisyPhi, daisy_name, daisy_models_name)
+		
 	if net == None or _models:
 		printNoSolution(model, phi, Q, with_recovery)
 		cleanUp()
 		return 6
-
+	
 	makeAllTrails(daisy_models_name, max_attacks) 
 	# second arg is max# attacks to make
 
 	cmds      			= trailParseCMDs(daisy_models_name)
-	attacks, provenance = parseAllTrails(cmds, with_recovery, False, len(daisynames))
+	attacks, provenance = parseAllTrails(cmds, with_recovery)
 	
 	# Write these attacks to models
-	writeAttacks(attacks, provenance, net, with_recovery, attacker_name, distributed)
-
+	writeAttacks(attacks, provenance, net, with_recovery, attacker_name)
+	
 	# Characterize the attacks
 	if characterize:
-		(E, A) = characterizeAttacks(\
-			model, phi, with_recovery, attacker_name, distributed)
-		# cleanUp()
+		(E, A) = characterizeAttacks(model, phi, with_recovery, attacker_name)
+		cleanUp()
 		return 0 if (E + A) > 0 else -1
 	else:
-		# cleanUp()
+		cleanUp()
 		return 0 # assume it worked if not asked to prove it ...
 
 if __name__== "__main__":

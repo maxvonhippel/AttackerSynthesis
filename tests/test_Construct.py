@@ -9,8 +9,6 @@
 import unittest
 import Construct as c
 
-from CLI import _cleanUp
-
 class TestConstruct(unittest.TestCase):
 
     s_Q   = 'demo/livenessExample1/Q.pml'
@@ -27,11 +25,11 @@ class TestConstruct(unittest.TestCase):
 
     # Tests that daisy in a particular example was made correctly
     def test_makeDaisyWithEvent(self):
-        daisyBod = 'active proctype daisy() {\n\tdo\n\t:: channel!C;'
+        daisyBod = 'active proctype daisy () {\n\tdo\n\t:: channel!C;'
         daisyBod += '\n\t:: channel?A;\n\t:: channel?B;\n\tod\n}'
         daisy_string = c.makeDaisyWithEvents(
             self.IO, False, self.s_network, self.s_label)
-        self.assertEqual(daisy_string.strip(), daisyBod.strip())
+        self.assertEqual(daisy_string, daisyBod)
 
     # Same but for recovery case
     def test_makeDaisyPhiFinite(self):
@@ -48,4 +46,4 @@ class TestConstruct(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        _cleanUp()
+        cleanUp()

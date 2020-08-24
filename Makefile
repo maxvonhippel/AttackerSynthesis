@@ -25,17 +25,6 @@ clean:
 	- rm *.txt
 	echo "All clean!"
 
-multi:
-	time python3 Korg.py             \
-		--model=demo/multiDemo/P.pml \
-		--phi=demo/multiDemo/Phi.pml \
-		--Q=demo/multiDemo/Q         \
-		--IO=demo/multiDemo/IO       \
-		--max_attacks=1              \
-		--with_recovery=True         \
-		--name=multiExperiment       \
-		--characterize=True
-
 # Tests on TCP w/ experiment1 (phi_1)
 experiment1:
 	time python3 Korg.py                      \

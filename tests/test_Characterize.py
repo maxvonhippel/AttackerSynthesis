@@ -8,7 +8,7 @@
 
 import unittest
 from Characterize import models
-from CLI import _cleanUp
+from CLI import cleanUp
 
 class TestCharacterize(unittest.TestCase):
 
@@ -54,4 +54,4 @@ class TestCharacterize(unittest.TestCase):
 	
 	@classmethod
 	def tearDownClass(cls):
-		_cleanUp()
+		cleanUp()
