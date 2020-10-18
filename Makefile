@@ -27,7 +27,7 @@ clean:
 
 # Tests on TCP w/ experiment1 (phi_1)
 experiment1:
-	time python3 Korg.py                      \
+	time python3 korg/Korg.py                 \
 			--model=demo/TCP/TCP.pml          \
 			--phi=demo/TCP/phi1.pml 		  \
 			--Q=demo/TCP/network.pml          \
@@ -39,7 +39,7 @@ experiment1:
 
 # Runs the semaphore demo
 semaphoreDemo:
-	python3 Korg.py \
+	python3 korg/Korg.py \
 		--model=demo/smallDemo4/Alice.pml \
 		--phi=demo/smallDemo4/Phi.pml     \
 		--Q=demo/smallDemo4/Bob.pml       \
@@ -59,9 +59,9 @@ avgExperiment:
 				name="experiment"$$exp"_"$$n"_"$$b;                                  \
 				echo "\n\n~~~~~~~~~~~~~ EXPERIMENT :: "$$name" ~~~~~~~~~~~~~~~\n\n"; \
 				touch "logs/"$$name"_log.txt";                                       \
-				/usr/bin/time -o "logs/"$$name"_log.txt" python3 Korg.py             \
+				/usr/bin/time -o "logs/"$$name"_log.txt" python3 korg/Korg.py        \
 					--model=demo/TCP/TCP.pml                                         \
-					--phi="demo/TCP/phi"$$exp".pml"                        \
+					--phi="demo/TCP/phi"$$exp".pml"                                  \
 					--Q=demo/TCP/network.pml                                         \
 					--IO=demo/TCP/IO.txt                                             \
 					--max_attacks=10                                                 \
@@ -71,14 +71,14 @@ avgExperiment:
 		done;                                                                        \
 	done;
 
-# Runs the primary test class for Korg.py
-testKorg: ; green tests/test_Korg.py
+# Runs the primary test class for korg/Korg.py
+testKorg: ; green korg/tests/test_korg/Korg.py
 
 # Runs tests for Characterize.py
-testChar: ; green tests/test_Characterize.py
+testChar: ; green korg/tests/test_Characterize.py
 
 # Runs tests for Construct.py
-testCons: ; green tests/test_Construct.py
+testCons: ; green korg/tests/test_Construct.py
 
 # Runs all tests
 test: 
