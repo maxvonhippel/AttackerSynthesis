@@ -12,10 +12,10 @@
 # ==============================================================================
 
 
-from CLI          import *
-from Characterize import *
-from Construct    import *
-from glob 		  import glob
+from korg.CLI          import *
+from korg.Characterize import *
+from korg.Construct    import *
+from glob 		       import glob
 
 def main():
 	args = getArgs()
