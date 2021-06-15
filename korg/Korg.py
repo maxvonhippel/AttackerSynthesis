@@ -25,6 +25,7 @@ def main():
                 with_recovery, name, characterize)
     attackPath = "out/" + name + "_" + str(with_recovery)
     removeRedundant(attackPath)
+    # testRemaining(attackPath)
     return ret
 
 def parseArgs(args):
