@@ -25,6 +25,19 @@ clean:
 	- rm *.txt
 	echo "All clean!"
 
+dccp:
+	for j in 1 2 3 4; do               \
+		python3 korg/Korg.py           \
+			--model=demo/DCCP/DCCP.pml \
+			--phi=demo/DCCP/phi$$j.pml \
+			--Q=demo/DCCP/network.pml  \
+			--IO=demo/DCCP/IO.txt      \
+			--max_attacks=30           \
+			--with_recovery=True       \
+			--name=DCCP.$$j            \
+			--characterize=False;      \
+	done;
+
 # Tests on TCP w/ experiment1 (phi_1)
 experiment1:
 	time python3 korg/Korg.py                 \

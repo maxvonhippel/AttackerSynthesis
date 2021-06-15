@@ -22,14 +22,14 @@ OUTPUT:
 	true iff modelFile runs successfully without acceptance cycles
 	or violations else false
 '''
-def check(modelFile, maxDepth=10000):
+def check(modelFile, maxDepth=60000):
 
 	if maxDepth > 10000 * 20:
 		print("maxDepth too large for any realistic run.  Edit the code if " \
 			+ "you actually really want to do this ... in Characterize.py.")
 		return False
 
-	args = "spin -run -a -m" + str(maxDepth) + " -RS88 " + modelFile
+	args = "spin -run -a -DNOREDUCE -m" + str(maxDepth) + " -RS88 " + modelFile
 	args = [a.strip() for a in args.split(" ")]
 	args = [a for a in args if len(a) > 0]
 	ret = None
@@ -58,9 +58,9 @@ def check(modelFile, maxDepth=10000):
 def makeAllTrails(modelFile, numTrails=100):
 	args = ""
 	if numTrails <= 1:
-		args = "spin -run -a " + modelFile
+		args = "spin -run -a -DNOREDUCE " + modelFile
 	else:
-		args = "spin -run -a -e -c" + str(numTrails - 1) + " " + modelFile
+		args = "spin -run -a -DNOREDUCE -e -c" + str(numTrails - 1) + " " + modelFile
 	subprocess.run(args.split(" "))
 	
 '''
