@@ -27,6 +27,7 @@ clean:
 
 # -------------------------------------------------------------------------------
 # DCCP and TCP targets are canonical versions from Case Studies in RFC NLP paper.
+# Choice of max_attacks=100 is because that's what we did in RFC NLP.
 # -------------------------------------------------------------------------------
 
 dccp:

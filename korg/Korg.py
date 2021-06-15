@@ -15,14 +15,17 @@
 from korg.CLI          import *
 from korg.Characterize import *
 from korg.Construct    import *
-from glob                import glob
+from glob              import glob
 
 def main():
     args = getArgs()
     model, phi, Q, IO, max_attacks, with_recovery, name, characterize \
         = parseArgs(args)
-    return body(model, phi, Q, IO, max_attacks, \
+    ret = body(model, phi, Q, IO, max_attacks, \
                 with_recovery, name, characterize)
+    attackPath = "out/" + name + "_" + str(with_recovery)
+    removeRedundant(attackPath)
+    return ret
 
 def parseArgs(args):
     P, Q, IO, phi = (None,)*4
