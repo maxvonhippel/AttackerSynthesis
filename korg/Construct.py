@@ -8,6 +8,14 @@
 import os
 import subprocess
 
+def chooseBitName(procContents):
+	recovery_bitflag = "b"
+	j = 0
+	while "bit " + recovery_bitflag in procContents:
+		recovery_bitflag = "b" + str(j)
+		j += 1
+	return recovery_bitflag
+
 def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	"""
 	Scan the model for all send and receive events,
@@ -25,13 +33,7 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 		(network in { False, None } or len(network.strip()) == 0):
 		return None
 
-	recovery_bitflag = "b"
-	j = 0
-	while "bit " + recovery_bitflag in network:
-		recovery_bitflag = "b" + str(j)
-		j += 1
-
-	return network, recovery_bitflag
+	return network, chooseBitName(network)
 
 def makeDaisyWithEvents(events, with_recovery, network, b):
 	"""
@@ -63,6 +65,39 @@ def makeDaisyPhiFinite(label, phi):
 	newPhi = "ltl newPhi {\n\t(eventually ( " + label + \
 		     " == 1 ) ) implies (\n\t\t" + phiBody + "  )\n}"
 	return newPhi
+
+# We saved the attacker, now we want to test transferability on another property.
+# So we need to modify it to have with a recovery bit.
+def addBit(attackerText, bitName):
+	return attackerText\
+			.replace(
+				"active proctype attacker() {",
+				"bit " + bitName + " = 0;\nactive proctype attacker() {")\
+			.replace(
+				"N begins here ...",
+				"N begins here ...\n\t" + bitName + " = 1;\n")
+
+# To use for testing transfer of attacks
+def makeAttackTransferCheck(attackerModel, P, phi):
+	
+	attackerText, Ptext, phiText = None, None, None
+	
+	with open(attackerModel, "r") as fr:
+		attackerText = fr.read()
+	
+	with open(P, "r") as fr:
+		Ptext = fr.read()
+	
+	with open(phi, "r") as fr:
+		phiText = fr.read()
+	
+	bitName = chooseBitName(attackerText + Ptext + phiText)
+
+	return Ptext                         + \
+	       "\n\n"                        + \
+	       addBit(attackerText, bitName) + \
+	       "\n\n"                        + \
+	       makeDaisyPhiFinite(bitName, phi) 
 
 def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	"""

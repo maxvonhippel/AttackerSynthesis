@@ -12,17 +12,6 @@ import sys
 import os
 from   glob import glob
 
-# We saved the attacker, now we want to test transferability on another property.
-# So we need to modify it to have with a recovery bit.
-def addBit(attackerText):
-	return attackerText\
-			.replace(
-				"active proctype attacker() {",
-				"bit b = 0;\nactive proctype attacker() {")\
-			.replace(
-				"N begins here ...",
-				"N begins here ...\nb = 1;\n")
-
 # Also adapted from RFCNLP code.
 def bigCleanUp(cur_model_name):
     for file in glob.glob("*.trail") + \
