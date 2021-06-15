@@ -1,3 +1,3 @@
-ltl exp1 {
+ltl phi1 {
 	always ( leftClosed implies !rightEstablished )
 }
