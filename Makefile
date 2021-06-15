@@ -25,6 +25,10 @@ clean:
 	- rm *.txt
 	echo "All clean!"
 
+# -------------------------------------------------------------------------------
+# DCCP and TCP targets are canonical versions from Case Studies in RFC NLP paper.
+# -------------------------------------------------------------------------------
+
 dccp:
 	for j in 1 2 3 4; do               \
 		python3 korg/Korg.py           \
@@ -32,11 +36,28 @@ dccp:
 			--phi=demo/DCCP/phi$$j.pml \
 			--Q=demo/DCCP/network.pml  \
 			--IO=demo/DCCP/IO.txt      \
-			--max_attacks=30           \
+			--max_attacks=100          \
 			--with_recovery=True       \
 			--name=DCCP.$$j            \
 			--characterize=False;      \
 	done;
+
+tcp:
+	for j in 1 2 3 4; do               \
+		python3 korg/Korg.py           \
+			--model=demo/TCP/TCP.pml   \
+			--phi=demo/TCP/phi$$j.pml  \
+			--Q=demo/TCP/network.pml   \
+			--IO=demo/TCP/IO.txt       \
+			--max_attacks=100          \
+			--with_recovery=True       \
+			--name=TCP.$$j             \
+			--characterize=False;      \
+	done;
+
+# -------------------------------------------------------------------------------
+# The remaining targets are from the original KORG paper.
+# -------------------------------------------------------------------------------
 
 # Tests on TCP w/ experiment1 (phi_1)
 experiment1:
