@@ -21,16 +21,8 @@ def main():
     args = getArgs()
     model, phi, Q, IO, max_attacks, with_recovery, name, characterize \
         = parseArgs(args)
-    ret = body(model, phi, Q, IO, max_attacks, \
+    return body(model, phi, Q, IO, max_attacks, \
                 with_recovery, name, characterize)
-    attackPath = "out/" + name + "_" + str(with_recovery)
-    removeRedundant(attackPath)
-    # Special case for TCP and DCCP demos:
-    propFilename = phi.split("/")[-1]
-    propPattern  = phi.replace(propFilename, "phi*.pml")
-    otherProps   = [a for a in glob(propPattern)]
-    testRemaining(attackPath, model, otherProps)
-    return ret
 
 def parseArgs(args):
     P, Q, IO, phi = (None,)*4
@@ -149,15 +141,29 @@ def body(model, phi, Q, IO, max_attacks=1, \
     
     # Write these attacks to models
     writeAttacks(attacks, provenance, net, with_recovery, attacker_name)
+
+    ret = None
     
     # Characterize the attacks
     if characterize:
         (E, A) = characterizeAttacks(model, phi, with_recovery, attacker_name)
         cleanUp()
-        return 0 if (E + A) > 0 else -1
+        ret = 0 if (E + A) > 0 else -1
     else:
         cleanUp()
-        return 0 # assume it worked if not asked to prove it ...
+        ret = 0 # assume it worked if not asked to prove it ...
+
+    attackPath = "out/" + name + "_" + str(with_recovery)
+    removeRedundant(attackPath)
+    
+    # Are there other props named phiJ.pml for any J?
+    # If so, let's try them!
+    propFilename = phi.split("/")[-1]
+    propPattern  = phi.replace(propFilename, "phi*.pml")
+    otherProps   = [a for a in glob(propPattern)]
+    testRemaining(attackPath, Q, model, otherProps)
+
+    return ret
 
 if __name__== "__main__":
     main()

@@ -14,10 +14,21 @@ from   glob            import glob
 from   korg.Construct  import makeAttackTransferCheck
 from   korg.printUtils import *
 
-def testRemaining(attackPath, P, props):
+def nontrivialProps(P, Q, props):
+    ret = set()
+    for p in P:
+        # We assume this file does not yet exist
+        tmpname = str(abs(hash(P + Q + p))) + ".temporary.pml"
+        if models(P, p, Q, tmpname, True):
+            ret.add(p)
+        bigCleanUp(tmpname)
+    return list(ret)
+
+def testRemaining(attackPath, P, Q, props):
 	if attackPath[-1] != "/":
 		attackPath += "/"
-	# makeAttackTransferCheck(attackerModel, P, phi)
+	# Remove any trivial props
+    props = nontrivialProps(P, Q, props)
 	for attackerModel in glob(attackPath + "*.pml"):
 		for phi in props:
 			checkText = makeAttackTransferCheck(attackerModel, P, phi)
@@ -131,11 +142,12 @@ INPUT:
     model - the string containing the path to the model file
     phi   - the string containing the path to the ltl model file
     N     - the string containing the path to the N model file
+    name  - where to save the intermediary model file to
 OUTPUTS:
     true iff the model (model || phi || N) runs successfully without
     acceptance cycles or violations else false
 '''
-def models(model, phi, N, name):
+def models(model, phi, N, name, removeAfter=False):
     
     if None in { model, phi, N, name }:
         return False
@@ -158,7 +170,12 @@ def models(model, phi, N, name):
 
     assert(os.path.isfile(name))
 
-    return check(name)
+    ret = check(name)
+
+    if removeAfter == True:
+        os.remove(name)
+
+    return ret
 
 # Parses output of reading trail using Spin.
 def parseTrail(trailBody):
