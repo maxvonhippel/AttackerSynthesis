@@ -10,7 +10,29 @@
 import subprocess
 import sys
 import os
-from   glob import glob
+from   glob            import glob
+from   korg.Construct  import makeAttackTransferCheck
+from   korg.printUtils import *
+
+def testRemaining(attackPath, P, props):
+	if attackPath[-1] != "/":
+		attackPath += "/"
+	# makeAttackTransferCheck(attackerModel, P, phi)
+	for attackerModel in glob(attackPath + "*.pml"):
+		for phi in props:
+			checkText = makeAttackTransferCheck(attackerModel, P, phi)
+			newname = str(abs(int(hash(checkText)))) + ".pml"
+			with open(newname, "w") as fw:
+				fw.write(checkText)
+			result = check(newname)
+			if result == False:
+				print(
+					makeGreen(
+						str(attackerModel)                     + 
+						" is an attack with recovery against " + 
+						str(phi)))
+			# os.remove(newname)
+
 
 # Also adapted from RFCNLP code.
 def bigCleanUp(cur_model_name):

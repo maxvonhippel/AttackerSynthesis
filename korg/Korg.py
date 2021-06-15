@@ -25,7 +25,11 @@ def main():
                 with_recovery, name, characterize)
     attackPath = "out/" + name + "_" + str(with_recovery)
     removeRedundant(attackPath)
-    # testRemaining(attackPath)
+    # Special case for TCP and DCCP demos:
+    propFilename = phi.split("/")[-1]
+    propPattern  = phi.replace(propFilename, "phi*.pml")
+    otherProps   = [a for a in glob(propPattern)]
+    testRemaining(attackPath, model, otherProps)
     return ret
 
 def parseArgs(args):
