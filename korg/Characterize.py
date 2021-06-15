@@ -16,42 +16,48 @@ from   korg.printUtils import *
 
 def nontrivialProps(P, Q, props):
     ret = set()
-    for p in P:
+    for phi in props:
         # We assume this file does not yet exist
-        tmpname = str(abs(hash(P + Q + p))) + ".temporary.pml"
-        if models(P, p, Q, tmpname, True):
-            ret.add(p)
+        tmpname = str(abs(hash(P + Q + phi))) + ".temporary.pml"
+        if models(P, phi, Q, tmpname, True):
+            ret.add(phi)
+        else:
+            print(makeRed(                 \
+                phi                        \
+                + " was not supported by " \
+                + P + " || " + Q           \
+                + " so cannot be attacked."))
         bigCleanUp(tmpname)
     return list(ret)
 
 def testRemaining(attackPath, P, Q, props):
-	if attackPath[-1] != "/":
-		attackPath += "/"
-	# Remove any trivial props
+    if attackPath[-1] != "/":
+        attackPath += "/"
+    # Remove any trivial props
     props = nontrivialProps(P, Q, props)
-	for attackerModel in glob(attackPath + "*.pml"):
-		for phi in props:
-			checkText = makeAttackTransferCheck(attackerModel, P, phi)
-			newname = str(abs(int(hash(checkText)))) + ".pml"
-			with open(newname, "w") as fw:
-				fw.write(checkText)
-			result = check(newname)
-			if result == False:
-				print(
-					makeGreen(
-						str(attackerModel)                     + 
-						" is an attack with recovery against " + 
-						str(phi)))
-			# os.remove(newname)
+    for attackerModel in glob(attackPath + "*.pml"):
+        for phi in props:
+            checkText = makeAttackTransferCheck(attackerModel, P, phi)
+            newname = str(abs(int(hash(checkText)))) + ".pml"
+            with open(newname, "w") as fw:
+                fw.write(checkText)
+            result = check(newname)
+            if result == False:
+                print(
+                    makeGreen(
+                        str(attackerModel)                     + 
+                        " is an attack with recovery against " + 
+                        str(phi)))
+            os.remove(newname)
 
 
 # Also adapted from RFCNLP code.
 def bigCleanUp(cur_model_name):
-    for file in glob.glob("*.trail") + \
-                glob.glob("*tmp*")   + \
-                glob.glob("pan")     + \
-                glob.glob("*.pml")   + \
-                glob.glob("._n_i_p_s_"):
+    for file in glob("*.trail") + \
+                glob("*tmp*")   + \
+                glob("pan")     + \
+                glob("*.pml")   + \
+                glob("._n_i_p_s_"):
         if file != cur_model_name + ".pml" and \
            file != cur_model_name + "_CORRECT.pml":
             os.remove(file)

@@ -161,7 +161,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
     propFilename = phi.split("/")[-1]
     propPattern  = phi.replace(propFilename, "phi*.pml")
     otherProps   = [a for a in glob(propPattern)]
-    testRemaining(attackPath, Q, model, otherProps)
+    testRemaining(attackPath, model, Q, otherProps)
 
     return ret
 
