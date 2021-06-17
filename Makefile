@@ -30,6 +30,19 @@ clean:
 # Choice of max_attacks=100 is because that's what we did in RFC NLP.
 # -------------------------------------------------------------------------------
 
+dccp-broken:
+	for j in 1 2 3 4; do                                \
+		python3 korg/Korg.py                            \
+			--model=demo/DCCP/DCCP.no-client-server.pml \
+			--phi=demo/DCCP/phi$$j.pml                  \
+			--Q=demo/DCCP/network.pml                   \
+			--IO=demo/DCCP/IO.txt                       \
+			--max_attacks=100                           \
+			--with_recovery=True                        \
+			--name=DCCP.$$j                             \
+			--characterize=False;                       \
+	done;
+
 dccp:
 	for j in 1 2 3 4; do               \
 		python3 korg/Korg.py           \
