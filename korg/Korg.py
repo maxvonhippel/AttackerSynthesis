@@ -15,6 +15,7 @@
 from korg.CLI          import *
 from korg.Characterize import *
 from korg.Construct    import *
+from korg.printUtils   import makeBlue
 from glob              import glob
 
 def main():
@@ -161,7 +162,30 @@ def body(model, phi, Q, IO, max_attacks=1, \
     propFilename = phi.split("/")[-1]
     propPattern  = phi.replace(propFilename, "phi*.pml")
     otherProps   = [a for a in glob(propPattern)]
+
+    """
+    If you would like to test your attacks generated using model M'
+    on some other model M, you can replace "model" in the line of code
+    below with the path to M.  We don't hard-code this as a CLI option
+    because it's unlikely anyone besides myself (Max) will ever need to
+    do this.  For example:
+
+      testRemaining(attackPath, "demo/DCCP/DCCP.pml", Q, otherProps)
+
+    """
+
     testRemaining(attackPath, model, Q, otherProps)
+
+    """
+    Finally, let's look at the strategies.
+    """
+    print("~~ Looking at strategies now. ~~")
+    if attackPath[-1] != "/":
+        attackPath += "/"
+    for attackerModel in glob(attackPath + "*.pml"):
+        print(makeBlue("\n\n------ analyzing " + attackerModel + " strategy ------"))
+        determineAttackStrategy(attackerModel, P, phi)
+
 
     return ret
 
