@@ -14,21 +14,21 @@ from pathlib import Path
 from korg.Characterize import check
 
 
-# attacker rcvs X over C
-# attacker snds X over C
+# attacker Recvs X over C
+# attacker Sents X over C
 class trailLine:
     def __init__(self, event, msg, channel):
         self.event   = event
         self.msg     = msg
         self.channel = channel
-        assert(event in { "rcv", "snd" })
+        assert(event in { "Recv", "Sent" })
 
     def toString(self):
         return "Attacker "                                   + \
-            ("received" if self.event == "rcv" else "send")  + \
+            ("received" if self.event == "Recv" else "send")  + \
             " " + self.msg + " over " + self.channel
 
-def line_in_trail_is_a_trailLine(theLine):
+def line_in_trail_is_a_trailLine(line):
     if not "(attacker:" in line:
         return False
     if "Sent" in line and line.strip()[-1] == ")" and "(" in line:
@@ -38,25 +38,17 @@ def line_in_trail_is_a_trailLine(theLine):
     return False
 
 def line_in_trail_to_trailLine(theLine):
-    event, msg, channel = None, None, None
-    components = None
-    if "Sent" in theLine:
-        event = "snd"
-        components = event.split("Sent")
-    elif "Recv" in theLine:
-        event = "rcv"
-        components = event.split("Recv")
-    assert(components != None)
-    # Sent DCCP_REQUEST    -> queue 4 (NtoB)
-    #      [0]          [1][2]   [3][4]
-    msg = components[0]
-    assert(components[4][0] == "(" and components[4][-1] == ")")
-    channel = components[4][0][1:-1]
+    event = "Sent" if "Sent" in theLine else \
+            "Recv" if "Recv" in theLine else \
+            None
+    remainder = theLine.split(event)
+    msg = remainder[1].split()[0]
+    channel = remainder[1].split("(")[1].split(")")[0]
     return trailLine(event, msg, channel)
 
 def parseTrailToEventsPair(theTrail):
     interestingLines = []
-    for l in theTrail:
+    for l in theTrail.split("\n"):
         if line_in_trail_is_a_trailLine(l):
             print(line_in_trail_to_trailLine(l).toString())
         elif "acceptance cycle" in l.lower():
@@ -81,11 +73,11 @@ def determineAttackStrategy(attack, model, phi):
         fw.write("")
     check(newfilename)
 
-    args = "spin -t0 -s -r " + modelFile
+    args = "spin -t0 -s -r " + newfilename
     args = [a.strip() for a in args.split(" ")]
     args = [a for a in args if len(a) > 0]
     
-    output = subprocess.check_output(args, stderr=devnull)
+    output = subprocess.check_output(args)
     if sys.stdout.encoding != None:
         output = output.decode(sys.stdout.encoding)
     output = str(output).strip().replace("\\n", "\n")\

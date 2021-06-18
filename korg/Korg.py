@@ -15,6 +15,7 @@
 from korg.CLI          import *
 from korg.Characterize import *
 from korg.Construct    import *
+from korg.Equivalent   import determineAttackStrategy
 from korg.printUtils   import makeBlue
 from glob              import glob
 
@@ -184,7 +185,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
         attackPath += "/"
     for attackerModel in glob(attackPath + "*.pml"):
         print(makeBlue("\n\n------ analyzing " + attackerModel + " strategy ------"))
-        determineAttackStrategy(attackerModel, P, phi)
+        determineAttackStrategy(attackerModel, model, phi)
 
 
     return ret
