@@ -28,6 +28,15 @@ class trailLine:
             ("received" if self.event == "Recv" else "send")  + \
             " " + self.msg + " over " + self.channel
 
+    def getEvent(self):
+        return self.event
+
+    def getMsg(self):
+        return self.msg
+
+    def getChannel(self):
+        return self.channel
+
 def line_in_trail_is_a_trailLine(line):
     if not "(attacker:" in line:
         return False
@@ -47,12 +56,27 @@ def line_in_trail_to_trailLine(theLine):
     return trailLine(event, msg, channel)
 
 def parseTrailToEventsPair(theTrail):
-    interestingLines = []
+    channel_to_events = { }
+    channel_names = []
+    
     for l in theTrail.split("\n"):
         if line_in_trail_is_a_trailLine(l):
-            print(line_in_trail_to_trailLine(l).toString())
+            tl = line_in_trail_to_trailLine(l)
+            tl_key = tl.getChannel()
+            if not tl_key in channel_to_events:
+                channel_to_events[tl_key] = []
+            channel_names.append(tl_key)
+
+    for l in theTrail.split("\n"):
+        if line_in_trail_is_a_trailLine(l):
+            tl = line_in_trail_to_trailLine(l)
+            tl_key = tl.getChannel()
+            channel_to_events[tl_key].append((tl.getEvent(), tl.getMsg()))
         elif "acceptance cycle" in l.lower():
-            print("------------ acceptance cycle -----------")
+            for tl_key in channel_names:
+                channel_to_events[tl_key].append("accept")
+
+    return channel_to_events
 
 def determineAttackStrategy(attack, model, phi):
     newfilename = str(abs(hash(attack + model + phi))) + ".pml"
@@ -82,7 +106,8 @@ def determineAttackStrategy(attack, model, phi):
         output = output.decode(sys.stdout.encoding)
     output = str(output).strip().replace("\\n", "\n")\
                                 .replace("\\t", "\t")
-    parseTrailToEventsPair(output)
+    
+    print(parseTrailToEventsPair(output))
 
 
 # spin -run -a model.pml
