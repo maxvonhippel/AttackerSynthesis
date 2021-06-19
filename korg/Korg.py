@@ -183,9 +183,26 @@ def body(model, phi, Q, IO, max_attacks=1, \
     print("~~ Looking at strategies now. ~~")
     if attackPath[-1] != "/":
         attackPath += "/"
+    strategies = []
+    numAttackerModels = 0
+    
     for attackerModel in glob(attackPath + "*.pml"):
+        numAttackerModels += 1
         print(makeBlue("\n\n------ analyzing " + attackerModel + " strategy ------"))
-        determineAttackStrategy(attackerModel, model, phi)
+        strategy = determineAttackStrategy(attackerModel, model, phi)
+        found_the_strategy = False
+        for i in range(len(strategies)):
+            if strategies[i] == strategy:
+                print("This is the same as strategy #" + str(i))
+                found_the_strategy = True
+        if found_the_strategy == False:
+            strategies.append(strategy)
+    
+    print("Among "                   + \
+          str(numAttackerModels)     + \
+          " attacks, we identified " + \
+          str(len(strategies))       + \
+          " unique strategies.")
 
 
     return ret

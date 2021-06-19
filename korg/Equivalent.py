@@ -107,7 +107,12 @@ def determineAttackStrategy(attack, model, phi):
     output = str(output).strip().replace("\\n", "\n")\
                                 .replace("\\t", "\t")
     
-    print(parseTrailToEventsPair(output))
+    ret_dict = parseTrailToEventsPair(output)
+    ret_list = []
+
+    ret_dict_keys = sorted([k for k in ret_dict])
+
+    return [(k, ret_dict[k]) for k in ret_dict_keys]
 
 
 # spin -run -a model.pml
