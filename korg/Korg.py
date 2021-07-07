@@ -190,13 +190,21 @@ def body(model, phi, Q, IO, max_attacks=1, \
         numAttackerModels += 1
         print(makeBlue("\n\n------ analyzing " + attackerModel + " strategy ------"))
         strategy = determineAttackStrategy(attackerModel, model, phi)
-        found_the_strategy = False
-        for i in range(len(strategies)):
-            if strategies[i] == strategy:
-                print("This is the same as strategy #" + str(i))
-                found_the_strategy = True
-        if found_the_strategy == False:
-            strategies.append(strategy)
+        if strategy == None:
+            print("Could not find any strategy for " 
+                  + attackerModel 
+                  + " against " 
+                  + model 
+                  + " w.r.t. " 
+                  + phi)
+        else:
+            found_the_strategy = False
+            for i in range(len(strategies)):
+                if strategies[i] == strategy:
+                    print("This is the same as strategy #" + str(i))
+                    found_the_strategy = True
+            if found_the_strategy == False:
+                strategies.append(strategy)
     
     print("Among "                   + \
           str(numAttackerModels)     + \

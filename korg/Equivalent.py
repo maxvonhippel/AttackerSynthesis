@@ -88,14 +88,23 @@ def determineAttackStrategy(attack, model, phi):
     with open(newfilename, "w") as fw:
         with open(model, "r") as fr:
             fw.write(fr.read())
-        fw.write("")
+        fw.write("\n")
         with open(attack, "r") as fr:
             fw.write(fr.read())
-        fw.write("")
+        fw.write("\n")
         with open(phi, "r") as fr:
             fw.write(fr.read())
-        fw.write("")
-    check(newfilename)
+        fw.write("\n")
+    
+    supports = check(newfilename)
+
+    print(model + " || " +
+          attack + 
+          (" |= " if applies else " |/= ") +
+          phi)
+
+    if supports == True:
+        return None
 
     args = "spin -t0 -s -r " + newfilename
     args = [a.strip() for a in args.split(" ")]
