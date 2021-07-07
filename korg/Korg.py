@@ -191,12 +191,17 @@ def body(model, phi, Q, IO, max_attacks=1, \
         print(makeBlue("\n\n------ analyzing " + attackerModel + " strategy ------"))
         strategy = determineAttackStrategy(attackerModel, model, phi)
         if strategy == None:
+            print("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
             print("Could not find any strategy for " 
                   + attackerModel 
                   + " against " 
                   + model 
                   + " w.r.t. " 
                   + phi)
+            print("Here are the contents of model: \n\n")
+            with open(model, "r") as fr:
+                print(fr.read())
+            print("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
         else:
             found_the_strategy = False
             for i in range(len(strategies)):
