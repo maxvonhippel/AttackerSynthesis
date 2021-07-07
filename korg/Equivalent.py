@@ -100,7 +100,7 @@ def determineAttackStrategy(attack, model, phi):
 
     print(model + " || " +
           attack + 
-          (" |= " if applies else " |/= ") +
+          (" |= " if supports == True else " |/= ") +
           phi)
 
     if supports == True:
