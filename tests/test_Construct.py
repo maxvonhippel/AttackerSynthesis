@@ -7,8 +7,8 @@
 # ==============================================================================
 
 import unittest
-import Construct as c
-from CLI import cleanUpAlias
+from korg import Construct as c
+from korg.CLI import cleanUpAlias
 
 class TestConstruct(unittest.TestCase):
 

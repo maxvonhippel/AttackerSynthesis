@@ -152,7 +152,7 @@ def handleTs(args, name):
 		return [addTrailNumberToArgs(args, i) for i in range(0, num)]
 
 def trailParseCMDs(tmpName):
-	args = "spin -t -s -r " + tmpName
+	args = "spin -t -s -r -p -g " + tmpName
 	return handleTs(args, tmpName)
 
 # Error message for if we were handed apparently invalid inputs.

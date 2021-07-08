@@ -7,8 +7,8 @@
 # ==============================================================================
 
 import unittest
-import Korg
-from CLI import cleanUpAlias
+from korg import Korg
+from korg.CLI import cleanUpAlias
 
 class TestKorg(unittest.TestCase):
 

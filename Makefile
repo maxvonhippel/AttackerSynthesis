@@ -120,13 +120,13 @@ avgExperiment:
 	done;
 
 # Runs the primary test class for korg/Korg.py
-testKorg: ; green korg/tests/test_korg/Korg.py
+testKorg: ; green tests/test_Korg.py
 
 # Runs tests for Characterize.py
-testChar: ; green korg/tests/test_Characterize.py
+testChar: ; green tests/test_Characterize.py
 
 # Runs tests for Construct.py
-testCons: ; green korg/tests/test_Construct.py
+testCons: ; green tests/test_Construct.py
 
 # Runs all tests
 test: 

@@ -184,11 +184,14 @@ def models(model, phi, N, name, removeAfter=False):
     return ret
 
 # Parses output of reading trail using Spin.
-def parseTrail(trailBody):
+def parseTrail(trail_body, cycle_indicator=None):
+
+    if cycle_indicator == None:
+        cycle_indicator = "CYCLE"
 
     ret, i = [[], []], 0
 
-    for line in trailBody.split("\n"):
+    for line in trail_body.split("\n"):
 
         if "(daisy:" in line:
 
@@ -199,29 +202,29 @@ def parseTrail(trailBody):
             
             if "Recv " in line:
             
-                msg = LL[line.rfind("Recv ")+5:].split()[0]
+                msg = LL[line.rfind("Recv ") + 5:].split()[0]
                 evt = "?"
             
             if "Send" in line and msg == None and evt == None:
             
-                msg = LL[line.rfind("Send ")+5:].split()[0]
+                msg = LL[line.rfind("Send ") + 5:].split()[0]
                 evt = "!"
 
             if "Sent" in line and msg == None and evt == None:
             
-                msg = LL[line.rfind("Sent ")+5:].split()[0]
+                msg = LL[line.rfind("Sent ") + 5:].split()[0]
                 evt = "!"
             
             if evt != None and msg != None:
 
                 ret[i].append(chan + " " + evt + " " + msg)
         
-        elif "CYCLE" in line:
+        elif cycle_indicator in line:
             i = 1
     
     return ret
 
-def parseAllTrails(cmds, with_recovery=False, debug=False):
+def parseAllTrails(cmds, with_recovery=False, debug=False, cycle_indicator=None):
     ret = []
     prov = []
     with open(os.devnull, 'w') as devnull:
@@ -231,7 +234,7 @@ def parseAllTrails(cmds, with_recovery=False, debug=False):
                 output = output.decode(sys.stdout.encoding)
             output = str(output).strip().replace("\\n", "\n")\
                                         .replace("\\t", "\t")
-            parsed = parseTrail(output)
+            parsed = parseTrail(output, cycle_indicator)
             ret.append(parsed)
             prov.append(cmd)
     return ret, prov
