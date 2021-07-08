@@ -119,6 +119,18 @@ def check(modelFile, maxDepth=60000):
             else:
                 ret = str(ret)
         except Exception as e:
+            print("+++++++++ Problem in check() ++++++++++")
+            print("---------------- ret ------------------")
+            print(ret)
+            print("--------------- exception -------------")
+            print(e)
+            print("----------------- model ---------------")
+            try:
+                with open(modelFile, "r") as fr:
+                    print(fr.read())
+            except Exception as e_inner:
+                print(e_inner)
+            print("+++++++++++++++++++++++++++++++++++++++")
             raise e
 
     if ret == None:
