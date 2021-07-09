@@ -30,7 +30,7 @@ def nontrivialProps(P, Q, props):
         bigCleanUp(tmpname)
     return list(ret)
 
-def testRemaining(attackPath, P, Q, props):
+def testRemaining(attackPath, P, Q, props, comparing=False):
     if attackPath[-1] != "/":
         attackPath += "/"
     # Remove any trivial props
@@ -44,9 +44,12 @@ def testRemaining(attackPath, P, Q, props):
             result = check(newname)
             if result == False:
                 print(
+                    ("" if comparing == False 
+                        else 
+                        makeBlue("[ comparing to " + P + " ]")) +
                     makeGreen(
-                        str(attackerModel)                     + 
-                        " is an attack with recovery against " + 
+                        str(attackerModel)                      + 
+                        " is an attack with recovery against "  + 
                         str(phi)))
             os.remove(newname)
 

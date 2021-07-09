@@ -78,7 +78,8 @@ def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
     return _IO
 
 def body(model, phi, Q, IO, max_attacks=1, \
-         with_recovery=True, name=None, characterize=False):
+         with_recovery=True, name=None, characterize=False,
+         comparisons=[]):
     '''
     Body attempts to find attackers against a given model. The attacker 
     is successful if the given phi is violated. The phi is initially 
@@ -181,6 +182,9 @@ def body(model, phi, Q, IO, max_attacks=1, \
     """
 
     testRemaining(attackPath, model, Q, otherProps)
+    for comparison in comparisons:
+        print("\t testing if attacks transfer to " + comparison)
+        testRemaining(attackPath, comparison, Q, otherProps, is_a_comparison=True)
 
     """
     Finally, let's look at the strategies.
