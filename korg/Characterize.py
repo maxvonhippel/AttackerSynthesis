@@ -46,11 +46,23 @@ def testRemaining(attackPath, P, Q, props, comparing=False):
                 print(
                     ("" if comparing == False 
                         else 
-                        makeBlue("[ comparing to " + P + " ]")) +
+                        makeBlue("[ comparing to " + P + " ]\n\t\t")) +
                     makeGreen(
-                        str(attackerModel)                      + 
-                        " is an attack with recovery against "  + 
-                        str(phi)))
+                        attackerModel                           + 
+                        " is an attack with recovery against\n\t\t\t"  + 
+                        phi))
+            elif result == True and comparing == True:
+                print(
+                    makeFail(
+                        "\n\t\t"                                   + 
+                        attackerModel                              + 
+                        " does ")                                  + 
+                    makeBold("NOT")                                + 
+                    makeFail(
+                        "\n\t\twork as an attack with recovery against " +
+                        phi                                              +
+                        "\n\t\twhen applied to "                         +
+                        P))
             os.remove(newname)
 
 

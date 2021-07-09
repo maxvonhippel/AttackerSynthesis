@@ -184,7 +184,7 @@ def body(model, phi, Q, IO, max_attacks=1, \
     testRemaining(attackPath, model, Q, otherProps)
     for comparison in comparisons:
         print("\t testing if attacks transfer to " + comparison)
-        testRemaining(attackPath, comparison, Q, otherProps, is_a_comparison=True)
+        testRemaining(attackPath, comparison, Q, otherProps, comparing=True)
 
     """
     Finally, let's look at the strategies.

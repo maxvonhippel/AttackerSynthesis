@@ -42,3 +42,9 @@ def makeRed(str):
 
 def makeBlue(str):
     return f"{bcolors.OKBLUE}{str}{bcolors.ENDC}"
+
+def makeBold(str):
+    return f"{bcolors.BOLD}{str}{bcolors.ENDC}"
+
+def makeFail(str):
+    return f"{bcolors.FAIL}{str}{bcolors.ENDC}"
