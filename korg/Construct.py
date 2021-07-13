@@ -78,7 +78,7 @@ def addBit(attackerText, bitName):
 				"N begins here ...\n\t" + bitName + " = 1;\n")
 
 # To use for testing transfer of attacks
-def makeAttackTransferCheck(attackerModel, P, phi):
+def makeAttackTransferCheck(attackerModel, P, phi, recovery=True):
 	
 	attackerText, Ptext, phiText = None, None, None
 	
@@ -90,14 +90,18 @@ def makeAttackTransferCheck(attackerModel, P, phi):
 	
 	with open(phi, "r") as fr:
 		phiText = fr.read()
-	
-	bitName = chooseBitName(attackerText + Ptext + phiText)
 
-	return Ptext                         + \
-	       "\n\n"                        + \
-	       addBit(attackerText, bitName) + \
-	       "\n\n"                        + \
-	       makeDaisyPhiFinite(bitName, phi) 
+	if recovery == True:
+	
+		bitName = chooseBitName(attackerText + Ptext + phiText)
+
+		return Ptext                         + \
+		       "\n\n"                        + \
+		       addBit(attackerText, bitName) + \
+		       "\n\n"                        + \
+		       makeDaisyPhiFinite(bitName, phi)
+	
+	return Ptext + "\n\n" + attackerText + "\n\n" + phiText + "\n" 
 
 def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	"""
