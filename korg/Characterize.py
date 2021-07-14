@@ -37,33 +37,38 @@ def testRemaining(attackPath, P, Q, props, comparing=False):
     props = nontrivialProps(P, Q, props)
     for attackerModel in glob(attackPath + "*.pml"):
         for phi in props:
-            checkText = makeAttackTransferCheck(attackerModel, P, phi)
-            newname = str(abs(int(hash(checkText)))) + ".pml"
-            with open(newname, "w") as fw:
-                fw.write(checkText)
-            result = check(newname)
-            if result == False:
-                print(
-                    ("" if comparing == False 
-                        else 
-                        makeBlue("[ comparing to " + P + " ]\n\t\t")) +
-                    makeGreen(
-                        attackerModel                           + 
-                        " is an attack with recovery against\n\t\t\t"  + 
-                        phi))
-            elif result == True and comparing == True:
-                print(
-                    makeFail(
-                        "\n\t\t"                                   + 
-                        attackerModel                              + 
-                        " does ")                                  + 
-                    makeBold("NOT")                                + 
-                    makeFail(
-                        "\n\t\twork as an attack with recovery against " +
-                        phi                                              +
-                        "\n\t\twhen applied to "                         +
-                        P))
-            os.remove(newname)
+            for _recovery in [ True, False ]:
+                checkText = makeAttackTransferCheck(attackerModel, P, phi, _recovery)
+                newname = str(abs(int(hash(checkText)))) + ".pml"
+                with open(newname, "w") as fw:
+                    fw.write(checkText)
+                result = check(newname)
+                if result == False:
+                    print(
+                        ("" if comparing == False 
+                            else 
+                            makeBlue("[ comparing to " + P + " ]\n\t\t")) +
+                        makeGreen(
+                            attackerModel                                  + 
+                            " is an attack "                               +
+                            ("with " if _recovery == True else "without ") +
+                            "recovery against\n\t\t\t"                     + 
+                            phi))
+                elif result == True and comparing == True:
+                    print(
+                        makeFail(
+                            "\n\t\t"                                   + 
+                            attackerModel                              + 
+                            " does ")                                  + 
+                        makeBold("NOT")                                + 
+                        makeFail(
+                            "\n\t\twork as an attack " +
+                            ( "with " if _recovery == True else "without ") +
+                            "recovery against "                             +
+                            phi                                             +
+                            "\n\t\twhen applied to "                        +
+                            P))
+                os.remove(newname)
 
 
 # Also adapted from RFCNLP code.
