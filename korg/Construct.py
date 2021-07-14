@@ -103,7 +103,7 @@ def makeAttackTransferCheck(attackerModel, P, phi, recovery=True):
 	
 	return Ptext + "\n\n" + attackerText + "\n\n" + phiText + "\n" 
 
-def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
+def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0, soft=False):
 	"""
 	Create the attacker string given the events that the 
 	daisy made. This method also writes the string to a 
@@ -117,7 +117,10 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	proc = "active proctype attacker() {\n\t"
 	
 	for ae in acyclicEvents:
-		proc += "\n\t" + ae  + ";"
+		if soft == False:
+			proc += "\n\t" + ae  + ";"
+		elif soft == True:
+			proc += "\n\tif\n\t:: " + ae + ";\n\tfi unless timeout;"
 	name = None
 	if with_recovery:
 		proc += "\n// recovery to N\n// N begins here ... \n" + net + "\n}"
@@ -128,9 +131,10 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 				 + "".join(["\n\t   " + ce + ";" for ce in cyclicEvents]) \
 				 + "\n\tod"
 		proc += "\n}"
-	attackerName = "attacker_"               \
-				 + str(k)                    \
+	attackerName = "attacker_"                             \
+				 + str(k)                                  \
 				 + ("_WITH_RECOVERY" * int(with_recovery)) \
+				 + ("_soft_transitions" * int(soft))       \
 				 + ".pml"
 
 	name = (DIR + "/") * int(DIR != None) + attackerName
@@ -179,13 +183,15 @@ def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 	assert(not os.path.isdir(name))
 	os.mkdir(name)
 	for j in range(len(attacks)):
-		makeAttacker(                      \
-			events = attacks[j],           \
-			prov   = provenance[j],        \
-			net    = net,                  \
-			DIR    = name,                 \
-			with_recovery = with_recovery, \
-			k      = j)
+		for soft in [ False, True, ]:
+			makeAttacker(                      \
+				events = attacks[j],           \
+				prov   = provenance[j],        \
+				net    = net,                  \
+				DIR    = name,                 \
+				with_recovery = with_recovery, \
+				k      = j,                    \
+				soft   = soft)
 
 def negateClaim(phi):
 	"""
