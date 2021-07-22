@@ -39,10 +39,11 @@ def testRemaining(attackPath, P, Q, props, comparing=False, testWithoutRecovery=
     recoveryOptions = [ True, False ] if testWithoutRecovery == True else [ True ]
 
     for attackerModel in glob(attackPath + "*.pml"):
+        
         for phi in props:
 
             for _recovery in recoveryOptions:
-                
+
                 checkText = makeAttackTransferCheck(attackerModel, P, phi, _recovery)
                 newname = str(abs(int(hash(checkText)))) + ".pml"
                 with open(newname, "w") as fw:
