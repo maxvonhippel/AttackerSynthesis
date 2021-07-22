@@ -30,14 +30,19 @@ def nontrivialProps(P, Q, props):
         bigCleanUp(tmpname)
     return list(ret)
 
-def testRemaining(attackPath, P, Q, props, comparing=False):
+def testRemaining(attackPath, P, Q, props, comparing=False, testWithoutRecovery=False):
     if attackPath[-1] != "/":
         attackPath += "/"
     # Remove any trivial props
     props = nontrivialProps(P, Q, props)
+    
+    recoveryOptions = [ True, False ] if testWithoutRecovery == True else [ True ]
+
     for attackerModel in glob(attackPath + "*.pml"):
         for phi in props:
-            for _recovery in [ True, False ]:
+
+            for _recovery in recoveryOptions:
+                
                 checkText = makeAttackTransferCheck(attackerModel, P, phi, _recovery)
                 newname = str(abs(int(hash(checkText)))) + ".pml"
                 with open(newname, "w") as fw:
