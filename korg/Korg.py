@@ -186,47 +186,6 @@ def body(model, phi, Q, IO, max_attacks=1, \
         print("\t testing if attacks transfer to " + comparison)
         testRemaining(attackPath, comparison, Q, otherProps, comparing=True)
 
-    """
-    Finally, let's look at the strategies.
-    """
-    print("~~ Looking at strategies now. ~~")
-    if attackPath[-1] != "/":
-        attackPath += "/"
-    strategies = []
-    numAttackerModels = 0
-    
-    for attackerModel in glob(attackPath + "*.pml"):
-        numAttackerModels += 1
-        print(makeBlue("\n\n------ analyzing " + attackerModel + " strategy ------"))
-        strategy = determineAttackStrategy(attackerModel, model, phi)
-        if strategy == None:
-            print("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-            print("Could not find any strategy for " 
-                  + attackerModel 
-                  + " against " 
-                  + model 
-                  + " w.r.t. " 
-                  + phi)
-            print("Here are the contents of model: \n\n")
-            with open(model, "r") as fr:
-                print(fr.read())
-            print("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-        else:
-            found_the_strategy = False
-            for i in range(len(strategies)):
-                if strategies[i] == strategy:
-                    print("This is the same as strategy #" + str(i))
-                    found_the_strategy = True
-            if found_the_strategy == False:
-                strategies.append(strategy)
-    
-    print("Among "                   + \
-          str(numAttackerModels)     + \
-          " attacks, we identified " + \
-          str(len(strategies))       + \
-          " unique strategies.")
-
-
     return ret
 
 if __name__== "__main__":
