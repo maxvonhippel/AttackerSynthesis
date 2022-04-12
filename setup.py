@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='korg',
-    version='0.1.0',    
+    version='0.2.0',    
     description='Attacker synthesis for distributed protocols',
     url='https://github.com/maxvonhippel/AttackerSynthesis',
     author='Max von Hippel and Cole Vick',

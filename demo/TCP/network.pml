@@ -24,14 +24,6 @@ active proctype network() {
 		if
 		:: NtoA ! ACK;
 		fi unless timeout;
-	:: AtoN ? SYN_ACK -> 
-		if
-		:: NtoB ! SYN_ACK;
-		fi unless timeout;
-	:: BtoN ? SYN_ACK -> 
-		if
-		:: NtoA ! SYN_ACK;
-		fi unless timeout;
 	:: _nr_pr < 3 -> break;
 	od
 end:

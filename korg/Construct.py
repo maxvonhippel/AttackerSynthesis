@@ -1,12 +1,20 @@
 # ==============================================================================
 # File      : Construct.py
-# Author    : Max von Hippel and Cole Vick
+# Author    : Max von Hippel and Cole Vick and [redacted]
 # Authored  : 30 November 2019 - 13 March 2020
 # Purpose   : Constructs and interprets Promela models for Korg.
 # How to run: This file is used by Korg.py.
 # ==============================================================================
 import os
 import subprocess
+
+def chooseBitName(procContents):
+	recovery_bitflag = "b"
+	j = 0
+	while "bit " + recovery_bitflag in procContents:
+		recovery_bitflag = "b" + str(j)
+		j += 1
+	return recovery_bitflag
 
 def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 	"""
@@ -25,13 +33,7 @@ def makeDaisy(events, N, with_recovery=False, daisyName="daisy.pml"):
 		(network in { False, None } or len(network.strip()) == 0):
 		return None
 
-	recovery_bitflag = "b"
-	j = 0
-	while "bit " + recovery_bitflag in network:
-		recovery_bitflag = "b" + str(j)
-		j += 1
-
-	return network, recovery_bitflag
+	return network, chooseBitName(network)
 
 def makeDaisyWithEvents(events, with_recovery, network, b):
 	"""
@@ -64,7 +66,44 @@ def makeDaisyPhiFinite(label, phi):
 		     " == 1 ) ) implies (\n\t\t" + phiBody + "  )\n}"
 	return newPhi
 
-def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
+# We saved the attacker, now we want to test transferability on another property.
+# So we need to modify it to have with a recovery bit.
+def addBit(attackerText, bitName):
+	return attackerText\
+			.replace(
+				"active proctype attacker() {",
+				"bit " + bitName + " = 0;\nactive proctype attacker() {")\
+			.replace(
+				"N begins here ...",
+				"N begins here ...\n\t" + bitName + " = 1;\n")
+
+# To use for testing transfer of attacks
+def makeAttackTransferCheck(attackerModel, P, phi, recovery=True):
+	
+	attackerText, Ptext, phiText = None, None, None
+	
+	with open(attackerModel, "r") as fr:
+		attackerText = fr.read()
+	
+	with open(P, "r") as fr:
+		Ptext = fr.read()
+	
+	with open(phi, "r") as fr:
+		phiText = fr.read()
+
+	if recovery == True:
+	
+		bitName = chooseBitName(attackerText + Ptext + phiText)
+
+		return Ptext                         + \
+		       "\n\n"                        + \
+		       addBit(attackerText, bitName) + \
+		       "\n\n"                        + \
+		       makeDaisyPhiFinite(bitName, phi)
+	
+	return Ptext + "\n\n" + attackerText + "\n\n" + phiText + "\n" 
+
+def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0, soft=False):
 	"""
 	Create the attacker string given the events that the 
 	daisy made. This method also writes the string to a 
@@ -78,7 +117,10 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 	proc = "active proctype attacker() {\n\t"
 	
 	for ae in acyclicEvents:
-		proc += "\n\t" + ae  + ";"
+		if soft == False:
+			proc += "\n\t" + ae  + ";"
+		elif soft == True:
+			proc += "\n\tif\n\t:: " + ae + ";\n\tfi unless timeout;"
 	name = None
 	if with_recovery:
 		proc += "\n// recovery to N\n// N begins here ... \n" + net + "\n}"
@@ -89,15 +131,13 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0):
 				 + "".join(["\n\t   " + ce + ";" for ce in cyclicEvents]) \
 				 + "\n\tod"
 		proc += "\n}"
-	attackerName = "attacker_"               \
-				 + str(k)                    \
+	attackerName = "attacker_"                             \
+				 + str(k)                                  \
 				 + ("_WITH_RECOVERY" * int(with_recovery)) \
+				 + ("_soft_transitions" * int(soft))       \
 				 + ".pml"
 
 	name = (DIR + "/") * int(DIR != None) + attackerName
-
-	# Only write the attacker if it isn't a duplicate, as
-	# determined using our hash function naming convention.
 
 	if (DIR != None and not os.path.exists(DIR)):
 		os.mkdir(DIR)
@@ -140,13 +180,16 @@ def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 	assert(not os.path.isdir(name))
 	os.mkdir(name)
 	for j in range(len(attacks)):
-		makeAttacker(                      \
-			events = attacks[j],           \
-			prov   = provenance[j],        \
-			net    = net,                  \
-			DIR    = name,                 \
-			with_recovery = with_recovery, \
-			k      = j)
+		for soft in [ False, True, ]:
+			attackerName = makeAttacker(                      \
+				               events = attacks[j],           \
+				               prov   = provenance[j],        \
+				               net    = net,                  \
+				               DIR    = name,                 \
+				               with_recovery = with_recovery, \
+				               k      = j,                    \
+				               soft   = soft)
+			print("Wrote to " + attackerName)
 
 def negateClaim(phi):
 	"""

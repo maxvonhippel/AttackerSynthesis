@@ -7,8 +7,8 @@
 # ==============================================================================
 
 import unittest
-from Characterize import models
-from CLI import cleanUpAlias
+from korg.Characterize import models
+from korg.CLI import cleanUpAlias
 
 class TestCharacterize(unittest.TestCase):
 
