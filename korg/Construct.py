@@ -1,6 +1,6 @@
 # ==============================================================================
 # File      : Construct.py
-# Author    : Max von Hippel and Cole Vick
+# Author    : Max von Hippel and Cole Vick and [redacted]
 # Authored  : 30 November 2019 - 13 March 2020
 # Purpose   : Constructs and interprets Promela models for Korg.
 # How to run: This file is used by Korg.py.
@@ -139,9 +139,6 @@ def makeAttacker(events, prov, net, DIR=None, with_recovery=True, k=0, soft=Fals
 
 	name = (DIR + "/") * int(DIR != None) + attackerName
 
-	# Only write the attacker if it isn't a duplicate, as
-	# determined using our hash function naming convention.
-
 	if (DIR != None and not os.path.exists(DIR)):
 		os.mkdir(DIR)
 
@@ -184,14 +181,15 @@ def writeAttacks(attacks, provenance, net, with_recovery=True, name="run"):
 	os.mkdir(name)
 	for j in range(len(attacks)):
 		for soft in [ False, True, ]:
-			makeAttacker(                      \
-				events = attacks[j],           \
-				prov   = provenance[j],        \
-				net    = net,                  \
-				DIR    = name,                 \
-				with_recovery = with_recovery, \
-				k      = j,                    \
-				soft   = soft)
+			attackerName = makeAttacker(                      \
+				               events = attacks[j],           \
+				               prov   = provenance[j],        \
+				               net    = net,                  \
+				               DIR    = name,                 \
+				               with_recovery = with_recovery, \
+				               k      = j,                    \
+				               soft   = soft)
+			print("Wrote to " + attackerName)
 
 def negateClaim(phi):
 	"""

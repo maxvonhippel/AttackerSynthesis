@@ -1,6 +1,6 @@
 # ==============================================================================
 # File      : Korg.py
-# Author    : Max von Hippel and Cole Vick
+# Author    : Max von Hippel and Cole Vick and [redacted]
 # Authored  : 30 November 2019 - 13 March 2020
 # Purpose   : Primary runner for Korg tool
 # How to run: see docs/Korg.md for instructions
@@ -15,16 +15,14 @@
 from korg.CLI          import *
 from korg.Characterize import *
 from korg.Construct    import *
-from korg.Equivalent   import determineAttackStrategy
 from korg.printUtils   import makeBlue
 from glob              import glob
 
 def main():
     args = getArgs()
-    model, phi, Q, IO, max_attacks, with_recovery, name, characterize \
-        = parseArgs(args)
-    return body(model, phi, Q, IO, max_attacks, \
-                with_recovery, name, characterize)
+    model, phi, Q, IO, max_attacks, \
+        with_recovery, name, characterize = parseArgs(args)
+    return body(model, phi, Q, IO, max_attacks, with_recovery, name, characterize)
 
 def parseArgs(args):
     P, Q, IO, phi = (None,)*4
@@ -79,11 +77,12 @@ def checkArgs(max_attacks, phi, model, Q, basic_check_name, IO):
 
 def body(model, phi, Q, IO, max_attacks=1, \
          with_recovery=True, name=None, characterize=False,
-         comparisons=[]):
+         comparisons=[], doTestRemaining=False):
     '''
     Body attempts to find attackers against a given model. The attacker 
     is successful if the given phi is violated. The phi is initially 
     evaluated by being composed with Q. 
+
     @param model        : a promela model 
     @param phi          : LTL property satisfied by model || Q
     @param Q            : a promela model
@@ -93,6 +92,8 @@ def body(model, phi, Q, IO, max_attacks=1, \
     @param name         : name of the files
     @param characterize : do you want us to characterize attackers after 
                           producing them?
+
+    Other options are specialized for reproducing paper results.
     '''
     
     # The name of the file we use to check that model || Q |= phi
@@ -139,13 +140,15 @@ def body(model, phi, Q, IO, max_attacks=1, \
     makeAllTrails(daisy_models_name, max_attacks) 
     # second arg is max# attacks to make
 
-    cycle_indicator = None if with_recovery == False else ( label + " = 1;" )
+    cycle_indicator = None if with_recovery == False else ( "[" + label + " = 1]" )
 
     cmds                = trailParseCMDs(daisy_models_name)
     attacks, provenance = parseAllTrails(cmds, 
                                          with_recovery=with_recovery, 
                                          debug=False, 
                                          cycle_indicator=cycle_indicator)
+
+    print("Writing attacks ...")
     
     # Write these attacks to models
     writeAttacks(attacks, provenance, net, with_recovery, attacker_name)
@@ -160,6 +163,8 @@ def body(model, phi, Q, IO, max_attacks=1, \
     else:
         cleanUp()
         ret = 0 # assume it worked if not asked to prove it ...
+
+    print("Removing redundant attack files ...")
 
     attackPath = "out/" + name + "_" + str(with_recovery)
     removeRedundant(attackPath)
@@ -180,11 +185,12 @@ def body(model, phi, Q, IO, max_attacks=1, \
       testRemaining(attackPath, "demo/DCCP/DCCP.pml", Q, otherProps)
 
     """
+    if doTestRemaining == True:
 
-    testRemaining(attackPath, model, Q, otherProps)
-    for comparison in comparisons:
-        print("\t testing if attacks transfer to " + comparison)
-        testRemaining(attackPath, comparison, Q, otherProps, comparing=True)
+        testRemaining(attackPath, model, Q, otherProps)
+        for comparison in comparisons:
+            print("\t testing if attacks transfer to " + comparison)
+            testRemaining(attackPath, comparison, Q, otherProps, comparing=True)
 
     return ret
 

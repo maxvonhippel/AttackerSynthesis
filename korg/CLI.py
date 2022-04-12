@@ -1,6 +1,6 @@
 # ==============================================================================
 # File      : CLI.py
-# Author    : Max von Hippel and Cole Vick
+# Author    : Max von Hippel and Cole Vick and [redacted]
 # Authored  : 30 November 2019 - 13 March 2020
 # Purpose   : Handles most of the command line interface logic for Korg.
 # How to run: This code is used by Korg.py, which is what you want to run.
@@ -152,6 +152,13 @@ def handleTs(args, name):
 		return [addTrailNumberToArgs(args, i) for i in range(0, num)]
 
 def trailParseCMDs(tmpName):
+	"""
+	-t means "inspect a trail"
+	-s means "show all send events"
+	-r means "show all receive events"
+	-p means "show all state changes at each time step"
+	-g means "show global variable values at each time step"
+	"""
 	args = "spin -t -s -r -p -g " + tmpName
 	return handleTs(args, tmpName)
 

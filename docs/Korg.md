@@ -64,3 +64,7 @@ See [interpreting outputs](InterpretingOutputs.md).
 ## Help!  It's not working!
 
 See [troubleshooting](Troubleshooting.md).
+
+## How can I directly reproduce the results from the ArXiV paper?
+
+Simply build the [Dockerfile](Dockerfile).  It automatically reproduces all results from the paper, and [checks these results](analysis/compare2arxiv.py) against a [saved copy](example.attacks/redo.korg.results.with.partial.order.reduction/).

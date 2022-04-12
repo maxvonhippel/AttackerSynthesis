@@ -1,5 +1,5 @@
 /* file       : DCCP.no-client-server.pml
- * author     : Max von Hippel
+ * author     : [redacted]
  * authored   : 12 March 2021 ... 14 June 2021
  * description: Illustrates why it's important to have the active/passive
  *              variable in the model DCCP.pml.

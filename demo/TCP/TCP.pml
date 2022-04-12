@@ -57,6 +57,7 @@ SYN_SENT:
 		/* Simultaneous open */
 		:: snd ! ACK; goto SYN_RECEIVED;
 		fi
+	:: rcv ? ACK; rcv ? SYN -> snd ! ACK; goto ESTABLISHED;
 	/* Timeout */
 	:: timeout -> goto CLOSED;
 	fi

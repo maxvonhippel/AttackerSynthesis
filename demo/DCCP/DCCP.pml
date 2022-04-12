@@ -1,5 +1,5 @@
 /* file: DCCP.pml
- * author: Max von Hippel
+ * author: [redacted]
  * authored: 12 March 2021 ... 14 June 2021
  */
 

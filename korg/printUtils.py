@@ -1,7 +1,7 @@
 '''
 name       : printUtils.py
-author     : Max von Hippel
-authored   : 9 June 2020, directly ripped from (my) rfcnlp code.
+author     : [redacted]
+authored   : 9 June 2020, directly ripped from RFCNLP code.
 description: provides pretty-print utils
 '''
 

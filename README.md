@@ -1,4 +1,4 @@
-Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project.
+Tool (Korg), Models (TCP, etc.), and Documentation for Attacker Synthesis Project, *with modifications to support RFCNLP paper*.
 
 * TOC
 {:toc}
@@ -30,7 +30,11 @@ This repository contains the tool `Korg` as well as various Promela models from 
 	- `smallDemo1-3` are more small examples with explanations 
 	- :pushpin: `TCP/` contains the entire TCP model used in our Case Study.
 * `out/` - this is where the outputs of the program are written to.
-* `results/` - this contains the results of the Case Study from the paper.  You can reproduce these results using the tool.
+* `example.attacks/` - contains example outputs for different threat models.
+	- `dccp/` - example attacks for canonical DCCP model from RFCNLP paper.
+	- `redo.korg.results/` - what you get if you re-run the KORG ArXiV Case Study using the latest version of KORG, which has partial order reduction turned off in order to support RFCNLP and other projects./
+	- `redo.korg.results.with.partial.order.reduction/` - the results from the KORG ArXiV Case Study.
+	- `tcp/` - the updated canonical TCP model we used in the RFCNLP paper.
 * `tests/` - this contains unit-test code for `Korg`.
 * `__init__.py` - a file needed by Python to handle imports.
 * :pushpin: `avgExperiment.sh` - a Bash script with which to reproduce our results in `results/`.
@@ -49,7 +53,7 @@ From the top-level to run smallDemo1, run the command `python3 Korg.py --name=sm
 
 ## How to cite
 
-In BibTeX:
+To cite KORG or the TCP model, please use the following BibTeX:
 
 ````
 @misc{hippel2020automated,
@@ -62,11 +66,29 @@ In BibTeX:
 }
 ````
 
-For more, view the article in [Semantic Scholar](https://api.semanticscholar.org/CorpusID:214795205).
+For more, view the article in [Semantic Scholar](https://api.semanticscholar.org/CorpusID:214795205).  To cite the DCCP model, please use the following BibTeX:
+
+````
+@article{pacheco2022automated,
+  title={Automated Attack Synthesis by Extracting Finite State Machines from Protocol Specification Documents},
+  author={Pacheco, Maria Leonor and von Hippel, Max and Weintraub, Ben and Goldwasser, Dan and Nita-Rotaru, Cristina},
+  journal={arXiv preprint arXiv:2202.09470},
+  year={2022}
+}
+````
+
 
 ## ArXiV version with proofs.
 
-Available [here](https://arxiv.org/abs/2004.01220).
+Available [here](https://arxiv.org/abs/2004.01220).  You can reproduce the results by building the [Dockerfile](Dockerfile), which will compile and run the code, and compare the results to a [saved copy of those from the ArXiV document](example.attacks/redo.korg.results.with.partial.order.reduction/).
+
+The Dockerfile compiles a [special version of the code](example.attacks/redo.korg.results.with.partial.order.reduction/alternativeCharacterize.py) with [partial order reduction](https://spinroot.com/spin/Workshops/ws06/040.pdf) turned on.  This is an optimization in Spin which we used in the paper, but which we turn off in the default version of KORG in order to support models with rendezvous composition (i.e. size-0 [channels](https://spinroot.com/spin/Man/chan.html)).
+
+````
+sudo docker build -t korg .
+````
+
+If the Dockerfile fails to reproduce the exact results from the paper, it will also fail to build successfully (and will throw a warning in the terminal).
 
 ## How to use the tool.
 

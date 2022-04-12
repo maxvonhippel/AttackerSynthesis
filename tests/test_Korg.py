@@ -21,12 +21,12 @@ class TestKorg(unittest.TestCase):
 	IO_P  = 'demo/livenessExample2/IO.txt'
 
 	# Test on TCP model with 3 threat models
-	TCP   = 'demo/TCP/TCP.pml'
-	net   = 'demo/TCP/network.pml'
-	IO    = 'demo/TCP/IO.txt'
-	exp1  = 'demo/TCP/phi1.pml'
-	exp2  = 'demo/TCP/phi2.pml'
-	exp3  = 'demo/TCP/phi3.pml'
+	TCP   = 'demo/TCP.korg/TCP.pml'
+	net   = 'demo/TCP.korg/network.pml'
+	IO    = 'demo/TCP.korg/IO.txt'
+	exp1  = 'demo/TCP.korg/phi1.pml'
+	exp2  = 'demo/TCP.korg/phi2.pml'
+	exp3  = 'demo/TCP.korg/phi3.pml'
 	
 	# Test Cole's experiments
 	s_P   = 'demo/livenessExample1/P.pml'
@@ -122,8 +122,7 @@ class TestKorg(unittest.TestCase):
 				name = "test_works_on_TCP_exp1_" + str(_recovery), \
 				characterize   = True), 0)
 	
-	# Test that we can find attackers for experiment_2 without recovery,
-	# but not with.
+	# Test that we can find attackers for experiment_2 with and without recovery
 	def test_works_on_TCP_exp2(self):
 		for _recovery in [ True, False ]:
 			self.assertEqual(Korg.body(           \
@@ -134,8 +133,7 @@ class TestKorg(unittest.TestCase):
 				max_attacks    = self.maxAttacks, \
 				with_recovery  = _recovery,    	  \
 				name           = "test_works_on_TCP_exp2_" + str(_recovery), \
-				characterize   = True), 
-				-1 if _recovery == True else 0)
+				characterize   = True), 0)
 
 	# We don't test exp3 because it takes too long, but we encourage you to
 	# try it out if you're curious!  See the documentation and Makefile for 
