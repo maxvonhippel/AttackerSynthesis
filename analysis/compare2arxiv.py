@@ -12,16 +12,36 @@ comparisons = [
 ]
 
 for (vAdir, vBdir) in comparisons:
+
+	print("Comparing " + vAdir + " to " + vBdir)
+
 	Aset = set()
 	Bset = set()
+
+	Aset2f = { }
+	Bset2f = { }
+
 	for vA in glob.glob(vAdir + "/*.pml"):
 		with open(vA, "r") as fr:
 			_ = next(fr)
-			Aset.add(fr.read())
+			txt = fr.read()
+			Aset.add(txt)
+			Aset2f[txt] = vA
+	
 	for vB in glob.glob(vBdir + "/*.pml"):
 		with open(vB, "r") as fr:
 			_ = next(fr)
-			Bset.add(fr.read())
+			txt = fr.read()
+			Bset.add(txt)
+			Bset2f[txt] = vB
+	
 	assert(Aset == Bset)
+	assert(len(Aset) == len(Bset))
+
+	for a in Aset:
+		assert(a in Bset)
+		print(Aset2f[a] + " == " + Bset2f[a])
+
+
 
 		
