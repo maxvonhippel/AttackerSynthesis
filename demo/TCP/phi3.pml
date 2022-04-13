@@ -1,4 +1,4 @@
-ltl exp3 {
+ltl phi3 {
   !(eventually (((always (state[0] == SynSentState))   ||
                  (always (state[0] == SynRecState))    ||
                  (always (state[0] == EstState))       ||
