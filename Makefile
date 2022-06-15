@@ -203,3 +203,16 @@ newExample:
 	- mkdir ${dir} 
 	- cd ${dir}
 	- touch P.pml Q.pml IO.txt Phi.pml
+
+# Runs the piratical example from the tutorial.
+# https://dev.to/maxvonhippel/automated-attacker-synthesis-for-distributed-protocols-45mn
+pirates:
+	python3 korg/Korg.py                \
+		--model=demo/pirates/alice.pml  \
+		--phi=demo/pirates/phi.pml 		\
+		--Q=demo/pirates/bob.pml        \
+		--IO=demo/pirates/IO.txt            \
+		--max_attacks=10                \
+		--with_recovery=True            \
+		--name=pirates                	\
+		--characterize=True

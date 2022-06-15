@@ -1,0 +1,6 @@
+bob2alice:
+    I:
+    O:white,royal,trading
+alice2bob:
+    I:pirate
+    O:
