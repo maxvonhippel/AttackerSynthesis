@@ -211,8 +211,8 @@ pirates:
 		--model=demo/pirates/alice.pml  \
 		--phi=demo/pirates/phi.pml 		\
 		--Q=demo/pirates/bob.pml        \
-		--IO=demo/pirates/IO.txt            \
-		--max_attacks=10                \
+		--IO=demo/pirates/IO.txt        \
+		--max_attacks=1                 \
 		--with_recovery=True            \
 		--name=pirates                	\
 		--characterize=True
